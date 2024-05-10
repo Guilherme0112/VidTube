@@ -1,0 +1,261 @@
+@import url('https://fonts.googleapis.com/css2?family=Archivo+Black&family=Kanit&family=Lilita+One&family=Rowdies:wght@300;400;700&family=Signika:wght@300..700&display=swap');
+:root{
+
+    --color-box: rgb(71, 71, 71);
+    --color-background-pri: rgb(31, 31, 31);
+}
+*{
+    font-family: Kanit;
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-size: 15px;
+    border: 0;
+}
+body{
+
+    height: 100vh;
+    width: 100%;
+    background-color: var(--color-background-pri);
+}
+/* header of site */
+header{
+
+    position: fixed;
+    top: 0;
+    height: 50px;
+    width: 100%;
+    background-color: var(--color-box);
+    display: flex;
+    z-index: 1;
+    box-shadow: 0px 0px 10px black;
+
+}
+.header-one{
+
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: 50px;
+   
+}
+.header-one i{
+
+    display: block;
+    padding: 10px;
+    border-radius: 50%;
+    background-color: var(--color-box);
+    margin-left: -40px;
+    color: white;
+    cursor: pointer;
+}
+.header-one i:hover{
+
+    background-color: rgba(71, 71, 71, 0.9);
+    transition: .3s;
+}
+.header-two{
+
+    width: 10%;
+    display: flex;
+    justify-content: end;
+    align-items: center;
+}
+#search{
+
+    width: 500px;
+    height: 40px;
+    border-radius: 20px;
+    padding: 10px;
+}
+#search:hover{
+
+    box-shadow: 0px 0px 7px black;
+    transition: .5s;
+}
+.size-box-video{ /* size box default */
+
+    width: 240px;
+    height: 220px;
+    margin: 20px;
+    text-align: center;
+    border-radius: 10px;
+    cursor: pointer;
+    text-decoration: none;
+}
+.size-box-video:hover{
+
+    transition: .3s;
+    box-shadow: 0px 0px 7px black;
+}
+.box-video{ /* box video default */
+
+    background-color: rgb(71, 71, 71);
+    height: 150px;
+    width: 240px;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    cursor: pointer;
+}
+.box-video:hover{
+
+    transition: .7s;
+}
+.video-title{
+
+    font-size: 15px;
+}
+.views-video{ /* settings font os views */
+
+    font-size: 12px;
+    opacity: 0.4;
+}
+.box-post{ /* box post default */
+
+    height: 290px;
+    width: 350px;
+    background-color: rgb(71, 71, 71);
+    border-radius: 10px;
+    margin: 20px;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    cursor: pointer;
+}
+.box-post:hover{
+
+    outline: 1px solid white;
+    transition: .7s;
+}
+.img-post{
+
+    width: 50%;
+    height: 70%;
+    margin: 10px;
+    border-radius: 10px;
+    background-color: rgb(31, 31, 31);
+}
+.effect-text-line:hover{ /* effect bottom of text */
+
+    text-decoration: underline;
+    cursor: pointer;
+}
+.placeholder-center::placeholder{ /* centralize placeholder */
+
+    text-align: center;
+}
+.font-nigth{ /* for theme nigth */
+
+    color: white;
+}
+.font-ligth{ /* for theme ligth */
+
+    color: black;
+}
+/* Menu Hamburguer */
+.select{
+
+    color: rgb(31, 31, 31)
+}
+.icon{ /* settings icon */
+
+    margin-right: 10px;
+    z-index: 2;
+    cursor: pointer;
+    font-size: 24px;
+    color: white;
+}
+.menu{ /* settings for menu side */
+    position: fixed;
+    top: 0;
+    right: -250px;
+    background: var(--color-background-pri);
+    width: 250px;
+    height: 100vh;
+    transition: right 0.3s;
+    z-index: 1;
+    box-shadow: 0px 0px 10px black;
+}
+.menu a{ /* settings links of menu */
+
+    display: block;
+    width: 100%;
+    padding: 10px;
+    text-decoration: none;
+    color: white;
+}
+.menu a:hover{
+
+    background-color: var(--color-box);
+}
+.icon-menu{ /* space icon menu */
+
+    margin-right: 10px;
+}
+.show-menu {
+    right: 0;
+}
+.close-btn{
+
+    background-color: rgb(155, 27, 27);
+    text-decoration: none;
+    cursor: pointer;
+    border-radius: 10px;
+    text-align: center;
+}
+.close-btn:hover{
+
+    background-color: rgba(155, 27, 27, 0.8) !important;
+    transition: .3s;
+}
+
+@media (max-width: 768px){
+    .video-title, .views-video{
+
+        transform: scale(0.8);
+    }
+    #search{
+        width: 400px;
+    }
+
+}
+@media (max-width: 576px){
+
+    #search{
+
+        width: 250px;
+    }
+    .size-box-video{
+        
+        width: 90%;
+        height: 250px;
+        margin-top: 70px;
+    }
+    .box-video{
+
+        width: 100%;
+        height: 100%;
+    }
+    .video-title{
+
+        margin-top: 10px;
+    }
+}
+@media (max-width: 345px){
+    .size-box-video{
+        
+        width: 90%;
+        height: 130px;
+    }
+    #search{
+
+        width: 200px;
+    }
+    .header-one{
+
+        margin: auto 2px;
+        justify-content: start;
+    }
+}

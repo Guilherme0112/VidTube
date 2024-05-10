@@ -1,0 +1,98 @@
+body{
+
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+}
+.box-options{    
+
+    position: fixed;
+    width: 250px;
+    height: 100vh;
+    background-color: rgb(71, 71, 71);
+    box-shadow: 0px 0px 10px black;
+}
+.box-options a{
+
+    padding: 12px;
+    text-decoration: none;
+    display: block;
+}
+.box-options a:hover{
+
+    background-color: rgb(31, 31, 31);
+    transition: .3s;
+}
+.main-box{
+
+    margin-left: 250px;
+    width: 100%;
+    height: 100%;
+}
+.yourProfile{
+
+    width: 100%;
+    margin-top: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    text-align: center;
+    padding: 20px;
+}
+label{
+
+    width: 100%;
+}
+input{
+
+    margin: 10px 0;
+    width: 300px;
+    height: 30px;
+    border-radius: 10px;
+    padding-left: 10px;
+}
+.alterPass{
+
+    padding: 0;
+    background-color: rgb(255, 255, 69);
+    cursor: pointer;
+    border-radius: 10px;
+
+}
+.alterPass:hover{
+
+    transition: .3s;
+    box-shadow: 0px 0px 7px rgb(255, 255, 69);
+}
+.submit{
+
+    margin-top: 30px;
+    width: 300px;
+    height: 30px;
+    border-radius: 10px;
+    cursor: pointer;
+    background-color: rgb(37, 37, 190);
+}
+.submit:hover{
+
+    transition: .3s;
+    box-shadow: 0px 0px 7px rgb(37, 37, 190);
+}
+@media (max-width: 768px){
+
+    .box-options{
+
+        width: 120px;
+    }
+    .box-options a{
+
+        font-size: 12px;
+    }
+    .yourProfile{
+
+        width: 100%;
+    }
+}

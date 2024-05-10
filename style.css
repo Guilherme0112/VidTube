@@ -1,0 +1,28 @@
+
+body{
+    height: 100vh;
+    background-color: var(--color-background-pri);
+}
+#primary-page-video{
+
+    margin-top: 50px;
+}
+main{
+
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+}       
+@media (max-width: 768px) {
+    #search{
+
+        width: 100px;
+        height: 40px;      
+    }
+    .header-one{
+
+        margin: auto;
+    }
+}
