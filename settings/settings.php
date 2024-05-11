@@ -2,17 +2,38 @@
     session_start();
     if(isset($_SESSION['email']) && isset($_SESSION['senha'])){
 
+        // Inclusao do MYSQL, envio e recibo de dados
         include_once('../database/conexao.php');
         $email = $_SESSION['email'];
         $cursor = "SELECT * FROM usuarios WHERE email = '$email';";
         $response = $conexao->query($cursor);
         $resultMySQL = $response->fetch_assoc();
+
+        
+
+        // Variaveis do MySQL
         $id = $resultMySQL['id'];
         $name = $resultMySQL['nome'];
         $email = $resultMySQL['email'];
         $phone = $resultMySQL['phone'];
+
+
+        if (isset($_POST['submit'])){
+            //Dados do método POST
+            $nameForm = $_POST['name'];
+            $phoneForm = $_POST['phone'];
+            if (isset($_POST['name']) && strlen($_POST['name']) > 3){
+
+                $cursor = mysqli_query($conexao, "UPDATE usuarios SET nome = '$nameForm' WHERE id = $id");
+            } 
+            if (isset($_POST['phone']) && strlen($_POST['phone']) == 11){
+
+                $cursor = mysqli_query($conexao, "UPDATE usuarios SET phone = '$phoneForm' WHERE id = $id");
+            }
+            
+            
+        }
     };
-    
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -88,21 +109,21 @@
     <main class="main-box">
         <?php 
             if(isset($_SESSION['email']) && isset($_SESSION['senha'])){
-                echo "<section class='yourProfile'>
+                echo "<form action='settings.php' method='post' class='yourProfile'>
             <h1 class='font-nigth'>Seu Perfil</h1>
             <label for='id' class='font-nigth'>Id do usuário: </label>
             <span class='font-nigth'>$id</span>
             <label for='name' class='font-nigth'>Nome do usuário:</label>
-            <input type='text' name='name' class='input' value='$name'>
+            <input type='text' name='name' class='input' placeholder='$name'>
             <label for='email' class='font-nigth'>Email:</label>
             <input type='email' name='email' class='input' value='$email' id='email' desabled>
             <span style='width: 100%;'></span>
             <input type='button' value='Alterar Senha' class='alterPass'>
-            <label for='phone' class='font-nigth'>Telefone:</label>
-            <input type='tel' class='' value='$phone'> 
+            <label for='phone' class='font-nigth' min='11'>Telefone:</label>
+            <input type='tel' class='' placeholder='$phone' name='phone'> 
             <span style='width: 100%;'></span>
-            <button type='submit' class='submit font-nigth' name='submit'>Atualizar Dados</button>
-        </section>";
+            <input type='submit' value='Alterar Dados' class='submit font-nigth' name='submit'>
+        </form>";
             };
         ?>
         
