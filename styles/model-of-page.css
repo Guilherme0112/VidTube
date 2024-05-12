@@ -137,6 +137,10 @@ header{
     border-radius: 10px;
     background-color: rgb(31, 31, 31);
 }
+.effect-text-line{
+
+    text-decoration: none;
+}
 .effect-text-line:hover{ /* effect bottom of text */
 
     text-decoration: underline;

@@ -79,14 +79,18 @@
                                     <i class='fa-solid fa-user icon-menu'></i>
                                     Seu Perfil
                                 </a>
-                                <a href='/profile/goOut.php' class='close-btn font-nigth' title='Sair do Perfil'>
+                                <a href='../profile/goOut.php' class='close-btn font-nigth' title='Sair do Perfil'>
                                     Sair
                                 </a>";
                         } else {
                             echo "<a href='../register/register.php'>
                                     <i class='fa-solid fa-user icon-menu'></i>
                                     Criar Conta
-                                </a>";
+                                </a>
+                                <a href='../login/login.php'>
+                                    <i class='fa-solid fa-user icon-menu'></i>
+                                Fazer Login
+                            </a>";
                         }
                     ?>
                 </div>
@@ -118,7 +122,7 @@
             <label for='email' class='font-nigth'>Email:</label>
             <input type='email' name='email' class='input' value='$email' id='email' desabled>
             <span style='width: 100%;'></span>
-            <input type='button' value='Alterar Senha' class='alterPass'>
+            <input type='button' onclick='restorePass()' value='Alterar Senha' class='alterPass'>
             <label for='phone' class='font-nigth' min='11'>Telefone:</label>
             <input type='tel' class='' placeholder='$phone' name='phone'> 
             <span style='width: 100%;'></span>
@@ -134,6 +138,10 @@
             document.querySelector('.menu').classList.toggle('show-menu');
         });
         const email = document.getElementById('email').disabled = true;
+
+        function restorePass(){
+            location.href = 'restorePass/restorePass.php'
+        }
     </script>
 </body>
 </html>

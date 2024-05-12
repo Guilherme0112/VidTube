@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="styles/model-of-page.css">
     <link rel="stylesheet" href="fontawesome-free-6.5.1-web/css/all.min.css">
-    <script src="scripts.js"></script>
+    <script src="scripts.js" defer></script>
     <link rel="shortcut icon" href="/project/styles/icon.png" type="image/x-icon">
     <title>Início</title>
 </head>
@@ -52,7 +52,12 @@
                             echo "<a href='./register/register.php'>
                                     <i class='fa-solid fa-user icon-menu'></i>
                                     Criar Conta
-                                </a>";
+                                </a>
+                                <a href='./login/login.php'>
+                                    <i class='fa-solid fa-user icon-menu'></i>
+                                    Fazer Login
+                                </a>
+                                ";
                         }
                     ?>
                 </div>
@@ -60,62 +65,62 @@
         </div>
     </header>
     <main id="primary-page-video">
-        <a href='' class="size-box-video">
+        <a href='page-video/video.php' class="size-box-video">
             <div class="box-video"></div>
             <h3 class="video-title font-nigth ">Título do video</h3>
             <p class="views-video font-nigth">0 visualizaçoes</p>
         </a>
-        <a href='' class="size-box-video">
+        <a href='page-video/video.php' class="size-box-video">
             <div class="box-video"></div>
             <h3 class="video-title font-nigth ">Título do video</h3>
             <p class="views-video font-nigth">0 visualizaçoes</p>
         </a>
-        <a href='' class="size-box-video">
+        <a href='page-video/video.php' class="size-box-video">
             <div class="box-video"></div>
             <h3 class="video-title font-nigth ">Título do video</h3>
             <p class="views-video font-nigth">0 visualizaçoes</p>
         </a>
-        <a href='' class="size-box-video">
+        <a href='page-video/video.php' class="size-box-video">
             <div class="box-video"></div>
             <h3 class="video-title font-nigth ">Título do video</h3>
             <p class="views-video font-nigth">0 visualizaçoes</p>
         </a>
-        <a href='' class="size-box-video">
+        <a href='page-video/video.php' class="size-box-video">
             <div class="box-video"></div>
             <h3 class="video-title font-nigth ">Título do video</h3>
             <p class="views-video font-nigth">0 visualizaçoes</p>
         </a>
-        <a href='' class="size-box-video">
+        <a href='page-video/video.php' class="size-box-video">
             <div class="box-video"></div>
             <h3 class="video-title font-nigth ">Título do video</h3>
             <p class="views-video font-nigth">0 visualizaçoes</p>
         </a>
-        <a href='' class="size-box-video">
+        <a href='page-video/video.php' class="size-box-video">
             <div class="box-video"></div>
             <h3 class="video-title font-nigth ">Título do video</h3>
             <p class="views-video font-nigth">0 visualizaçoes</p>
         </a>
-        <a href='' class="size-box-video">
+        <a href='page-video/video.php' class="size-box-video">
             <div class="box-video"></div>
             <h3 class="video-title font-nigth ">Título do video</h3>
             <p class="views-video font-nigth">0 visualizaçoes</p>
         </a>
-        <a href='' class="size-box-video">
+        <a href='page-video/video.php' class="size-box-video">
             <div class="box-video"></div>
             <h3 class="video-title font-nigth ">Título do video</h3>
             <p class="views-video font-nigth">0 visualizaçoes</p>
         </a>
-        <a href='' class="size-box-video">
+        <a href='page-video/video.php' class="size-box-video">
             <div class="box-video"></div>
             <h3 class="video-title font-nigth ">Título do video</h3>
             <p class="views-video font-nigth">0 visualizaçoes</p>
         </a>
-        <a href='' class="size-box-video">
+        <a href='page-video/video.php' class="size-box-video">
             <div class="box-video"></div>
             <h3 class="video-title font-nigth ">Título do video</h3>
             <p class="views-video font-nigth">0 visualizaçoes</p>
         </a>
-        <a href='' class="size-box-video">
+        <a href='page-video/video.php' class="size-box-video">
             <div class="box-video"></div>
             <h3 class="video-title font-nigth ">Título do video</h3>
             <p class="views-video font-nigth">0 visualizaçoes</p>

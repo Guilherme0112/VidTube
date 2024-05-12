@@ -52,6 +52,10 @@
                             echo "<a href='../register/register.php'>
                                     <i class='fa-solid fa-user icon-menu'></i>
                                     Criar Conta
+                                </a>
+                                <a href='../login/login.php'>
+                                    <i class='fa-solid fa-user icon-menu'></i>
+                                    Fazer Login
                                 </a>";
                         }
                     ?>
