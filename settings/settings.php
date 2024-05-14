@@ -34,6 +34,12 @@
             
         }
     };
+    if(isset($_POST['deleteUser'])){
+
+        $cursor = mysqli_query($conexao, "DELETE FROM usuarios WHERE id = $id");
+        header('Location: ../login/login.php');
+        session_destroy();
+    }
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -41,7 +47,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="settingss.css">
+    <link rel="stylesheet" href="settings.css">
     <link rel="stylesheet" href="../styles/model-of-page.css">
     <link rel="stylesheet" href="../fontawesome-free-6.5.1-web/css/all.min.css">
     <link rel="shortcut icon" href="/project/styles/icon.png" type="image/x-icon">
@@ -127,6 +133,8 @@
             <input type='tel' class='' placeholder='$phone' name='phone'> 
             <span style='width: 100%;'></span>
             <input type='submit' value='Alterar Dados' class='submit font-nigth' name='submit'>
+            <span style='width: 100%;'></span>
+            <input type='submit' value='Excluir Conta' class='deleteUser' name='deleteUser'>
         </form>";
             };
         ?>

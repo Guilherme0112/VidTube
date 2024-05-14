@@ -1,9 +1,18 @@
-<?php 
-    session_start();
-    if(isset($_SESSION['email'])){
-
-        header('Location: ../index.php');
-    }
+<?php
+session_start();
+if ((!isset($_SESSION['email']) == true) and (!isset($_SESSION['senha']) == true)) {
+    unset($_SESSION['email']);
+    unset($_SESSION['senha']);
+    header('Location: ../login/login.php');
+} else {
+    include_once('../database/conexao.php');
+    $logado = $_SESSION['email'];
+    $cursor = "SELECT nome FROM usuarios WHERE email = '$logado';";
+    $response  = $conexao->query($cursor); // show response mysql
+    $nameMySQL = $response->fetch_assoc(); // search name in table mysql
+    $name = $nameMySQL['nome']; // show user name
+    
+}
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -11,17 +20,19 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="login.css">
+    <link rel="stylesheet" href="profile.css">
     <link rel="stylesheet" href="../styles/model-of-page.css">
     <link rel="stylesheet" href="../fontawesome-free-6.5.1-web/css/all.min.css">
-    <script src="scripts.js"></script>
-    <link rel="shortcut icon" href="/project/styles/icon.png" type="image/x-icon">
-    <title>Login</title>
+    <script src="profile.js"></script>
+    <link rel="shortcut icon" href="../styles/icon.png" type="image/x-icon">
+    <title>
+        <?php print "$name"; ?>
+    </title>
 </head>
 <body>
     <header>
         <div class="header-one">
-
+            
         </div>
         <div class="header-two">
             <i class="fas fa-bars icon"></i>
@@ -43,22 +54,26 @@
                         <i class="fa-solid fa-gear icon-menu"></i>
                         Configurações
                     </a>
-                    <a href="../register/register.php">
-                        <i class="fa-solid fa-user icon-menu"></i>
-                        Criar Conta
+                    <a href="goOut.php" class="close-btn font-nigth" title="Sair do Perfil">
+                        Sair
                     </a>
                 </div>
             </div>
         </div>
     </header>
+    <section>
+        <div class="size-img-profile">
+            <img src="../database/Arquivos/19/perfil.png" alt="" class="img-profile" class='photo-profile'>
+            <div class="name-space">
+                <p class="name">
+                    <?php print "$name"; ?>
+                </p>
+            </div>
+        </div>
+
+    </section>
     <main>
-        <form action="config.php" method="post">
-            <label for="email">E-mail:</label>
-            <input type="email" name="email" class="email placeholder-center" placeholder="Digite seu e-mail">
-            <label for="senha">Senha:</label>
-            <input type="password" name="senha" class="senha placeholder-center" placeholder="Digite sua senha">
-            <input type="submit" name='submit' value="Entrar">
-        </form>
+
     </main>
     <script>
         document.querySelector('.icon').addEventListener('click', function() {

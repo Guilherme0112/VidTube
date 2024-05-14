@@ -2,7 +2,7 @@
 :root{
 
     --color-box: rgb(71, 71, 71);
-    --color-background-pri: rgb(31, 31, 31);
+    --color-background-pri: rgb(13, 17, 23);
 }
 *{
     font-family: Kanit;

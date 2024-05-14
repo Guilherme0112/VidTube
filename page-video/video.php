@@ -73,8 +73,8 @@
             <h1 class='title font-nigth'>Título do vídeo</h1>
         </div>
         <div class="box-interaction">
-            <img src="../cpu_2.png" alt="">
-            <p class="font-nigth">Autor do vídeo</p>
+            <img src="../styles/icon.png" alt="">
+            <a href='' class="font-nigth">Autor do vídeo</a>
             <button class="btn" title="Seguir este perfil">Seguir</button>
             <i class="fa-regular fa-thumbs-up icon-interaction font-nigth" title="Like"></i>
             <i class="fa-regular fa-thumbs-down icon-interaction font-nigth" title="Deslike"></i>

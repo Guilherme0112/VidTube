@@ -23,7 +23,12 @@ if (isset($_POST['submit'])) {
              </script>";
     }
     
-}
+};
+    session_start();
+    if(isset($_SESSION['email'])){
+
+        header('Location: ../index.php');
+    }
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">

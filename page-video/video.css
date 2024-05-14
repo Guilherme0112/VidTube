@@ -26,6 +26,14 @@ video{
     padding-left: 30px;
     border-radius: 10px;
 }
+.box-interaction a{
+
+    text-decoration: none;
+}
+.box-interaction a:hover{
+
+    text-decoration: underline;
+}
 .box-title{
 
     width: 750px;
