@@ -4,22 +4,19 @@
     $phone = '';
     include_once('../database/conexao.php');
     if (isset($_POST['enviar'])) {
-        $name = $_POST['name'];
+        $name = $_POST['name'] ;
         $email = $_POST['email'];
         $phone = $_POST['phone'];
         $senha = $_POST['senha'];
         $rsenha = $_POST['rsenha'];
-        if (strlen($name) > 3 && strlen($phone) ==10 && $senha == $rsenha){
+        if (strlen($name) > 3 && strlen($phone) ==11 && $senha == $rsenha){
             $cursor = mysqli_query($conexao, "INSERT INTO usuarios (nome, email, senha, phone) VALUES ('$name', '$email', '$senha', '$phone')");
             header('Location: ../login/login.php');
 
         } else {
-            $name = $_POST['name'];
-            $email = $_POST['email'];
-            $phone = $_POST['phone'];
+                print"Passou aqui";
         
-        }
-        
+        }    
     };
     //if the user is online, do not login
     session_start();
@@ -39,8 +36,7 @@
     <link rel="stylesheet" href="../styles/model-of-page.css">
     <link rel="stylesheet" href="../fontawesome-free-6.5.1-web/css/all.min.css">
     <link rel="shortcut icon" href="../styles/icon.png" type="image/x-icon">
-    <script defer src="register.js"></script>
-    <script src="../styles/jquery-3.7.1.js"></script>
+    <script defer src="registers.js"></script>
     <title>Registrar</title>
 </head>
 <body>
@@ -74,7 +70,7 @@
         </div>
     </header>
     <main>
-        <form id='form' action="<?= $_SERVER['PHP_SELF'] ?>" method="post" onsubmit='return validateForm()'>
+        <form id='form' action="<?= $_SERVER['PHP_SELF'] ?>" method="post" onsubmit='return validateForm();'>
             <div>
                 <label for="name">Nome:</label>
                 <input type="text" name="name" class="input-space placeholder-center" min='3' placeholder='Digite seu nome' value='<?php print"$name";?>' required>
@@ -98,5 +94,4 @@
         </form>
     </main>
 </body>
-
 </html>
