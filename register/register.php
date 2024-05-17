@@ -36,7 +36,7 @@
     <link rel="stylesheet" href="../styles/model-of-page.css">
     <link rel="stylesheet" href="../fontawesome-free-6.5.1-web/css/all.min.css">
     <link rel="shortcut icon" href="../styles/icon.png" type="image/x-icon">
-    <script defer src="registers.js"></script>
+    <script defer src="register.js"></script>
     <title>Registrar</title>
 </head>
 <body>
