@@ -12,6 +12,12 @@ body{
     right: 0px;
     top: 13px;
 }
+.msg-erro{
+
+    width: 600px;
+    height: 30px;
+    color: red;
+}
 form{
 
     width: 600px !important;

@@ -1,34 +1,33 @@
 <?php
-$name = '';
-$email = '';
-$phone = '';
-include_once('../database/conexao.php');
-if (isset($_POST['submit'])) {
-    $name = $_POST['name'];
-    $email = $_POST['email'];
-    $phone = $_POST['phone'];
-    $senha = $_POST['senha'];
-    $rsenha = $_POST['rsenha'];
-    if ($senha == $rsenha && strlen($phone)===11){
-        $cursor = mysqli_query($conexao, "INSERT INTO usuarios (nome, email, senha, phone) VALUES ('$name', '$email', '$senha', '$phone')");
-        header('Location: ../login/login.php');
-    
-    } else {
-
+    $name = '';
+    $email = '';
+    $phone = '';
+    include_once('../database/conexao.php');
+    if (isset($_POST['enviar'])) {
         $name = $_POST['name'];
         $email = $_POST['email'];
         $phone = $_POST['phone'];
-        echo "<script>
-                    alert('O número de celular deve conter 11 dígitos e as senhas devem ser iguais.');
-             </script>";
-    }
-    
-};
+        $senha = $_POST['senha'];
+        $rsenha = $_POST['rsenha'];
+        if (strlen($name) > 3 && strlen($phone) ==10 && $senha == $rsenha){
+            $cursor = mysqli_query($conexao, "INSERT INTO usuarios (nome, email, senha, phone) VALUES ('$name', '$email', '$senha', '$phone')");
+            header('Location: ../login/login.php');
+
+        } else {
+            $name = $_POST['name'];
+            $email = $_POST['email'];
+            $phone = $_POST['phone'];
+        
+        }
+        
+    };
+    //if the user is online, do not login
     session_start();
     if(isset($_SESSION['email'])){
 
         header('Location: ../index.php');
     }
+
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -40,7 +39,7 @@ if (isset($_POST['submit'])) {
     <link rel="stylesheet" href="../styles/model-of-page.css">
     <link rel="stylesheet" href="../fontawesome-free-6.5.1-web/css/all.min.css">
     <link rel="shortcut icon" href="../styles/icon.png" type="image/x-icon">
-    <script src="register.js"></script>
+    <script src="register.js" defer></script>
     <title>Registrar</title>
 </head>
 <body>
@@ -74,10 +73,10 @@ if (isset($_POST['submit'])) {
         </div>
     </header>
     <main>
-        <form action="<?= $_SERVER['PHP_SELF'] ?>" method="post">
+        <form id='form' action="<?= $_SERVER['PHP_SELF'] ?>" method="post">
             <div>
                 <label for="name">Nome:</label>
-                <input type="text" name="name" class="input-space placeholder-center" min='5' placeholder='Digite seu nome' value='<?php print"$name";?>' required>
+                <input type="text" name="name" class="input-space placeholder-center" min='3' placeholder='Digite seu nome' value='<?php print"$name";?>' required>
                 <label for="email">Email:</label>
                 <input type="email" name="email" class="input-space placeholder-center" placeholder='Digite seu e-mail' value='<?php print"$email";?>' required>
                 <label for="phone">Telefone:</label>
@@ -85,11 +84,11 @@ if (isset($_POST['submit'])) {
             </div>
             <div>
                 <label for="senha">Senha:</label>
-                <input type="password" name="senha" class="input-space placeholder-center pass" min='8' max='20' placeholder='Digite sua senha' id='pass' required>
+                <input type="password" name="senha" class="input-space placeholder-center pass" placeholder='Digite sua senha' required>
                 <label for="rsenha">Repita a Senha:</label>
-                <input type="password" name="rsenha" class="input-space placeholder-center rpass" placeholder='Repita sua senha' min='8' max='20' id='rpass' required>
+                <input type="password" name="rsenha" class="input-space placeholder-center rpass" placeholder='Repita sua senha' required>
                 <a href="../login/login.php" class="font-nigth effect-text-line">Já tem conta? Faça Login</a>
-                <input type="submit" value="Registrar" name="submit" id='submit' onclick="validatePass()" title="Registrar conta">
+                <input type="submit" value="Registrar" name="enviar" id='submit' onclick='validateForm()' title="Registrar conta">
             </div>
         </form>
     </main>
@@ -97,16 +96,43 @@ if (isset($_POST['submit'])) {
         document.querySelector('.icon').addEventListener('click', function() {
             document.querySelector('.menu').classList.toggle('show-menu');
         });
-        function PassValidate(){
-            let pass = document.getElementById('pass').value;
-            let rpass = document.getElementById('rpass').value;
-            if (pass != rpass){
+        function validateForm(){
 
-                alert('As senhas nao coencidem');
-                window.location.replace('register.php');
+            var name = document.getElementsByName('name')[0];
+            var email = document.getElementsByName('email')[0];
+            var phone = document.getElementsByName('phone')[0];
+            var pass = document.getElementsByName('senha')[0];
+            var rpass = document.getElementsByName('rsenha')[0];
+
+            if(name.value.length < 3 || phone.value.length != 10 || pass.value != rpass){
+                if(name.value.length < 3){
+                    console.log('O nome precisa ter pelo menos 3 caracteres');   
+                    name.style.outline = '2px solid red';
+                }else{
+                    name.style.outline = 'none'
+                }
+                if(phone.value.length != 10){
+                    console.log('O número do telefone é necessário ter 10 caracteres');
+                    phone.style.outline = '2px solid red';
+                }else{
+                    phone.style.outline = 'none'
+                }
+                if(pass.value != rpass.value || pass.value.length === 0 || rpass.value.length === 0){
+                    console.log('As senhas nao coencidem ou estao vazias');
+                    pass.style.outline = '2px solid red';
+                    rpass.style.outline = '2px solid red';
+                }else{
+                    pass.style.outline = 'none'
+                    rpass.style.outline = 'none'
+                } 
+            } else{
+                
+                return true;
             }
-
+            
         }
+        
+
     </script>
 </body>
 
