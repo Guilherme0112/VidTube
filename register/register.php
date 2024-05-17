@@ -124,11 +124,14 @@
                 }else{
                     pass.style.outline = 'none'
                     rpass.style.outline = 'none'
-                } 
-            } else{
+                }
+
+                return false;
+                
+                } else{
                 
                 return true;
-            }
+                }
             
         }
         
