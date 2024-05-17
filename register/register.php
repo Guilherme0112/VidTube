@@ -35,11 +35,12 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="registers.css">
+    <link rel="stylesheet" href="register.css">
     <link rel="stylesheet" href="../styles/model-of-page.css">
     <link rel="stylesheet" href="../fontawesome-free-6.5.1-web/css/all.min.css">
     <link rel="shortcut icon" href="../styles/icon.png" type="image/x-icon">
-    <script src="register.js" defer></script>
+    <script type="text/javascript" src="register.js" defer></script>
+    <script src="../styles/jquery-3.7.1.js"></script>
     <title>Registrar</title>
 </head>
 <body>
@@ -77,16 +78,20 @@
             <div>
                 <label for="name">Nome:</label>
                 <input type="text" name="name" class="input-space placeholder-center" min='3' placeholder='Digite seu nome' value='<?php print"$name";?>' required>
+                <p class='msg-error' id='nameError'></p>
                 <label for="email">Email:</label>
                 <input type="email" name="email" class="input-space placeholder-center" placeholder='Digite seu e-mail' value='<?php print"$email";?>' required>
                 <label for="phone">Telefone:</label>
-                <input type="tel" name="phone" class="input-space placeholder-center" placeholder="(00)0000-0000" value='<?php print"$phone";?>' required>
+                <input type="tel" name="phone" class="input-space placeholder-center" placeholder="(00)0000-0000" value='<?php print"$phone";?>' style="margin-top: 5px;" required>
+                <p class='msg-error' id='phoneError'></p>
             </div>
             <div>
                 <label for="senha">Senha:</label>
                 <input type="password" name="senha" class="input-space placeholder-center pass" placeholder='Digite sua senha' required>
+                <p class='msg-error' id='passError'></p>
                 <label for="rsenha">Repita a Senha:</label>
                 <input type="password" name="rsenha" class="input-space placeholder-center rpass" placeholder='Repita sua senha' required>
+                <p class='msg-error' id='rpassError'></p>
                 <a href="../login/login.php" class="font-nigth effect-text-line">Já tem conta? Faça Login</a>
                 <input type="submit" value="Registrar" name="enviar" id='submit' onclick='validateForm()' title="Registrar conta">
             </div>
@@ -106,31 +111,39 @@
 
             if(name.value.length < 3 || phone.value.length != 10 || pass.value != rpass){
                 if(name.value.length < 3){
-                    console.log('O nome precisa ter pelo menos 3 caracteres');   
+                    console.log('O nome precisa ter pelo menos 3 caracteres');
+                    nameError.innerText = 'O nome precisa ter pelo menos 3 caracteres.';
                     name.style.outline = '2px solid red';
                 }else{
                     name.style.outline = 'none'
+                    nameError.innerText = '';
                 }
                 if(phone.value.length != 10){
                     console.log('O número do telefone é necessário ter 10 caracteres');
                     phone.style.outline = '2px solid red';
+                    phoneError.innerText = 'O número deve ter 10 caracteres.'
                 }else{
                     phone.style.outline = 'none'
+                    phoneError.innerText = '';
                 }
                 if(pass.value != rpass.value || pass.value.length === 0 || rpass.value.length === 0){
                     console.log('As senhas nao coencidem ou estao vazias');
+                    passError.innerText = 'As senhas nao coencidem.'
+                    rpassError.innerText = 'As senhas nao coencidem.'
                     pass.style.outline = '2px solid red';
                     rpass.style.outline = '2px solid red';
                 }else{
                     pass.style.outline = 'none'
                     rpass.style.outline = 'none'
-                }
+                    passError.innerText = '';
+                    rpassError.innerText = '';
+                } 
 
                 return false;
-                
-                } else{
-                
-                return true;
+
+                }else{
+
+                    return true;
                 }
             
         }
