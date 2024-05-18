@@ -9,7 +9,7 @@
         $response = $conexao->query($cursor);
         $resultMySQL = $response->fetch_assoc();
 
-        
+
 
         // Variaveis do MySQL
         $id = $resultMySQL['id'];
@@ -36,7 +36,7 @@
     };
     if(isset($_POST['deleteUser'])){
 
-        $cursor = mysqli_query($conexao, "DELETE FROM usuarios WHERE id = $id");
+        $cursor = mysqli_query($conexao, "DELETE FROM usuarios WHERE email = '$email';");
         header('Location: ../login/login.php');
         session_destroy();
     }

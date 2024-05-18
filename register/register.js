@@ -1,6 +1,8 @@
 document.querySelector('.icon').addEventListener('click', function() {
     document.querySelector('.menu').classList.toggle('show-menu');
 });
+
+//Form validation
 function validateForm(){
 
     var name = document.getElementsByName('name')[0];
@@ -28,8 +30,8 @@ function validateForm(){
         }
         if(pass.value != rpass.value || pass.value.length === 0 || rpass.value.length === 0){
             console.log('As senhas nao coencidem ou estao vazias');
-            passError.innerText = 'As senhas nao coencidem.';
-            rpassError.innerText = 'As senhas nao coencidem.';
+            passError.innerText = 'As senhas não coencidem.';
+            rpassError.innerText = 'As senhas não coencidem.';
             pass.style.outline = '2px solid red';
             rpass.style.outline = '2px solid red';
         }else{
