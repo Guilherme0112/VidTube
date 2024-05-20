@@ -9,8 +9,6 @@
         $response = $conexao->query($cursor);
         $resultMySQL = $response->fetch_assoc();
 
-
-
         // Variaveis do MySQL
         $id = $resultMySQL['id'];
         $name = $resultMySQL['nome'];
@@ -22,16 +20,17 @@
             //Dados do método POST
             $nameForm = $_POST['name'];
             $phoneForm = $_POST['phone'];
+            if(strlen($nameForm) == 0){
+
+            }
             if (isset($_POST['name']) && strlen($_POST['name']) > 3){
 
                 $cursor = mysqli_query($conexao, "UPDATE usuarios SET nome = '$nameForm' WHERE id = $id");
             } 
-            if (isset($_POST['phone']) && strlen($_POST['phone']) == 11){
+            if (isset($_POST['phone']) && strlen($_POST['phone']) == 15){
 
                 $cursor = mysqli_query($conexao, "UPDATE usuarios SET phone = '$phoneForm' WHERE id = $id");
             }
-            
-            
         }
     };
     if(isset($_POST['deleteUser'])){
@@ -51,7 +50,7 @@
     <link rel="stylesheet" href="../styles/model-of-page.css">
     <link rel="stylesheet" href="../fontawesome-free-6.5.1-web/css/all.min.css">
     <link rel="shortcut icon" href="/project/styles/icon.png" type="image/x-icon">
-    <script src="settings.js"></script>
+    <script defer src="settings.js"></script>
     <title>Configuraçoes</title>
 </head>
 <body>
@@ -119,18 +118,20 @@
     <main class="main-box">
         <?php 
             if(isset($_SESSION['email']) && isset($_SESSION['senha'])){
-                echo "<form action='settings.php' method='post' class='yourProfile'>
+                echo "<form action='settings.php' method='post' class='yourProfile' onsubmit='return validate()'>
             <h1 class='font-nigth'>Seu Perfil</h1>
             <label for='id' class='font-nigth'>Id do usuário: </label>
             <span class='font-nigth'>$id</span>
             <label for='name' class='font-nigth'>Nome do usuário:</label>
             <input type='text' name='name' class='input' placeholder='$name'>
+            <p class='msg-error'>Para modificar o nome, é preciso ter 3 caracteres</p>
             <label for='email' class='font-nigth'>Email:</label>
             <input type='email' name='email' class='input' value='$email' id='email' desabled>
             <span style='width: 100%;'></span>
             <input type='button' onclick='restorePass()' value='Alterar Senha' class='alterPass'>
             <label for='phone' class='font-nigth' min='11'>Telefone:</label>
-            <input type='tel' class='' placeholder='$phone' name='phone'> 
+            <input type='tel' class='tel' placeholder='$phone' name='phone'> 
+            <p class='msg-error'>Para modificar o número, é preciso ter 10 caracteres</p>
             <span style='width: 100%;'></span>
             <input type='submit' value='Alterar Dados' class='submit font-nigth' name='submit'>
             <span style='width: 100%;'></span>
@@ -150,6 +151,12 @@
         function restorePass(){
             location.href = 'restorePass/restorePass.php'
         }
+            document.querySelector('.tel').addEventListener('input', function(e){
+            let tel = e.target.value.replace(/\D/g, '');
+            tel = tel.replace(/^(\d{2})(\d)/g, '($1) $2');
+            tel = tel.replace(/(\d)(\d{4})$/, '$1-$2');
+            e.target.value = tel;
+        });
     </script>
 </body>
 </html>

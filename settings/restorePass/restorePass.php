@@ -1,15 +1,28 @@
 <?php
-
     session_start();
     if ((!isset($_SESSION['email']) == true) and (!isset($_SESSION['senha']) == true)) {
         unset($_SESSION['email']);
         unset($_SESSION['senha']);
         header('Location: ../../login/login.php');
     } else {
+        //data for verification
+        include_once('../../database/conexao.php');
+        $sql = "SELECT senha FROM usuarios WHERE email = '$email';";
+        $result = $conexao->query($sql);
+        $rMySQL = $result->fetch_assoc();
 
+        //user data
         $email = $_SESSION['email'];
-        $senha = $_SESSION['senha'];
+        $senha = $rMySQL['senha'];
 
+        // input values
+        $passInput = $_POST['passCurrent'] ?? '';
+        $newPass = $_POST['newPass'] ?? '';
+        $RnewPass = $_POST['RnewPass'] ?? '';
+        if($passInput == $senha && $newPass == $RnewPass){
+            $cursor = mysqli_query($conexao, "UPDATE usuarios SET senha = '$newPass' WHERE email = '$email';");
+            header('Location: ../settings.php');
+        } 
     }
 ?>
 <!DOCTYPE html>
@@ -37,7 +50,7 @@
                     <i class='fa-solid fa-user icon-menu'></i>
                     Seu Perfil
                 </a>
-                <a href='profile/goOut.php' class='close-btn font-nigth' title='Sair do Perfil'>
+                <a href='../../profile/goOut.php' class='close-btn font-nigth' title='Sair do Perfil'>
                     Sair
                 </a>
             </div>
@@ -48,6 +61,7 @@
     <form action="<?= $_SERVER['PHP_SELF']?>" method="post">
         <label for="passCurrent" class="font-nigth">Digite sua senha atual:</label>
         <input type="password" name="passCurrent" class="input">
+        <p class='msg-erro'></p>
         <label for="newPass" class="font-nigth">Digite sua nova senha:</label>
         <input type="password" name="newPass" class="">
         <label for="RnewPass" class="font-nigth">Repita sua nova senha:</label>
@@ -55,6 +69,7 @@
         <a href="" class="effect-text-line font-nigth">Esqueci minha senha</a>
         <input type="submit" value="Alterar Senha">
     </form>
+
     <script>
         document.querySelector('.icon').addEventListener('click', function () {
             document.querySelector('.menu').classList.toggle('show-menu');

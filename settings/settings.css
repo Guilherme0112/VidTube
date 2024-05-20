@@ -54,6 +54,13 @@ input{
     border-radius: 10px;
     padding-left: 10px;
 }
+.msg-error{
+
+    font-size: 10px;
+    width: 100%;
+    color: rgb(37, 37, 190);
+    padding-bottom: 10px;
+}
 .alterPass{
 
     padding: 0;
@@ -90,7 +97,7 @@ input{
 .deleteUser:hover{
 
     background-color: rgb(203, 51, 42);
-    color: rgb(45, 45, 45);
+    color: rgb(25, 25, 25);
     transition: .3s;
 }
 @media (max-width: 768px){

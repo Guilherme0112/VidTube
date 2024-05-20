@@ -1,3 +1,8 @@
+<?php
+    include_once('database/conexao.php');
+    $cursor = mysqli_query($conexao, "SELECT * FROM video");
+    $rows = mysqli_num_rows($cursor);
+?>
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -64,67 +69,25 @@
             </div>
         </div>
     </header>
+    
     <main id="primary-page-video">
-        <a href='page-video/video.php' class="size-box-video">
-            <div class="box-video"></div>
-            <h3 class="video-title font-nigth ">Título do video</h3>
-            <p class="views-video font-nigth">0 visualizaçoes</p>
-        </a>
-        <a href='page-video/video.php' class="size-box-video">
-            <div class="box-video"></div>
-            <h3 class="video-title font-nigth ">Título do video</h3>
-            <p class="views-video font-nigth">0 visualizaçoes</p>
-        </a>
-        <a href='page-video/video.php' class="size-box-video">
-            <div class="box-video"></div>
-            <h3 class="video-title font-nigth ">Título do video</h3>
-            <p class="views-video font-nigth">0 visualizaçoes</p>
-        </a>
-        <a href='page-video/video.php' class="size-box-video">
-            <div class="box-video"></div>
-            <h3 class="video-title font-nigth ">Título do video</h3>
-            <p class="views-video font-nigth">0 visualizaçoes</p>
-        </a>
-        <a href='page-video/video.php' class="size-box-video">
-            <div class="box-video"></div>
-            <h3 class="video-title font-nigth ">Título do video</h3>
-            <p class="views-video font-nigth">0 visualizaçoes</p>
-        </a>
-        <a href='page-video/video.php' class="size-box-video">
-            <div class="box-video"></div>
-            <h3 class="video-title font-nigth ">Título do video</h3>
-            <p class="views-video font-nigth">0 visualizaçoes</p>
-        </a>
-        <a href='page-video/video.php' class="size-box-video">
-            <div class="box-video"></div>
-            <h3 class="video-title font-nigth ">Título do video</h3>
-            <p class="views-video font-nigth">0 visualizaçoes</p>
-        </a>
-        <a href='page-video/video.php' class="size-box-video">
-            <div class="box-video"></div>
-            <h3 class="video-title font-nigth ">Título do video</h3>
-            <p class="views-video font-nigth">0 visualizaçoes</p>
-        </a>
-        <a href='page-video/video.php' class="size-box-video">
-            <div class="box-video"></div>
-            <h3 class="video-title font-nigth ">Título do video</h3>
-            <p class="views-video font-nigth">0 visualizaçoes</p>
-        </a>
-        <a href='page-video/video.php' class="size-box-video">
-            <div class="box-video"></div>
-            <h3 class="video-title font-nigth ">Título do video</h3>
-            <p class="views-video font-nigth">0 visualizaçoes</p>
-        </a>
-        <a href='page-video/video.php' class="size-box-video">
-            <div class="box-video"></div>
-            <h3 class="video-title font-nigth ">Título do video</h3>
-            <p class="views-video font-nigth">0 visualizaçoes</p>
-        </a>
-        <a href='page-video/video.php' class="size-box-video">
-            <div class="box-video"></div>
-            <h3 class="video-title font-nigth ">Título do video</h3>
-            <p class="views-video font-nigth">0 visualizaçoes</p>
-        </a>
+    <?php
+        
+    while($result = $cursor->fetch_assoc()){ //pega uma linha do mysql, quando o loop voltar ele pega a proxima linha e substitui.
+        $video = $result['video']; //pega o valor que está na coluna video no na banco.
+        $title = $result['title']; //pega o valor que está na coluna title.
+        $likes = $result['likes']; // pega o valor que está na colina likes.
+        $thumb = $result['thumb']; //pega a rota da thumb no MySQL
+    
+        echo "<a href='page-video/video.php?video=$video&title=$title' class='size-box-video' title='$title'>
+                <img class='box-video' src='$thumb'></img>
+                <h3 class='video-title font-nigth'>$title</h3>
+                <p class='views-video font-nigth'> $likes pessoas curtiram</p>
+            </a>";
+    }
+    
+    //Se houver 10 linhas de dados, ele volta pega a array e guarda em $result, os índices sao mostrados por causa do echo e fica nesse loop até nao ter mais dados.
+    ?>
     </main>
     <main id="primary-page-post">
         <div class="box-post">

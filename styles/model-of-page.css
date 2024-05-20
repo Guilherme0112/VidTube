@@ -107,6 +107,10 @@ header{
 .video-title{
 
     font-size: 15px;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    overflow: hidden;
+    -webkit-box-orient: vertical;
 }
 .views-video{ /* settings font os views */
 
