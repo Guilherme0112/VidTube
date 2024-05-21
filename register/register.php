@@ -4,18 +4,21 @@
     $phone = '';
     include_once('../database/conexao.php');
     if (isset($_POST['enviar'])) {
-        $name = $_POST['name'] ;
+        $name = $_POST['name'];
         $email = $_POST['email'];
         $phone = $_POST['phone'];
         $senha = $_POST['senha'];
         $rsenha = $_POST['rsenha'];
-        if (strlen($name) > 3 && strlen($phone) ==11 && $senha == $rsenha){
+        if (strlen($name) > 3 && strlen($phone) == 15 && $senha == $rsenha){
             $cursor = mysqli_query($conexao, "INSERT INTO usuarios (nome, email, senha, phone) VALUES ('$name', '$email', '$senha', '$phone')");
+            $sql = mysqli_query($conexao, "SELECT *  FROM usuarios WHERE email = '$email';");
+            $result = $sql->fetch_assoc();
+            $idBC = $result['id'];
+            //criar uma pasta para uploads assim que o perfil é criado
+            $dir = '../database/Arquivos/' . $idBC . '/';
+            mkdir($dir, 0777, true);
             header('Location: ../login/login.php');
 
-        } else {
-                print"Passou aqui";
-        
         }    
     };
     //if the user is online, do not login
@@ -70,7 +73,7 @@
         </div>
     </header>
     <main>
-        <form id='form' action="<?= $_SERVER['PHP_SELF'] ?>" method="post" onsubmit='return validateForm();'>
+        <form id='form' action="<?= $_SERVER['PHP_SELF'] ?>" method="post" onsubmit='return validateForm()'>
             <div>
                 <label for="name">Nome:</label>
                 <input type="text" name="name" class="input-space placeholder-center" min='3' placeholder='Digite seu nome' value='<?php print"$name";?>' required>
@@ -78,7 +81,7 @@
                 <label for="email">Email:</label>
                 <input type="email" name="email" class="input-space placeholder-center" placeholder='Digite seu e-mail' value='<?php print"$email";?>' required>
                 <label for="phone">Telefone:</label>
-                <input type="tel" name="phone" class="input-space placeholder-center" placeholder="(00)0000-0000" value='<?php print"$phone";?>' style="margin-top: 5px;" required>
+                <input type="tel" name="phone" class="input-space placeholder-center tel" placeholder="(00)0000-0000" value='<?php print"$phone";?>' style="margin-top: 5px;" required>
                 <p class='msg-error' id='phoneError'></p>
             </div>
             <div>

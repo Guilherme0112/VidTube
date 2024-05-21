@@ -1,18 +1,20 @@
 <?php
-session_start();
-if ((!isset($_SESSION['email']) == true) and (!isset($_SESSION['senha']) == true)) {
-    unset($_SESSION['email']);
-    unset($_SESSION['senha']);
-    header('Location: ../login/login.php');
-} else {
-    include_once('../database/conexao.php');
-    $logado = $_SESSION['email'];
-    $cursor = "SELECT nome FROM usuarios WHERE email = '$logado';";
-    $response  = $conexao->query($cursor); // show response mysql
-    $nameMySQL = $response->fetch_assoc(); // search name in table mysql
-    $name = $nameMySQL['nome']; // show user name
-    
-}
+    session_start();
+    if ((!isset($_SESSION['email']) == true) and (!isset($_SESSION['senha']) == true)) {
+        unset($_SESSION['email']);
+        unset($_SESSION['senha']);
+        header('Location: ../login/login.php');
+    } else {
+        include_once('../database/conexao.php');
+        $logado = $_SESSION['email'];
+        $cursor = "SELECT nome FROM usuarios WHERE email = '$logado';";
+        $response  = $conexao->query($cursor); // show response mysql
+        $nameMySQL = $response->fetch_assoc(); // search name in table mysql
+        $name = $nameMySQL['nome']; // show user name
+        
+    }
+    //icon default
+    $profileIcon = '../styles/icons/user.jpg';
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -54,6 +56,10 @@ if ((!isset($_SESSION['email']) == true) and (!isset($_SESSION['senha']) == true
                         <i class="fa-solid fa-gear icon-menu"></i>
                         Configurações
                     </a>
+                    <a href="uploadVideo.php">
+                        <i class='fa-solid fa-upload icon-menu'></i>
+                        Enviar Vídeo
+                    </a>
                     <a href="goOut.php" class="close-btn font-nigth" title="Sair do Perfil">
                         Sair
                     </a>
@@ -63,7 +69,7 @@ if ((!isset($_SESSION['email']) == true) and (!isset($_SESSION['senha']) == true
     </header>
     <section>
         <div class="size-img-profile">
-            <img src="../database/Arquivos/19/perfil.png" alt="" class="img-profile" class='photo-profile'>
+            <img src="<?php echo $profileIcon; ?>" alt="" class="img-profile" class='photo-profile'>
             <div class="name-space">
                 <p class="name">
                     <?php print "$name"; ?>

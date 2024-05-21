@@ -1,25 +1,9 @@
 <?php
- 
-    /*
-    include_once('../database/conexao.php');
-    $emailInput = $_POST['email'] ?? '';
-    $passInput = $_POST['senha'] ?? '';
-    if(isset($email) && isset($passInput)){
-
-        $cursor = "SELECT * FROM usuarios WHERE email = '$emailInput';";
-        $response = $conexao->query($cursor);
-        $resultMySQL = $response->fetch_assoc();
-
-        $emailMySQL = $resultMySQL['email'];
-        $passMySQL = $resultMySQL['senha'];
- 
-    }
-*/
     session_start();
     if(isset($_SESSION['email'])){
-
         header('Location: ../index.php');
     }
+    
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">

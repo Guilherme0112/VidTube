@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -40,7 +41,7 @@
                     <?php 
                         session_start();
                         if(isset($_SESSION['email']) && isset($_SESSION['senha'])){
-                            echo "<a href='./profile/profile.php'>
+                            echo "<a href='../profile/profile.php'>
                                     <i class='fa-solid fa-user icon-menu'></i>
                                     Seu Perfil
                                 </a>
@@ -63,15 +64,23 @@
             </div>
         </div>
     </header>
+    <?php
+        $video = $_GET['video'];
+        $title = $_GET['title'];
+    ?>
     <body>
-        <div class="box-picture">
-            <video src="">
 
-            </video>
-        </div>
+        <!-- box video -->
+
+        <iframe src="<?php echo $video ?>" frameborder="0" class="box-picture">
+
+        </iframe>
         <div class='box-title'>
-            <h1 class='title font-nigth'>Título do vídeo</h1>
+            <h1 class='title font-nigth'><?php echo $title ?></h1>
         </div>
+
+        <!-- video title and follow button -->
+
         <div class="box-interaction">
             <img src="../styles/icon.png" alt="">
             <a href='' class="font-nigth">Autor do vídeo</a>
