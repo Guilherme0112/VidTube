@@ -8,6 +8,7 @@ function validateForm(){
     var phone = document.getElementsByName('phone')[0];
     var pass = document.getElementsByName('senha')[0];
     var rpass = document.getElementsByName('rsenha')[0];
+    
     if(name.value.length < 3 || phone.value.length != 15 || pass.value != rpass.value){
         if(name.value.length < 3){
             console.log('O nome precisa ter pelo menos 3 caracteres');
@@ -27,17 +28,15 @@ function validateForm(){
         }
         if(pass.value != rpass.value || pass.value.length === 0 || rpass.value.length === 0){
             console.log('As senhas nao coencidem ou estao vazias');
-            passError.innerText = 'As senhas não coencidem.';
-            rpassError.innerText = 'As senhas não coencidem.';
             pass.style.outline = '2px solid red';
             rpass.style.outline = '2px solid red';
+            document.getElementById('passError').innerHTML = 'As senhas nao coencidem';
         }else{
             pass.style.outline = 'none';
             rpass.style.outline = 'none';
             passError.innerText = '';
             rpassError.innerText = '';
-        } 
-
+        }             
         return false;
 
     } else{

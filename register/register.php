@@ -9,15 +9,22 @@
         $phone = $_POST['phone'];
         $senha = $_POST['senha'];
         $rsenha = $_POST['rsenha'];
+
+        $sql = mysqli_query($conexao, "SELECT *  FROM usuarios WHERE email = '$email';");
+        $result = $sql->fetch_assoc();
+        $emailBC = $result['email'];
+
         if (strlen($name) > 3 && strlen($phone) == 15 && $senha == $rsenha){
-            $cursor = mysqli_query($conexao, "INSERT INTO usuarios (nome, email, senha, phone) VALUES ('$name', '$email', '$senha', '$phone')");
-            $sql = mysqli_query($conexao, "SELECT *  FROM usuarios WHERE email = '$email';");
-            $result = $sql->fetch_assoc();
-            $idBC = $result['id'];
-            //criar uma pasta para uploads assim que o perfil é criado
-            $dir = '../database/Arquivos/' . $idBC . '/';
-            mkdir($dir, 0777, true);
-            header('Location: ../login/login.php');
+            if(mysqli_num_rows($sql) > 0){
+                
+            } else {
+                $cursor = mysqli_query($conexao, "INSERT INTO usuarios (nome, email, senha, phone) VALUES ('$name', '$email', '$senha', '$phone')");
+                $idBC = $result['id'];
+                //criar uma pasta para uploads assim que o perfil é criado
+                $dir = '../database/Arquivos/' . $idBC . '/';
+                mkdir($dir, 0777, true);
+                header('Location: ../login/login.php');
+            }
 
         }    
     };
@@ -74,26 +81,26 @@
     </header>
     <main>
         <form id='form' action="<?= $_SERVER['PHP_SELF'] ?>" method="post" onsubmit='return validateForm()'>
-            <div>
+            <div id="form_1">
+            </div>
+            <div id="form_2">
                 <label for="name">Nome:</label>
                 <input type="text" name="name" class="input-space placeholder-center" min='3' placeholder='Digite seu nome' value='<?php print"$name";?>' required>
                 <p class='msg-error' id='nameError'></p>
                 <label for="email">Email:</label>
                 <input type="email" name="email" class="input-space placeholder-center" placeholder='Digite seu e-mail' value='<?php print"$email";?>' required>
-                <label for="phone">Telefone:</label>
-                <input type="tel" name="phone" class="input-space placeholder-center tel" placeholder="(00)0000-0000" value='<?php print"$phone";?>' style="margin-top: 5px;" required>
+                <p class="msg-error" id='emailError'></p>
+                <label for="phone" style="width: 50%;">Telefone:</label>
+                <input type="tel" name="phone" class="input-space placeholder-center tel" placeholder="(00) 0000-0000" value='<?php print"$phone";?>'  required>
                 <p class='msg-error' id='phoneError'></p>
-            </div>
-            <div>
                 <label for="senha">Senha:</label>
+                <label for="rsenha" style="margin-left: 25px;">Repita a Senha:</label>
                 <input type="password" name="senha" class="input-space placeholder-center pass" placeholder='Digite sua senha' required>
-                <p class='msg-error' id='passError'></p>
-                <label for="rsenha">Repita a Senha:</label>
-                <input type="password" name="rsenha" class="input-space placeholder-center rpass" placeholder='Repita sua senha' required>
-                <p class='msg-error' id='rpassError'></p>
-                <a href="../login/login.php" class="font-nigth effect-text-line">Já tem conta? Faça Login</a>
+                <input type="password" name="rsenha" class="input-space placeholder-center rpass" placeholder='Repita sua senha' style='margin-left: -10px;' required>
+                <p class="msg-error" id='passError'></p>
                 <input type="submit" value="Registrar" name="enviar" id='submit' title="Registrar conta">
             </div>
+            
         </form>
     </main>
 </body>
