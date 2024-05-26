@@ -1,7 +1,4 @@
 body{
-
-    width: 100%;
-    height: 100vh;
     display: flex;
     justify-content: start;
     align-items: center;
@@ -27,7 +24,6 @@ body{
 }
 .main-box{
 
-    margin-left: 250px;
     width: 100%;
     height: 100%;
 }
@@ -40,7 +36,8 @@ body{
     align-items: center;
     flex-wrap: wrap;
     text-align: center;
-    padding: 20px;
+    padding-left: 250px;
+    padding-top: 20px;
 }
 label{
 
@@ -48,56 +45,79 @@ label{
 }
 input{
 
-    margin: 10px 0;
+    margin: 10px auto;
+}
+input[type='text'], input[type='email']{
+
     width: 300px;
-    height: 30px;
+    height: 40px;
+    border-radius: 10px;
+    padding-left: 5px;
+}
+input[type='button']{
+    width: 300px;
+    height: 40px;
     border-radius: 10px;
     padding-left: 10px;
-}
-.msg-error{
-
-    font-size: 10px;
-    width: 100%;
-    color: rgb(37, 37, 190);
-    padding-bottom: 10px;
-}
-.alterPass{
-
-    padding: 0;
-    background-color: rgb(255, 255, 69);
+    background-color: rgb(37, 37, 190);
+    color: white;
     cursor: pointer;
-    border-radius: 10px;
-
 }
-.alterPass:hover{
+input[type='button']:hover{
 
     transition: .3s;
-    box-shadow: 0px 0px 7px rgb(255, 255, 69);
+    background-color: #1b1b1b;
+}
+/* input replace photo of user */
+input[type='file']{
+
+    display: none;
+}
+.photoProfile{
+
+    width: 300px;
+    height: 40px;
+    margin: 10px auto;
+    background-color: rgb(37, 37, 190);
+    color: white;
+    border-radius: 10px;
+    padding: 9px;
+    cursor: pointer;
+}
+.photoProfile:hover{
+
+    transition: .3s;
+    background-color: #1b1b1b;
 }
 .submit{
 
-    margin-top: 30px;
+    margin-top: 20px;
     width: 300px;
     height: 30px;
     border-radius: 10px;
     cursor: pointer;
     background-color: rgb(37, 37, 190);
+    color: white;
 }
 .submit:hover{
 
     transition: .3s;
-    box-shadow: 0px 0px 7px rgb(37, 37, 190);
+    background-color: #1b1b1b;
+
 }
 .deleteUser{
 
+    width: 300px;
+    height: 40px;
+    border-radius: 10px;
     cursor: pointer;
-    background-color: rgb(45, 45, 45);
-    color: rgb(203, 51, 42);
+    background-color: rgb(203, 51, 42);
+    color: #0b0b0b;
 }
 .deleteUser:hover{
 
-    background-color: rgb(203, 51, 42);
-    color: rgb(25, 25, 25);
+    background-color: #1b1b1b;
+    color: rgb(203, 51, 42);
     transition: .3s;
 }
 @media (max-width: 768px){
@@ -113,5 +133,7 @@ input{
     .yourProfile{
 
         width: 100%;
+        padding-left: 120px;
+        padding-top: 20px;
     }
 }

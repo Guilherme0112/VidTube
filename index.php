@@ -1,6 +1,6 @@
 <?php
     include_once('database/conexao.php');
-    $cursor = mysqli_query($conexao, "SELECT * FROM video");
+    $cursor = mysqli_query($conexao, "SELECT * FROM videos");
     $rows = mysqli_num_rows($cursor);
 ?>
 <!DOCTYPE html>
@@ -13,7 +13,7 @@
     <link rel="stylesheet" href="styles/model-of-page.css">
     <link rel="stylesheet" href="fontawesome-free-6.5.1-web/css/all.min.css">
     <script src="scripts.js" defer></script>
-    <link rel="shortcut icon" href="/project/styles/icon.png" type="image/x-icon">
+    <link rel="shortcut icon" href="styles/icons/icon-ligth.png" type="image/x-icon">
     <title>Início</title>
 </head>
 
@@ -27,7 +27,7 @@
             <i class="fas fa-bars icon"></i>
             <div class="menu">
                 <div style="margin-top: 40px;">
-                    <a href="/project/index.php" class="select">
+                    <a href="index.php" class="select">
                         <i class="fa-solid fa-house icon-menu"></i>
                         Início
                     </a>
@@ -74,12 +74,13 @@
     <?php
         
     while($result = $cursor->fetch_assoc()){ //pega uma linha do mysql, quando o loop voltar ele pega a proxima linha e substitui.
+        $id = $result['idVideo'];
         $video = $result['video']; //pega o valor que está na coluna video no na banco.
         $title = $result['title']; //pega o valor que está na coluna title.
         $likes = $result['likes']; // pega o valor que está na colina likes.
         $thumb = $result['thumb']; //pega a rota da thumb no MySQL
     
-        echo "<a href='page-video/video.php?video=$video&title=$title' class='size-box-video' title='$title'>
+        echo "<a href='page-video/video.php?id=$id' class='size-box-video' title='$title'>
                 <img class='box-video' src='$thumb'></img>
                 <h3 class='video-title font-nigth'>$title</h3>
                 <p class='views-video font-nigth'> $likes pessoas curtiram</p>
@@ -88,38 +89,6 @@
     
     //Se houver 10 linhas de dados, ele volta pega a array e guarda em $result, os índices sao mostrados por causa do echo e fica nesse loop até nao ter mais dados.
     ?>
-    </main>
-    <main id="primary-page-post">
-        <div class="box-post">
-            <div class="img-post">
-                <img src="" alt="">
-            </div>
-        </div>
-        <div class="box-post">
-            <div class="img-post">
-                <img src="" alt="">
-            </div>
-        </div>
-        <div class="box-post">
-            <div class="img-post">
-                <img src="" alt="">
-            </div>
-        </div>
-        <div class="box-post">
-            <div class="img-post">
-                <img src="" alt="">
-            </div>
-        </div>
-        <div class="box-post">
-            <div class="img-post">
-                <img src="" alt="">
-            </div>
-        </div>
-        <div class="box-post">
-            <div class="img-post">
-                <img src="" alt="">
-            </div>
-        </div>
     </main>
 </body>
 <script>

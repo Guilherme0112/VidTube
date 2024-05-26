@@ -1,0 +1,47 @@
+body{
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+form{
+
+    width: 400px;
+    height: 400px;
+    box-shadow: 0px 0px 7px black;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    padding: 30px;
+}
+input{
+
+    width: 300px;
+    height: 40px;
+    border-radius: 10px;
+    padding-left: 5px;
+}
+label{
+
+    width: 100%;
+    text-align: center;
+}
+a{
+
+    text-decoration: none;
+}
+input[type='submit']{
+
+    background-color: rgb(37, 37, 190);
+    cursor: pointer;
+    color: white;
+
+}
+input[type='submit']:hover{
+
+    transition: .3s;
+    background-color: #2b2b2b;
+    color: white
+}

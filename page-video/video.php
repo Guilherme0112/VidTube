@@ -1,4 +1,18 @@
+<?php 
+    include_once('../database/conexao.php');
+    $id = $_GET['id'];
+    $sql = mysqli_query($conexao, "SELECT * FROM videos WHERE idVideo = $id");
+    $resp = $sql->fetch_assoc();
+    $video = $resp['video'];
+    $title = $resp['title'];
+    //user data
+    $idUser = $resp['userVideo'];
+    $sql2 = mysqli_query($conexao, "SELECT * FROM usuarios WHERE id = $idUser");
+    $resp2 = $sql2->fetch_assoc();
+    $name = $resp2['nome'];
+    $userPhoto = $resp2['photoProfile'];
 
+?>
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -64,10 +78,6 @@
             </div>
         </div>
     </header>
-    <?php
-        $video = $_GET['video'];
-        $title = $_GET['title'];
-    ?>
     <body>
 
         <!-- box video -->
@@ -82,8 +92,8 @@
         <!-- video title and follow button -->
 
         <div class="box-interaction">
-            <img src="../styles/icon.png" alt="">
-            <a href='' class="font-nigth">Autor do vídeo</a>
+            <img src="<?php echo $userPhoto ?>" alt="">
+            <a href='' class="font-nigth"><?php echo $name ?></a>
             <button class="btn" title="Seguir este perfil">Seguir</button>
             <i class="fa-regular fa-thumbs-up icon-interaction font-nigth" title="Like"></i>
             <i class="fa-regular fa-thumbs-down icon-interaction font-nigth" title="Deslike"></i>

@@ -7,14 +7,14 @@
     } else {
         include_once('../database/conexao.php');
         $logado = $_SESSION['email'];
-        $cursor = "SELECT nome FROM usuarios WHERE email = '$logado';";
-        $response  = $conexao->query($cursor); // show response mysql
-        $nameMySQL = $response->fetch_assoc(); // search name in table mysql
-        $name = $nameMySQL['nome']; // show user name
+        $cursor = mysqli_query($conexao, "SELECT * FROM usuarios WHERE email = '$logado' ");
+        $MySQL = $cursor->fetch_assoc(); // search name in table mysql
+        $name = $MySQL['nome']; // show user name
+        $photoProfile = $MySQL['photoProfile']; // sow photo profile
         
     }
     //icon default
-    $profileIcon = '../styles/icons/user.jpg';
+    $profileIcon = $photoProfile;
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -26,7 +26,7 @@
     <link rel="stylesheet" href="../styles/model-of-page.css">
     <link rel="stylesheet" href="../fontawesome-free-6.5.1-web/css/all.min.css">
     <script src="profile.js"></script>
-    <link rel="shortcut icon" href="../styles/icon.png" type="image/x-icon">
+    <link rel="shortcut icon" href="../styles/icons/icon-ligth.png" type="image/x-icon">
     <title>
         <?php print "$name"; ?>
     </title>

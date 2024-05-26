@@ -10,9 +10,16 @@
     $title = $_POST['title'] ?? '';
     if(isset($_POST['submit'])){
         if(isset($_FILES['file']) && strlen($title) > 4){
-            $_FILES['file']['name'] = $title;
-            move_uploaded_file($_FILES['file']['tmp_name'], "../database/Arquivos/" . $id . "/" . $_FILES['file']['name'] . ".mp4");
-            $sql = mysqli_query($conexao, "INSERT INTO video VALUES (default, '../database/Arquivos/$id/$title.mp4', '$title', 0, '', '')");
+            
+            $title = $_FILES['file']['name'];
+            move_uploaded_file($_FILES['file']['tmp_name'], "../database/Arquivos/" . $id . "/" . $title);
+            $sql = mysqli_query($conexao, "INSERT INTO videos VALUES (default, '../database/Arquivos/$id/$title.mp4', 0, '', $id, '$title')");  
+            if(isset($_FILES['thumb'])){
+                $thumb = $_FILES['thumb']['name'];
+                move_uploaded_file($_FILES['thumb']['tpm_name'], "..database/Arquivos/" . $id . "/" . $thumb . ".png");
+                $thumbRota = "..database/Arquivos/$id/$thumb.png" ?? '';
+                #$sql2 = mysqli_query($conexao, "");
+            }
             header('Location: ../index.php');
         }
     }
@@ -29,6 +36,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../styles/model-of-page.css">
     <link rel="stylesheet" href="../fontawesome-free-6.5.1-web/css/all.min.css">
+    <link rel="shortcut icon" href="../styles/icons/icon-ligth.png" type="image/x-icon">
     <title>Upload Vídeo</title>
 </head>
 <body>
@@ -68,7 +76,10 @@
         </div>
     </header>
     <form action="<?php $_SERVER['PHP_SELF'] ?>" method="POST" enctype="multipart/form-data" onsubmit="return validate()">
-        <input type="file" name="file">
+        <label for="files" id='file'>Clique aqui para enviar seu vídeo</label>
+        <input type="file" name="file" id='files' accept="video/mp4" required>
+        <label for="thumb" id='file'>Clique aqui para colocar uma capa</label>
+        <input type="file" name="thumb" id="thumb" accept="image/png" required>
         <label for="title">Título do vídeo</label>
         <input type="text" name="title" id='title'>
         <p class="msg"></p>
@@ -82,9 +93,8 @@
 
             var title = document.getElementsById('title');
             if(title.value.length > 0){
-
-                var msg = document.getElementsByClassName('msg')[0];
-                msg.innerHTML = 'O título deve ter no máximo 69 caracteres'
+                var msg = document.getElementsByClassName('msg');
+                msg.innerHTML = 'O título deve ter no máximo 70 caracteres'
                 return false;
             } else {
                 return true;
@@ -104,14 +114,31 @@
             justify-content: center;
             align-items: center;
             flex-wrap: wrap;
-            width: 500px;
+            width: 700px;
             height: 500px;
             border-radius: 10px;
-            background-color: gray;
+            background-color: #1b1b1b;
+            box-shadow: 0px 0px 7px black;
+            padding: 20px;
         }
         label{
 
             text-align: center;
+            color: white;
+            width: 100%;
+    
+        }
+        #file{
+
+            display: block;
+            padding: 60px 10px;
+            width: 300px;
+            height: 150px;
+            background-color: #0b0b0b;
+            cursor: pointer;
+            color: white;
+            border-radius: 10px;
+            margin: auto 10px;
         }
         .msg{
 
@@ -122,6 +149,7 @@
         }
         input[type='file']{
 
+            display: none;
             width: 95%;
             height: 300px;
             outline: 2px solid black;
@@ -131,9 +159,11 @@
         input[type='text']{
 
             width: 80%;
-            height: 30px;
+            height: 40px;
             padding-left: 5px;
             border-radius: 5px;
+            background-color: #0b0b0b;
+            color: white;
         }
         input[type='submit']{
 

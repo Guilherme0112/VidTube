@@ -16,7 +16,7 @@
 body{
 
     height: 100vh;
-    width: 100%;
+    max-width: 1280px;
     background-color: var(--color-background-pri);
 }
 /* header of site */
@@ -116,32 +116,7 @@ header{
 
     font-size: 12px;
     opacity: 0.4;
-}
-.box-post{ /* box post default */
-
-    height: 290px;
-    width: 350px;
-    background-color: #1b1b1b;
-    border-radius: 10px;
-    margin: 20px;
-    display: flex;
-    justify-content: start;
-    align-items: center;
-    cursor: pointer;
-}
-.box-post:hover{
-
-    outline: 1px solid white;
-    transition: .7s;
-}
-.img-post{
-
-    width: 50%;
-    height: 70%;
-    margin: 10px;
-    border-radius: 10px;
-    background-color: #1b1b1b;
-}
+}   
 .effect-text-line{
 
     text-decoration: none;
