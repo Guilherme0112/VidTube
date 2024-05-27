@@ -110,8 +110,7 @@
                         <span style='width: 100%;'></span>
                         <input type='button' value='Mudar Telefone' onclick='phone()'> 
                         <span style='width: 100%;'></span>
-                        <label for='photoProfile' class='photoProfile'>Trocar a foto do perfil</label>
-                        <input type='file' name='photoProfile' id='photoProfile' accept='image/png'>
+                        <input type='button' name='photoProfile' id='photoProfile' value='Trocar foto de Perfil' onclick='photo()'>
                         <span style='width: 100%;'></span>
                         <input type='submit' value='Excluir Conta' class='deleteUser' name='deleteUser'>
                     </form>";
@@ -131,6 +130,9 @@
                 evento.preventDefault();
             }
         });
+        function photo(){
+            location.href = 'PassAndPhoto/photo.php';
+        }
         function phone(){
             location.href = 'nameAndPhone/phone.php';
         };
