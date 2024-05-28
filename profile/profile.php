@@ -1,16 +1,17 @@
 <?php
+    include_once('../database/conexao.php');
     session_start();
     if ((!isset($_SESSION['email']) == true) and (!isset($_SESSION['senha']) == true)) {
         unset($_SESSION['email']);
         unset($_SESSION['senha']);
         header('Location: ../login/login.php');
     } else {
-        include_once('../database/conexao.php');
         $logado = $_SESSION['email'];
         $cursor = mysqli_query($conexao, "SELECT * FROM usuarios WHERE email = '$logado' ");
-        $MySQL = $cursor->fetch_assoc(); // search name in table mysql
-        $name = $MySQL['nome']; // show user name
-        $photoProfile = $MySQL['photoProfile']; // sow photo profile
+        $MySQL = $cursor->fetch_assoc();
+        $id = $MySQL['id'];
+        $name = $MySQL['nome']; 
+        $photoProfile = $MySQL['photoProfile']; 
         
     }
     //icon default
@@ -56,7 +57,7 @@
                         <i class="fa-solid fa-gear icon-menu"></i>
                         Configurações
                     </a>
-                    <a href="uploadVideo.php">
+                    <a href="uploadVideo/uploadVideo.php">
                         <i class='fa-solid fa-upload icon-menu'></i>
                         Enviar Vídeo
                     </a>
@@ -79,7 +80,20 @@
 
     </section>
     <main>
-
+        <?php
+            $sql = mysqli_query($conexao, "SELECT * FROM videos WHERE userVideo = $id");
+            while($i = $sql->fetch_assoc()){
+                $idVideo = $i['idVideo'];
+                $title = $i['title'];
+                $thumb = $i['thumb'];
+                $likes = $i['likes'];
+                echo "<a href='../page-video/video.php?id=$idVideo' class='size-box-video' title='$title'>
+                        <img class='box-video' src='$thumb'></img>
+                        <h3 class='video-title font-nigth'>$title</h3>
+                        <p class='views-video font-nigth'> $likes pessoas curtiram</p>
+                    </a>";
+            }
+        ?>
     </main>
     <script>
         document.querySelector('.icon').addEventListener('click', function() {
