@@ -1,0 +1,40 @@
+body{
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+form{
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    background-color: #1b1b1b;
+    border-radius: 10px;
+    width: 500px;
+    height: 500px;
+}
+input[type='file']{
+
+    display: none;
+}
+input[type='text']{
+
+    width: 300px;
+    height: 40px;
+    border-radius: 5px;
+}
+input[type='submit']{
+
+    width: 300px;
+    height: 40px;
+    border-radius: 5px;
+}
+label{
+
+    width: 90%;
+    height: 40%;
+    background-color: #0b0b0b;
+    border-radius: 10px;
+}
