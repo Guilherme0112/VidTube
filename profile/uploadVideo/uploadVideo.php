@@ -6,14 +6,20 @@
     $resp = $sql->fetch_assoc();
     $idUser = $resp['id'];
 
-    if(isset($_POST['submit']) && isset($_FILES['video']['name'])){
+    if(isset($_POST['submit']) && isset($_FILES['video']['name']) && isset($_FILES['thumb']['name'])){
+        //info thumb
+        $nameThumb = $_FILES['thumb']['name'];
+        $routeThumb = "database/Arquivos/$idUser/$nameThumb"; 
+        move_uploaded_file($_FILES['thumb']['tmp_name'], "../../database/Arquivos/$idUser/$nameThumb");
+        // info video
         $nameVideo = $_FILES['video']['name'];
-        $ext = pathinfo($nameVideo, PATHINFO_EXTENSION);
+        $extV = pathinfo($nameVideo, PATHINFO_EXTENSION);
         $titleVideoToView = $_POST['title'];
-        $titleVideoToMySQL = $_POST['title'] . '.' . $ext;
-        $route = "../database/Arquivos/$idUser/$titleVideoToMySQL";
-        move_uploaded_file($_FILES['video']['tmp_name'], "../$route");
-        $sql2 = mysqli_query($conexao, "INSERT INTO videos VALUES (default, '$route', 0, '', $idUser, '$titleVideoToView')");
+        $titleVideoToMySQL = $_POST['title'] . '.' . $extV;
+        $routeVideo = "../database/Arquivos/$idUser/$titleVideoToMySQL";
+        move_uploaded_file($_FILES['video']['tmp_name'], "../../database/Arquivos/$idUser/$titleVideoToMySQL");
+        //insert into mysql
+        $sql2 = mysqli_query($conexao, "INSERT INTO videos VALUES (default, '$routeVideo', 0, '$routeThumb', $idUser, '$titleVideoToView')");
         header('Location: ../../index.php');
     }
 ?>
@@ -53,15 +59,36 @@
         </div>
     </header>
     <form action="<?php $_SERVER['PHP_SELF'] ?>" method="post" enctype="multipart/form-data">
-        <label for="video"></label>
+        <input type="text" name="title" id="title" placeholder="Título do Vídeo">
+        <label for="video">Fazer upload de vídeo</label>
         <input type="file" name="video" id='video' accept="video/*">
-        <input type="text" name="title" id="title">
+        <img src="" alt="" id='img-preview'>
+        <label for="thumb" id='thumbLabel'>Capa do Vídeo</label>
+        <input type="file" name="thumb" id="thumb" accept="image/*">
+        <span style='width: 100%;'></span>
         <input type="submit" name='submit' value="Postar Vídeo">
     </form>
     <script>
         document.querySelector('.icon').addEventListener('click', function() {
             document.querySelector('.menu').classList.toggle('show-menu');
         });
+        const fileInput = document.getElementById('thumb');
+        const imagePreview = document.getElementById('img-preview');
+
+        fileInput.addEventListener('change', function() {
+            const file = this.files[0];
+
+        if (file) {
+            const reader = new FileReader();
+
+            reader.onload = function(event) {
+                imagePreview.src = event.target.result;
+                document.querySelector('#thumbLabel').innerHTML = 'Arquivo carregado com sucesso!';
+        };
+
+        reader.readAsDataURL(file);
+    }
+});
     </script>
 </body>
 </html>

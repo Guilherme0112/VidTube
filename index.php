@@ -1,7 +1,6 @@
 <?php
     include_once('database/conexao.php');
     $cursor = mysqli_query($conexao, "SELECT * FROM videos");
-    $rows = mysqli_num_rows($cursor);
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -46,7 +45,7 @@
                     <?php 
                         session_start();
                         if(isset($_SESSION['email']) && isset($_SESSION['senha'])){
-                            echo "<a href='./profile/profile.php'>
+                            echo "<a href='profile/profile.php'>
                                     <i class='fa-solid fa-user icon-menu'></i>
                                     Seu Perfil
                                 </a>
@@ -71,24 +70,22 @@
     </header>
     
     <main id="primary-page-video">
-    <?php
-        
-    while($result = $cursor->fetch_assoc()){ //pega uma linha do mysql, quando o loop voltar ele pega a proxima linha e substitui.
-        $id = $result['idVideo'];
-        $video = $result['video']; //pega o valor que está na coluna video no na banco.
-        $title = $result['title']; //pega o valor que está na coluna title.
-        $likes = $result['likes']; // pega o valor que está na colina likes.
-        $thumb = $result['thumb']; //pega a rota da thumb no MySQL
-    
-        echo "<a href='page-video/video.php?id=$id' class='size-box-video' title='$title'>
-                <img class='box-video' src='$thumb'></img>
-                <h3 class='video-title font-nigth'>$title</h3>
-                <p class='views-video font-nigth'> $likes pessoas curtiram</p>
-            </a>";
-    }
-    
-    //Se houver 10 linhas de dados, ele volta pega a array e guarda em $result, os índices sao mostrados por causa do echo e fica nesse loop até nao ter mais dados.
-    ?>
+        <?php
+            while($result = $cursor->fetch_assoc()){ //pega uma linha do mysql, quando o loop voltar ele pega a proxima linha e substitui.
+                $id = $result['idVideo'];
+                $video = $result['video']; //pega o valor que está na coluna video no na banco.
+                $title = $result['title']; //pega o valor que está na coluna title.
+                $likes = $result['likes']; // pega o valor que está na colina likes.
+                $thumb = $result['thumb']; //pega a rota da thumb no MySQL
+            
+                echo "<a href='page-video/video.php?id=$id' class='size-box-video' title='$title'>
+                        <img class='box-video' src='$thumb'></img>
+                        <h3 class='video-title font-nigth'>$title</h3>
+                        <p class='views-video font-nigth'> $likes pessoas curtiram</p>
+                    </a>";
+            }
+        //Se houver 10 linhas de dados, ele volta pega a array e guarda em $result, os índices sao mostrados por causa do echo e fica nesse loop até nao ter mais dados.
+        ?>
     </main>
 </body>
 <script>

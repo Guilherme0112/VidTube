@@ -6,10 +6,53 @@ body{
 }
 main{
 
+    width: 100%;
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: start;
     flex-wrap: wrap;
+    padding: 10px;
+}
+.box-config{
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    width: 500px;
+    height: 225px;
+    background-color: #2b2b2b;
+    border-radius: 10px;
+}
+.edit{
+    height: 90%;
+    display: flex;
+    align-items: flex-start;
+    flex-wrap: wrap;
+}
+input[type='text']{
+
+    width: 200px;
+    height: 40px;
+    padding-left: 5px;
+    border-radius: 5px;
+}
+.replaceName{
+
+    background-color: rgb(37, 37, 190);
+    color: white !important;
+    transition: .3s;
+    cursor: pointer;
+}
+.replaceName:hover{
+
+    background-color: #1b1b1b;
+
+}
+input[type='submit']{
+
+    width: 200px;
+    height: 40px;
+    border-radius: 10px;
+    color: black;
 }
 .size-img-profile{
 

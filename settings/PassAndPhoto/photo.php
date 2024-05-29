@@ -8,6 +8,7 @@
     $sql = mysqli_query($conexao, "SELECT * FROM usuarios WHERE email = '$email'");
     $resp = $sql->fetch_assoc();
     $id = $resp['id'];
+    
     if(isset($_POST['submit']) && isset($_FILES['photo']['name'])){
         $nameFile = $_FILES['photo']['name'];
         $route = "../database/Arquivos/$id/$nameFile";
@@ -119,16 +120,15 @@
         const imagePreview = document.getElementById('img-preview');
 
         fileInput.addEventListener('change', function() {
-        const file = this.files[0];
+            const file = this.files[0];
 
-        if (file) {
-            const reader = new FileReader();
+            if(file) {
+                const reader = new FileReader();
+                reader.onload = function(event) {
+                    imagePreview.src = event.target.result;
+            };
 
-            reader.onload = function(event) {
-                imagePreview.src = event.target.result;
-        };
-
-        reader.readAsDataURL(file);
+            reader.readAsDataURL(file);
     }
 });
     </script>

@@ -19,7 +19,7 @@ video{
 
     display: flex;
     align-items: center;
-    width: 400px;
+    width: 50%;
     height: 60px;
     margin-left: 10px;
     box-shadow: 0px 0px 7px black;
@@ -99,9 +99,10 @@ img{
 
         height: 350px;
     }
-    .box-title{
+    .box-title, .box-interaction{
 
         margin: 10px auto;
         width: 90%;
     }
+
 }

@@ -1,18 +1,14 @@
-<?php
-    include_once('../database/conexao.php');
+<?php   
     session_start();
-    if ((!isset($_SESSION['email']) == true) and (!isset($_SESSION['senha']) == true)) {
-        unset($_SESSION['email']);
-        unset($_SESSION['senha']);
-        header('Location: ../login/login.php');
+    include_once('../database/conexao.php');
+    if(!isset($_GET['id'])){
+        header('Location: ../index.php');
     } else {
-        $logado = $_SESSION['email'];
-        $cursor = mysqli_query($conexao, "SELECT * FROM usuarios WHERE email = '$logado' ");
-        $MySQL = $cursor->fetch_assoc();
-        $id = $MySQL['id'];
-        $name = $MySQL['nome']; 
-        $photoProfile = $MySQL['photoProfile']; 
-        
+        $id = $_GET['id'];
+        $sql = mysqli_query($conexao, "SELECT * FROM usuarios WHERE id = $id");
+        $infoUser = $sql->fetch_assoc();
+        $nameUser = $infoUser['nome'];
+        $photoProfileUser = $infoUser['photoProfile'];
     }
 ?>
 <!DOCTYPE html>
@@ -24,11 +20,8 @@
     <link rel="stylesheet" href="profile.css">
     <link rel="stylesheet" href="../styles/model-of-page.css">
     <link rel="stylesheet" href="../fontawesome-free-6.5.1-web/css/all.min.css">
-    <script src="profile.js"></script>
     <link rel="shortcut icon" href="../styles/icons/icon-ligth.png" type="image/x-icon">
-    <title>
-        <?php echo $name; ?>
-    </title>
+    <title><?php echo $nameUser; ?></title>
 </head>
 <body>
     <header>
@@ -55,23 +48,37 @@
                         <i class="fa-solid fa-gear icon-menu"></i>
                         Configurações
                     </a>
-                    <a href="uploadVideo/uploadVideo.php">
-                        <i class='fa-solid fa-upload icon-menu'></i>
-                        Enviar Vídeo
-                    </a>
-                    <a href="goOut.php" class="close-btn font-nigth" title="Sair do Perfil">
-                        Sair
-                    </a>
+                    <?php 
+                        if(isset($_SESSION['email']) && isset($_SESSION['senha'])){
+                            echo "<a href='../profile/profile.php'>
+                                    <i class='fa-solid fa-user icon-menu'></i>
+                                    Seu Perfil
+                                </a>
+                                <a href='../profile/goOut.php' class='close-btn font-nigth' title='Sair do Perfil'>
+                                    Sair
+                                </a>";
+                        } else {
+                            echo "<a href='../register/register.php'>
+                                    <i class='fa-solid fa-user icon-menu'></i>
+                                    Criar Conta
+                                </a>
+                                <a href='../login/login.php'>
+                                    <i class='fa-solid fa-user icon-menu'></i>
+                                    Fazer Login
+                                </a>
+                                ";
+                        }
+                    ?>
                 </div>
             </div>
         </div>
     </header>
     <section>
         <div class="size-img-profile">
-            <img src="<?php echo $photoProfile; ?>" alt="" class="img-profile" class='photo-profile'>
+            <img src="<?php echo "$photoProfileUser"; ?>" alt="" class="img-profile" class='photo-profile'>
             <div class="name-space">
                 <p class="name">
-                    <?php print "$name"; ?>
+                    <?php echo $nameUser ?>
                 </p>
             </div>
         </div>
@@ -85,20 +92,11 @@
                 $title = $i['title'];
                 $thumb = $i['thumb'];
                 $likes = $i['likes'];
-                echo "
-                    <div class='box-config'>
-                        <a href='../page-video/video.php?id=$idVideo' class='size-box-video' title='$title' style='display: block;'>
-                            <img class='box-video' src='../$thumb'></img>
-                            <h3 class='video-title font-nigth'>$title</h3>
-                            <p class='views-video font-nigth'> $likes pessoas curtiram</p>
-                        </a>
-                        <form class='edit'>
-                            <input type='text' name'title' class='title' value='$title' onkeyup='title()'>
-                            <input type='submit' name='replaceName' value='Mudar título' class='replaceName'>
-                            <input type='submit' name='deleteVideo' class='close-btn' value='Apagar Vídeo'>
-                        </form>
-                    </div>
-                        ";
+                echo "<a href='../page-video/video.php?id=$idVideo' class='size-box-video' title='$title'>
+                        <img class='box-video' src='../$thumb'></img>
+                        <h3 class='video-title font-nigth'>$title</h3>
+                        <p class='views-video font-nigth'> $likes pessoas curtiram</p>
+                    </a>";
             }
         ?>
     </main>
@@ -106,6 +104,9 @@
         document.querySelector('.icon').addEventListener('click', function() {
             document.querySelector('.menu').classList.toggle('show-menu');
         });
+    </script>
+    <script>
+
     </script>
 </body>
 </html>

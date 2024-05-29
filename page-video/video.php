@@ -1,16 +1,24 @@
 <?php 
     include_once('../database/conexao.php');
+    session_start();
     $id = $_GET['id'];
-    $sql = mysqli_query($conexao, "SELECT * FROM videos WHERE idVideo = $id");
-    $resp = $sql->fetch_assoc();
-    $video = $resp['video'];
-    $title = $resp['title'];
-    //user data
-    $idUser = $resp['userVideo'];
-    $sql2 = mysqli_query($conexao, "SELECT * FROM usuarios WHERE id = $idUser");
-    $resp2 = $sql2->fetch_assoc();
-    $name = $resp2['nome'];
-    $userPhoto = $resp2['photoProfile'];
+    if(isset($_GET['id'])){
+        $sql = mysqli_query($conexao, "SELECT * FROM videos WHERE idVideo = $id");
+        $resp = $sql->fetch_assoc();
+        $video = $resp['video'];
+        $title = $resp['title'];
+        $idUserVideo = $resp['userVideo'];
+        //user data
+        $sql2 = mysqli_query($conexao, "SELECT * FROM usuarios WHERE id = $idUserVideo");
+        $resp2 = $sql2->fetch_assoc();
+        $name = $resp2['nome'];
+        $email = $resp2['email'];
+        $idUser = $resp2['id'];
+        $userPhoto = $resp2['photoProfile'];
+    } else {
+
+        header('Location: ../index.php');
+    }
 
 ?>
 <!DOCTYPE html>
@@ -24,7 +32,7 @@
     <link rel="stylesheet" href="../styles/model-of-page.css">
     <script src="video.js" defer></script>
     <link rel="shortcut icon" href="../styles/icon.png" type="image/x-icon">
-    <title>Vídeo</title>
+    <title><?php echo $title ?></title>
 </head>
 <body>
     <header>
@@ -53,7 +61,6 @@
                         Configurações
                     </a>
                     <?php 
-                        session_start();
                         if(isset($_SESSION['email']) && isset($_SESSION['senha'])){
                             echo "<a href='../profile/profile.php'>
                                     <i class='fa-solid fa-user icon-menu'></i>
@@ -93,7 +100,7 @@
 
         <div class="box-interaction">
             <img src="<?php echo $userPhoto ?>" alt="">
-            <a href='' class="font-nigth"><?php echo $name ?></a>
+            <a href="../profile/outherProfile.php?id=<?php echo $idUser; ?>" class="font-nigth"><?php echo $name ?></a>
             <button class="btn" title="Seguir este perfil">Seguir</button>
             <i class="fa-regular fa-thumbs-up icon-interaction font-nigth" title="Like"></i>
             <i class="fa-regular fa-thumbs-down icon-interaction font-nigth" title="Deslike"></i>
