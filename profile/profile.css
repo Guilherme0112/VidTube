@@ -1,3 +1,4 @@
+/* style of pages */
 body{
 
     width: 100%;
@@ -13,6 +14,35 @@ main{
     flex-wrap: wrap;
     padding: 10px;
 }
+/* editVideo.php */
+form{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    width: 500px;
+    height: 500px;
+    background-color: #2b2b2b;
+    border-radius: 10px;
+    padding: 50px;
+}
+label{
+    width: 100%;
+    color: white;
+}
+input[type='text']{
+
+    width: 300px;
+    height: 40px;
+    border-radius: 5px;
+    padding-left: 5px;
+}
+img{
+
+    width: 200px;
+    height: 100px;
+}
+/* profile.php and outherProfile.php */
 .box-config{
     display: flex;
     justify-content: start;
@@ -23,30 +53,33 @@ main{
     border-radius: 10px;
 }
 .edit{
+    width: 200px;
     height: 90%;
     display: flex;
     align-items: flex-start;
     flex-wrap: wrap;
+    padding: 0;
 }
-input[type='text']{
+.config{
 
+    display: block;
     width: 200px;
     height: 40px;
-    padding-left: 5px;
-    border-radius: 5px;
-}
-.replaceName{
-
+    border-radius: 10px;
     background-color: rgb(37, 37, 190);
     color: white !important;
-    transition: .3s;
     cursor: pointer;
+    transition: .3s;
+    margin-top: 45px;
+    text-decoration: none;
+    text-align: center;
+    padding-top: 8px;
 }
-.replaceName:hover{
+.config:hover{
 
     background-color: #1b1b1b;
 
-}
+}  
 input[type='submit']{
 
     width: 200px;

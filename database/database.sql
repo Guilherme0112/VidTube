@@ -1,5 +1,3 @@
-CREATE DATABASE  IF NOT EXISTS `vidtube` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci */;
-USE `vidtube`;
 -- MySQL dump 10.13  Distrib 5.7.17, for Win64 (x86_64)
 --
 -- Host: 127.0.0.1    Database: vidtube
@@ -18,6 +16,57 @@ USE `vidtube`;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
+-- Table structure for table `comentarios`
+--
+
+DROP TABLE IF EXISTS `comentarios`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `comentarios` (
+  `idComment` int(11) NOT NULL AUTO_INCREMENT,
+  `idUserComment` int(11) NOT NULL,
+  `idVideoComment` int(11) NOT NULL,
+  `comentario` text NOT NULL,
+  PRIMARY KEY (`idComment`),
+  KEY `idUserComment` (`idUserComment`),
+  CONSTRAINT `comentarios_ibfk_1` FOREIGN KEY (`idUserComment`) REFERENCES `usuarios` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=76 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `comentarios`
+--
+
+LOCK TABLES `comentarios` WRITE;
+/*!40000 ALTER TABLE `comentarios` DISABLE KEYS */;
+/*!40000 ALTER TABLE `comentarios` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `likes`
+--
+
+DROP TABLE IF EXISTS `likes`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `likes` (
+  `idLike` int(11) NOT NULL AUTO_INCREMENT,
+  `videoLike` int(11) DEFAULT NULL,
+  `userLike` int(11) DEFAULT NULL,
+  PRIMARY KEY (`idLike`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `likes`
+--
+
+LOCK TABLES `likes` WRITE;
+/*!40000 ALTER TABLE `likes` DISABLE KEYS */;
+/*!40000 ALTER TABLE `likes` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `usuarios`
 --
 
@@ -30,8 +79,9 @@ CREATE TABLE `usuarios` (
   `email` varchar(60) NOT NULL,
   `senha` varchar(30) NOT NULL,
   `phone` varchar(15) DEFAULT NULL,
+  `photoProfile` varchar(60) DEFAULT '../styles/icons/user.jpg',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=33 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=60 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -40,36 +90,38 @@ CREATE TABLE `usuarios` (
 
 LOCK TABLES `usuarios` WRITE;
 /*!40000 ALTER TABLE `usuarios` DISABLE KEYS */;
-INSERT INTO `usuarios` VALUES (31,'Guilherme','guimendesmen124@gmail.com','','(63) 99132-4404');
+INSERT INTO `usuarios` VALUES (55,'Guilherme','guimendesmen124@gmail.com','123','(63) 99132-4404','../styles/icons/user.jpg'),(56,'Matheus','matheus@gmail.com','123','(00) 00000-0000','../database/Arquivos/56/Koala.jpg');
 /*!40000 ALTER TABLE `usuarios` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
--- Table structure for table `video`
+-- Table structure for table `videos`
 --
 
-DROP TABLE IF EXISTS `video`;
+DROP TABLE IF EXISTS `videos`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `video` (
-  `idvideo` int(11) NOT NULL AUTO_INCREMENT,
-  `video` varchar(45) NOT NULL,
-  `title` varchar(50) DEFAULT NULL,
+CREATE TABLE `videos` (
+  `idVideo` int(11) NOT NULL AUTO_INCREMENT,
+  `video` varchar(100) DEFAULT NULL,
   `likes` int(11) DEFAULT NULL,
-  `comments` text DEFAULT NULL,
-  `thumb` varchar(45) DEFAULT NULL,
-  PRIMARY KEY (`idvideo`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+  `thumb` varchar(60) DEFAULT NULL,
+  `userVideo` int(11) DEFAULT NULL,
+  `title` varchar(50) DEFAULT NULL,
+  PRIMARY KEY (`idVideo`),
+  KEY `userVideo` (`userVideo`),
+  CONSTRAINT `videos_ibfk_1` FOREIGN KEY (`userVideo`) REFERENCES `usuarios` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `video`
+-- Dumping data for table `videos`
 --
 
-LOCK TABLES `video` WRITE;
-/*!40000 ALTER TABLE `video` DISABLE KEYS */;
-INSERT INTO `video` VALUES (1,'../database/Arquivos/19/teste.mp4','Vida Selvagem',0,'0',NULL),(2,'../database/Arquivos/19/samp.mp4','Jogando no servidor NWD com meus amigos',0,'0','../database/Arquivos/19/samp.png');
-/*!40000 ALTER TABLE `video` ENABLE KEYS */;
+LOCK TABLES `videos` WRITE;
+/*!40000 ALTER TABLE `videos` DISABLE KEYS */;
+INSERT INTO `videos` VALUES (15,'../database/Arquivos/55/Vida Selvagem.mp4',0,'database/Arquivos/55/Penguins.jpg',55,'Vida Selvagem'),(16,'../database/Arquivos/56/teste perfil matheus.mp4',0,'database/Arquivos/56/Jellyfish.jpg',56,'teste perfil matheus');
+/*!40000 ALTER TABLE `videos` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -81,4 +133,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-05-20 20:41:09
+-- Dump completed on 2024-06-01 12:41:38

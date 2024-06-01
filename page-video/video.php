@@ -1,28 +1,36 @@
-<?php 
-    include_once('../database/conexao.php');
-    session_start();
-    $id = $_GET['id'];
-    if(isset($_GET['id'])){
-        $sql = mysqli_query($conexao, "SELECT * FROM videos WHERE idVideo = $id");
-        $resp = $sql->fetch_assoc();
-        $video = $resp['video'];
-        $title = $resp['title'];
-        $idUserVideo = $resp['userVideo'];
-        //user data
-        $sql2 = mysqli_query($conexao, "SELECT * FROM usuarios WHERE id = $idUserVideo");
-        $resp2 = $sql2->fetch_assoc();
-        $name = $resp2['nome'];
-        $email = $resp2['email'];
-        $idUser = $resp2['id'];
-        $userPhoto = $resp2['photoProfile'];
-    } else {
-
-        header('Location: ../index.php');
-    }
-
+<?php
+include_once('../database/conexao.php');
+session_start();
+// data user session
+if (isset($_SESSION['email'])) {
+    $emailSession = $_SESSION['email'];
+    $sqlSession = mysqli_query($conexao, "SELECT * FROM usuarios WHERE email = '$emailSession'");
+    $respSession = $sqlSession->fetch_assoc();
+    $nameSession = $respSession['nome'] ?? '';
+    $photoProfileSession = $respSession['photoProfile'] ?? '';
+    $idSession = $respSession['id'] ?? '';
+}
+// video verification
+$idVideo = $_GET['id'] ?? 15;
+if (!isset($_GET['id'])) {
+    //header('Location: ../index.php');
+}
+// data video
+$sql = mysqli_query($conexao, "SELECT * FROM videos WHERE idVideo = $idVideo");
+$resp = $sql->fetch_assoc();
+$video = $resp['video'] ?? '';
+$title = $resp['title'] ?? '';
+$idUserVideo = $resp['userVideo'];
+// data user create video  
+$sql2 = mysqli_query($conexao, "SELECT * FROM usuarios WHERE id = $idUserVideo");
+$resp2 = $sql2->fetch_assoc();
+$name = $resp2['nome'] ?? '';
+$idUser = $resp2['id'] ?? '';
+$userPhoto = $resp2['photoProfile'] ?? '';
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -31,9 +39,11 @@
     <link rel="stylesheet" href="../fontawesome-free-6.5.1-web/css/all.min.css">
     <link rel="stylesheet" href="../styles/model-of-page.css">
     <script src="video.js" defer></script>
-    <link rel="shortcut icon" href="../styles/icon.png" type="image/x-icon">
+    <link rel="shortcut icon" href="../styles/icons/icon-ligth.png" type="image/x-icon">
+    <script src="../styles/jquery-3.7.1.js"></script>
     <title><?php echo $title ?></title>
 </head>
+
 <body>
     <header>
         <div class="header-one">
@@ -60,17 +70,17 @@
                         <i class="fa-solid fa-gear icon-menu"></i>
                         Configurações
                     </a>
-                    <?php 
-                        if(isset($_SESSION['email']) && isset($_SESSION['senha'])){
-                            echo "<a href='../profile/profile.php'>
+                    <?php
+                    if (isset($_SESSION['email']) && isset($_SESSION['senha'])) {
+                        echo "<a href='../profile/profile.php'>
                                     <i class='fa-solid fa-user icon-menu'></i>
                                     Seu Perfil
                                 </a>
                                 <a href='../profile/goOut.php' class='close-btn font-nigth' title='Sair do Perfil'>
                                     Sair
                                 </a>";
-                        } else {
-                            echo "<a href='../register/register.php'>
+                    } else {
+                        echo "<a href='../register/register.php'>
                                     <i class='fa-solid fa-user icon-menu'></i>
                                     Criar Conta
                                 </a>
@@ -79,12 +89,13 @@
                                     Fazer Login
                                 </a>
                                 ";
-                        }
+                    }
                     ?>
                 </div>
             </div>
         </div>
     </header>
+
     <body>
 
         <!-- box video -->
@@ -104,7 +115,61 @@
             <button class="btn" title="Seguir este perfil">Seguir</button>
             <i class="fa-regular fa-thumbs-up icon-interaction font-nigth" title="Like"></i>
             <i class="fa-regular fa-thumbs-down icon-interaction font-nigth" title="Deslike"></i>
-            <i class="fa-solid fa-share icon-interaction font-nigth" title='Compartilhar' ></i>
+            <i class="fa-solid fa-share icon-interaction font-nigth" title='Compartilhar'></i>
         </div>
-</body>
+        <section class="comments">
+            <?php
+            if (isset($_SESSION['email'])) {
+                echo "
+                    <form action='video.php' class='box-comments'>
+                        <img src='$photoProfileSession' alt=''>
+                        <a href='../profile/profile.php' class='nameComment'>$nameSession</a>
+                        <input type='text' name='comment' class='inputComment' placeholder='Diga a sua opinião'>
+                        <button name='submitComment' class='submitComment'>Postar</button>
+                    </form>
+                    ";
+            }
+            ?>
+            <script>
+                var nameComment = "<?php echo $nameSession ?>"
+                var photoComment = "<?php echo $photoProfileSession ?>"
+                var userId = "<?php echo $idSession ?>";
+                $(function() {
+                    $('.comments').submit(function(e) {
+                        e.preventDefault();
+                        var buscar = $(this).find('input').val();
+                        $.ajax({
+                            url: 'video.php',
+                            type: 'POST',
+                            data: {
+                                comment: buscar
+                            }
+                        }).done(function(e) {
+                            $('.comments').children().eq(1).after("<div class='box-comments'><img src='"+ photoComment +"' alt=''><a href='../profile/outherProfile.php?id="+ userId +"' class='nameComment text-line-effect'>"+ nameComment +"</a><p class='comment'>" + buscar +"</p></div>");
+                            $('input').val('');
+                        });
+                    });
+                });
+            </script>
+            <?php
+            // comments
+            $sql3 = mysqli_query($conexao, "SELECT u.id, u.nome, u.photoProfile, c.comentario, c.idVideoComment FROM comentarios c JOIN usuarios u ON c.idUserComment = u.id WHERE idVideoComment = $idVideo;");
+            while ($i = $sql3->fetch_assoc()) {
+                $idComment = $i['id'];
+                $photoComment = $i['photoProfile'];
+                $userComment = $i['nome'];
+                $comment = $i['comentario'];
+                echo "
+                    <div class='box-comments'>
+                        <img src='$photoComment' alt=''>
+                        <a href='../profile/outherProfile.php?id=$idComment' class='nameComment text-line-effect'>$userComment</a>
+                        <p class='comment'>$comment</p>
+                    </div>
+                    ";
+            }
+            ?>
+
+        </section>
+    </body>
+
 </html>

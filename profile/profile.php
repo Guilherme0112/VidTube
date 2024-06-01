@@ -92,9 +92,8 @@
                             <h3 class='video-title font-nigth'>$title</h3>
                             <p class='views-video font-nigth'> $likes pessoas curtiram</p>
                         </a>
-                        <form class='edit'>
-                            <input type='text' name'title' class='title' value='$title' onkeyup='title()'>
-                            <input type='submit' name='replaceName' value='Mudar título' class='replaceName'>
+                        <form class='edit' action='profile.php'>
+                            <a href='editVideo.php?id=$idVideo'name='config' class='config'>Configuraçoes</a>
                             <input type='submit' name='deleteVideo' class='close-btn' value='Apagar Vídeo'>
                         </form>
                     </div>
