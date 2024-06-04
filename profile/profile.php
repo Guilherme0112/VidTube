@@ -5,15 +5,21 @@
         unset($_SESSION['email']);
         unset($_SESSION['senha']);
         header('Location: ../login/login.php');
-    } else {
-        $logado = $_SESSION['email'];
-        $cursor = mysqli_query($conexao, "SELECT * FROM usuarios WHERE email = '$logado' ");
-        $MySQL = $cursor->fetch_assoc();
-        $id = $MySQL['id'];
-        $name = $MySQL['nome']; 
-        $photoProfile = $MySQL['photoProfile']; 
-        
     }
+    // info user 
+    $logado = $_SESSION['email'];
+    $cursor = mysqli_query($conexao, "SELECT * FROM usuarios WHERE email = '$logado' ");
+    $MySQL = $cursor->fetch_assoc();
+    $id = $MySQL['id'];
+    $name = $MySQL['nome']; 
+    $photoProfile = $MySQL['photoProfile']; 
+    //follow and followers
+    $sql = mysqli_query($conexao, "SELECT * FROM seguir WHERE idSeguindo = $id");
+    $resp = $sql->fetch_assoc();
+    $seguidores = mysqli_num_rows($sql);
+    $sql2 = mysqli_query($conexao, "SELECT * FROM seguir WHERE idSeguidor = $id");
+    $resp2 = $sql->fetch_assoc();
+    $seguindo = mysqli_num_rows($sql2); 
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -43,10 +49,6 @@
                         <i class="fa-solid fa-house icon-menu"></i>
                         Início
                     </a>
-                    <a href="../lives/lives.php">
-                        <i class="fa-solid fa-tower-broadcast icon-menu"></i>
-                        Lives
-                    </a>
                     <a href="#">
                         <i class="fa-solid fa-fire icon-menu"></i>
                         Em Alta
@@ -73,6 +75,10 @@
                 <p class="name">
                     <?php print "$name"; ?>
                 </p>
+                <div class="box-follow">
+                    <p>Seguidores <?php echo $seguidores ?? 0 ?></p>
+                    <p>Seguindo <?php echo $seguindo ?? 0 ?></p>
+                </div>
             </div>
         </div>
 
@@ -92,10 +98,9 @@
                             <h3 class='video-title font-nigth'>$title</h3>
                             <p class='views-video font-nigth'> $likes pessoas curtiram</p>
                         </a>
-                        <form class='edit' action='profile.php'>
-                            <a href='editVideo.php?id=$idVideo'name='config' class='config'>Configuraçoes</a>
-                            <input type='submit' name='deleteVideo' class='close-btn' value='Apagar Vídeo'>
-                        </form>
+                        <div class='edit' action='profile.php'>
+                            <a href='editVideo.php?id=$idVideo'name='config' class='config fa-solid fa-gear'></a>
+                        </div>
                     </div>
                         ";
             }

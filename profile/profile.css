@@ -43,17 +43,28 @@ img{
     height: 100px;
 }
 /* profile.php and outherProfile.php */
+.box-follow{
+    width: 300px;
+    color: white;
+    display: flex;
+}
+.box-follow p{
+    width: 150px;
+    height: 20px;
+    margin: 20px;
+    display: flex;
+}
 .box-config{
     display: flex;
     justify-content: start;
     align-items: center;
-    width: 500px;
+    width: 330px;
     height: 225px;
     background-color: #2b2b2b;
     border-radius: 10px;
 }
 .edit{
-    width: 200px;
+    width: 100px;
     height: 90%;
     display: flex;
     align-items: flex-start;
@@ -63,7 +74,7 @@ img{
 .config{
 
     display: block;
-    width: 200px;
+    width: 40px;
     height: 40px;
     border-radius: 10px;
     background-color: rgb(37, 37, 190);
@@ -73,7 +84,7 @@ img{
     margin-top: 45px;
     text-decoration: none;
     text-align: center;
-    padding-top: 8px;
+    padding-top: 13px;
 }
 .config:hover{
 
@@ -109,11 +120,13 @@ input[type='submit']{
 }
 .name-space{
 
-    width: 100%;
+    width: 300px;
     height: 40px;
+    display: flex;
 }
 .name{
     margin-left: 20px;
+    margin-right: 20px;
     font-size: 35px;
     color: white;
 }

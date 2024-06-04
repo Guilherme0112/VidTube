@@ -8,6 +8,20 @@ session_start();
     $sql = mysqli_query($conexao, "SELECT * FROM videos WHERE idVideo = $idVideo");
     $resp = $sql->fetch_assoc();
     $title = $resp['title'];
+    $video = $resp['video'];
+    $thumb = $resp['thumb'];
+    if(isset($_POST['submit'])){
+
+    }
+    if(isset($_POST['delete'])){
+        if(file_exists($video)){
+            unlink("../$thumb");
+            $deleteVideo = mysqli_query($conexao, "DELETE FROM videos WHERE idVideo = $idVideo");
+            $deleteCommentVideo = mysqli_query($conexao, "DELETE FROM comentarios WHERE idVideoComment = $idVideo");
+            unlink($video);
+            header('Location: profile.php');
+        }
+    }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -63,6 +77,8 @@ session_start();
         <label for="thumb">Capa do Vídeo</label>
         <input type="file" name="thumb" id="thumb">
         <img src="" alt="" id='img-preview'>
+        <button name='submit'>Confirmar Alteraçoes</button>
+        <button name='delete'>Apagar Vídeo</button>
     </form>
     <script>
          document.querySelector('.icon').addEventListener('click', function() {
@@ -85,5 +101,12 @@ session_start();
     }
 });
     </script>
+    <style>
+        body{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+    </style>
 </body>
 </html>

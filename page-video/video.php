@@ -1,32 +1,33 @@
 <?php
-include_once('../database/conexao.php');
-session_start();
-// data user session
-if (isset($_SESSION['email'])) {
-    $emailSession = $_SESSION['email'];
-    $sqlSession = mysqli_query($conexao, "SELECT * FROM usuarios WHERE email = '$emailSession'");
-    $respSession = $sqlSession->fetch_assoc();
-    $nameSession = $respSession['nome'] ?? '';
-    $photoProfileSession = $respSession['photoProfile'] ?? '';
-    $idSession = $respSession['id'] ?? '';
-}
-// video verification
-$idVideo = $_GET['id'] ?? 15;
-if (!isset($_GET['id'])) {
-    //header('Location: ../index.php');
-}
-// data video
-$sql = mysqli_query($conexao, "SELECT * FROM videos WHERE idVideo = $idVideo");
-$resp = $sql->fetch_assoc();
-$video = $resp['video'] ?? '';
-$title = $resp['title'] ?? '';
-$idUserVideo = $resp['userVideo'];
-// data user create video  
-$sql2 = mysqli_query($conexao, "SELECT * FROM usuarios WHERE id = $idUserVideo");
-$resp2 = $sql2->fetch_assoc();
-$name = $resp2['nome'] ?? '';
-$idUser = $resp2['id'] ?? '';
-$userPhoto = $resp2['photoProfile'] ?? '';
+    include_once('../database/conexao.php');
+    session_start();
+    // data user session
+    if (isset($_SESSION['email'])) {
+        $emailSession = $_SESSION['email'];
+        $sqlSession = mysqli_query($conexao, "SELECT * FROM usuarios WHERE email = '$emailSession'");
+        $respSession = $sqlSession->fetch_assoc();
+        $nameSession = $respSession['nome'] ?? '';
+        $photoProfileSession = $respSession['photoProfile'] ?? '';
+        $idSession = $respSession['id'] ?? '';
+    }
+    // video verification
+    if (isset($_GET['id'])) {
+        $idVideo = $_GET['id'];
+    } else{
+        header('Location: video.php');
+    }
+    // data video
+    $sql = mysqli_query($conexao, "SELECT * FROM videos WHERE idVideo = $idVideo");
+    $resp = $sql->fetch_assoc();
+    $video = $resp['video'] ?? '';
+    $title = $resp['title'] ?? '';
+    $idUserVideo = $resp['userVideo'];
+    // data user create video  
+    $sql2 = mysqli_query($conexao, "SELECT * FROM usuarios WHERE id = $idUserVideo");
+    $resp2 = $sql2->fetch_assoc();
+    $name = $resp2['nome'] ?? '';
+    $idUser = $resp2['id'] ?? '';
+    $userPhoto = $resp2['photoProfile'] ?? '';
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -57,10 +58,6 @@ $userPhoto = $resp2['photoProfile'] ?? '';
                     <a href="../index.php" class="select">
                         <i class="fa-solid fa-house icon-menu"></i>
                         Início
-                    </a>
-                    <a href="../lives/lives.php">
-                        <i class="fa-solid fa-tower-broadcast icon-menu"></i>
-                        Lives
                     </a>
                     <a href="#">
                         <i class="fa-solid fa-fire icon-menu"></i>
@@ -121,10 +118,10 @@ $userPhoto = $resp2['photoProfile'] ?? '';
             <?php
             if (isset($_SESSION['email'])) {
                 echo "
-                    <form action='video.php' class='box-comments'>
+                    <form action='video.php' method='POST' class='box-comments'>
                         <img src='$photoProfileSession' alt=''>
                         <a href='../profile/profile.php' class='nameComment'>$nameSession</a>
-                        <input type='text' name='comment' class='inputComment' placeholder='Diga a sua opinião'>
+                        <input type='text' class='inputComment' placeholder='Diga a sua opinião'>
                         <button name='submitComment' class='submitComment'>Postar</button>
                     </form>
                     ";
@@ -134,18 +131,24 @@ $userPhoto = $resp2['photoProfile'] ?? '';
                 var nameComment = "<?php echo $nameSession ?>"
                 var photoComment = "<?php echo $photoProfileSession ?>"
                 var userId = "<?php echo $idSession ?>";
+                var idVideo = "<?php echo $idVideo; ?>";
                 $(function() {
                     $('.comments').submit(function(e) {
                         e.preventDefault();
-                        var buscar = $(this).find('input').val();
+                        var comentario = $('.inputComment').val();
                         $.ajax({
-                            url: 'video.php',
+                            url: '../routes/comments.php',
                             type: 'POST',
-                            data: {
-                                comment: buscar
+                            data: {comment: comentario, 
+                                    idVideo: idVideo},
+                            success: function(e){
+                                console.log('Sucesso: ' + e)
+                            },
+                            error: function(e){
+                                console.log('Error: ' + e)
                             }
-                        }).done(function(e) {
-                            $('.comments').children().eq(1).after("<div class='box-comments'><img src='"+ photoComment +"' alt=''><a href='../profile/outherProfile.php?id="+ userId +"' class='nameComment text-line-effect'>"+ nameComment +"</a><p class='comment'>" + buscar +"</p></div>");
+                        }).done(function(e) {               
+                            $('.comments').children().eq(1).after("<div class='box-comments'><img src='"+ photoComment +"' alt=''><a href='../profile/outherProfile.php?id="+ userId +"' class='nameComment text-line-effect'>"+ nameComment +"</a><p class='comment'>" + comentario +"</p></div>");
                             $('input').val('');
                         });
                     });

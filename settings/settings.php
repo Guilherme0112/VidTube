@@ -46,10 +46,6 @@
                         <i class="fa-solid fa-house icon-menu"></i>
                         Início
                     </a>
-                    <a href="../lives/lives.php">
-                        <i class="fa-solid fa-tower-broadcast icon-menu"></i>
-                        Lives
-                    </a>
                     <a href="#">
                         <i class="fa-solid fa-fire icon-menu"></i>
                         Em Alta</a>

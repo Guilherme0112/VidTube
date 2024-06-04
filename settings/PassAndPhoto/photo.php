@@ -8,8 +8,10 @@
     $sql = mysqli_query($conexao, "SELECT * FROM usuarios WHERE email = '$email'");
     $resp = $sql->fetch_assoc();
     $id = $resp['id'];
+    $photoProfile = $resp['photoProfile'];
     
     if(isset($_POST['submit']) && isset($_FILES['photo']['name'])){
+        unlink("../$photoProfile");
         $nameFile = $_FILES['photo']['name'];
         $route = "../database/Arquivos/$id/$nameFile";
         move_uploaded_file($_FILES['photo']['tmp_name'], "../../database/Arquivos/$id/$nameFile");

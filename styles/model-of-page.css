@@ -71,6 +71,15 @@ header{
     border-radius: 20px;
     padding: 10px;
 }
+.btn-follow{
+
+    width: 150px;
+    height: 40px;
+    background-color: #0b0b0b;
+    color: white !important;
+    cursor: pointer;
+    border-radius: 10px;
+}
 #search:hover{
 
     box-shadow: 0px 0px 7px black;

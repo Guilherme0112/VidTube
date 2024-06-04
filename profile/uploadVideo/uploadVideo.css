@@ -10,6 +10,7 @@ form{
     justify-content: center;
     flex-wrap: wrap;
     padding-top: 50px;
+    padding-bottom: 30px;
     background-color: #1b1b1b;
     border-radius: 10px;
     width: 500px;
@@ -25,19 +26,28 @@ img{
     object-fit: cover;
     object-position: center;
     border-radius: 10px;
-    outline: 1px solid white;
     margin-right: 10px;
-    margin-top: -100px;
+    margin-top: -115px;
+    background-color: #0b0b0b;
 }
 input[type='text']{
 
-    width: 300px;
+    width: 460px;
     height: 40px;
     border-radius: 5px;
     margin-right: 10px;
     background-color: #0b0b0b;
     color: white;
     padding-left: 5px;
+}
+#msg-error{
+    width: 400px;
+    height: 15px;
+    margin-top: -20px;
+    font-size: 11px;
+    color: red;
+    text-align: center;
+    padding-right: 5px;
 }
 input[type='submit']{
 
@@ -55,19 +65,37 @@ input[type='submit']:hover{
 }
 label{
 
-    width: 180px;
-    height: 100px;
+    width: 150px;
+    height: 80px;
     background-color: #0b0b0b;
     border-radius: 10px;
     color: white;
     display: grid;
     place-items: center;
-    padding: 20px;
+    text-align: center;
+    padding: 10px 10px;
     cursor: pointer;
+    transition: .3s;
+}
+label:hover{
+    outline: 2px solid #3b3b3b;
+}
+#videoLabel{
+    margin-left: 310px;
+    margin-bottom: -20px;
 }
 #thumbLabel{
 
     display: grid;
     place-content: center;
     text-align: center;
+
+}
+progress{
+
+    width: 150px;
+    outline: 2px solid #1b1b1b;
+    border-radius: 5px;
+    margin-left: 310px;
+    margin-bottom: -20px;
 }

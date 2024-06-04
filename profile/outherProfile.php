@@ -10,6 +10,12 @@
         $nameUser = $infoUser['nome'];
         $photoProfileUser = $infoUser['photoProfile'];
     }
+    $sql = mysqli_query($conexao, "SELECT * FROM seguir WHERE idSeguindo = $id");
+    $resp = $sql->fetch_assoc();
+    $seguidores = mysqli_num_rows($sql);
+    $sql2 = mysqli_query($conexao, "SELECT * FROM seguir WHERE idSeguidor = $id");
+    $resp2 = $sql->fetch_assoc();
+    $seguindo = mysqli_num_rows($sql2); 
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -21,6 +27,7 @@
     <link rel="stylesheet" href="../styles/model-of-page.css">
     <link rel="stylesheet" href="../fontawesome-free-6.5.1-web/css/all.min.css">
     <link rel="shortcut icon" href="../styles/icons/icon-ligth.png" type="image/x-icon">
+    <script src="../styles/jquery-3.7.1.js"></script>
     <title><?php echo $nameUser; ?></title>
 </head>
 <body>
@@ -80,6 +87,13 @@
                 <p class="name">
                     <?php echo $nameUser ?>
                 </p>
+                <div class="box-follow">
+                    <p>Seguidores <?php echo $seguidores ?? 0 ?></p>
+                    <p>Seguindo <?php echo $seguindo ?? 0 ?></p>
+                </div>
+                <div>
+                    <input type='submit' class="btn-follow" id='follow' value='Seguir'>
+                </div>
             </div>
         </div>
 
@@ -104,6 +118,22 @@
         document.querySelector('.icon').addEventListener('click', function() {
             document.querySelector('.menu').classList.toggle('show-menu');
         });
+        $(document).ready(function(){
+            $('#follow').click(function(){
+                const profile = "<?php echo $id ?>";
+                $.ajax({
+                    url: '../routes/follow.php',
+                    method: 'POST',
+                    data: {follow: profile},
+                    success: function(e){
+                        console.log('Sucesso: ' + profile)
+                    },
+                    error: function(e){
+                        console.log('Error: ' + profile)
+                    }
+                })
+            });
+        })
     </script>
     <script>
 
