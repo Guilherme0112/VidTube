@@ -97,9 +97,8 @@
 
         <!-- box video -->
 
-        <iframe src="<?php echo $video ?>" frameborder="0" class="box-picture">
-
-        </iframe>
+        <video src="<?php echo $video ?>" controls class="box-picture" type='video/mp4'>
+        </video>
         <div class='box-title'>
             <h1 class='title font-nigth'><?php echo $title ?></h1>
         </div>
@@ -109,7 +108,25 @@
         <div class="box-interaction">
             <img src="<?php echo $userPhoto ?>" alt="">
             <a href="../profile/outherProfile.php?id=<?php echo $idUser; ?>" class="font-nigth"><?php echo $name ?></a>
-            <button class="btn" title="Seguir este perfil">Seguir</button>
+            <?php
+                if(isset($_SESSION['email'])){
+                    if($idSession != $idUser){
+                        $condition = mysqli_query($conexao, "SELECT * FROM seguir WHERE idSeguindo = $idUser AND idSeguidor = $idSession");
+                        if(mysqli_num_rows($condition) < 1){
+                            echo "<input type='button' class='btn' value='Seguir'>";
+                        }
+                        else {
+                            echo "<input type='button' class='btn' value='Deixar de Seguir'>";
+                        }
+                    } else {
+                        echo "<a href='../profile/profile.php'>
+                                <button class='btn'>Ver meu Perfil</button>
+                            </a>";
+                    }
+                }
+
+            ?>
+            
             <i class="fa-regular fa-thumbs-up icon-interaction font-nigth" title="Like"></i>
             <i class="fa-regular fa-thumbs-down icon-interaction font-nigth" title="Deslike"></i>
             <i class="fa-solid fa-share icon-interaction font-nigth" title='Compartilhar'></i>
@@ -148,11 +165,32 @@
                                 console.log('Error: ' + e)
                             }
                         }).done(function(e) {               
-                            $('.comments').children().eq(1).after("<div class='box-comments'><img src='"+ photoComment +"' alt=''><a href='../profile/outherProfile.php?id="+ userId +"' class='nameComment text-line-effect'>"+ nameComment +"</a><p class='comment'>" + comentario +"</p></div>");
+                            $('.comments').children().eq(1).after("<div class='box-comments'><img src='"+ photoComment +"' alt=''><a href='../profile/outherProfile.php?id="+ userId +"' class='nameComment text-line-effect'>"+ nameComment +"</a><span style='width: 100%;'</span><p class='comment'>" + comentario +"</p></div>");
                             $('input').val('');
                         });
                     });
                 });
+                $(function() {
+                    $('.btn').click(function(e) {
+                        var profile = "<?php echo $idUser ?>"
+                    $.ajax({
+                        url: '../routes/follow.php',
+                        type: 'POST',
+                        data: {follow: profile},
+                        success: function(e){
+                            console.log('Sucesso: ' + e)
+                            if ($('.btn').val() === 'Seguir'){
+                                $('.btn').val("Deixar de Seguir")
+                            } else{
+                                $('.btn').val("Seguir")
+                            }
+                        },
+                        error: function(e){
+                            console.log('Error: ' + e)
+                        }
+                    });
+                });
+            });
             </script>
             <?php
             // comments
@@ -166,6 +204,7 @@
                     <div class='box-comments'>
                         <img src='$photoComment' alt=''>
                         <a href='../profile/outherProfile.php?id=$idComment' class='nameComment text-line-effect'>$userComment</a>
+                        <span style='width: 100%;'</span>
                         <p class='comment'>$comment</p>
                     </div>
                     ";

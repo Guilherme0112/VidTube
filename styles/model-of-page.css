@@ -13,10 +13,10 @@
     border: 0;
     outline: none;
 }
-body{
-
-    height: 100vh;
+body, html{
+    
     max-width: 1280px;
+    height: 100vh;
     background-color: var(--color-background-pri);
 }
 /* header of site */
@@ -24,8 +24,8 @@ header{
 
     position: fixed;
     top: 0;
-    height: 50px;
     width: 100%;
+    height: 50px;
     background-color: var(--color-box);
     display: flex;
     z-index: 1;
@@ -34,7 +34,7 @@ header{
 }
 .header-one{
 
-    width: 100%;
+    width: 90%;
     height: 100%;
     display: flex;
     justify-content: center;
@@ -70,15 +70,6 @@ header{
     height: 40px;
     border-radius: 20px;
     padding: 10px;
-}
-.btn-follow{
-
-    width: 150px;
-    height: 40px;
-    background-color: #0b0b0b;
-    color: white !important;
-    cursor: pointer;
-    border-radius: 10px;
 }
 #search:hover{
 

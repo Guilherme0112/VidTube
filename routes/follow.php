@@ -8,16 +8,17 @@
         $resp = $sql->fetch_assoc();
         $idSession = $resp['id'];
     }
-    $follower = $_POST['follow'];
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if(isset($_POST['follow'])){
-        $follower = $_POST['follow'];
-        //$sql2 = mysqli_query($conexao, "INSERT INTO seguir VALUES (DEFAULT, $idSession, $follower");
-        echo "<script>
-                console.log('Dado recebido: ' + $follower)
-            </script>";
-    } else {
-        echo "<script>
-                console.log('Dado nao recebido')
-            </script>";
+        $profile = $_POST['follow'];
+        if($profile != $idSession){
+            $condition = mysqli_query($conexao, "SELECT * FROM seguir WHERE idSeguindo = $profile AND idSeguidor = $idSession");
+            if(mysqli_num_rows($condition) < 1){
+                $sql2 = mysqli_query($conexao, "INSERT INTO seguir VALUES(default, $profile, $idSession)"); 
+            } else {
+                $sql2 = mysqli_query($conexao, "DELETE FROM seguir WHERE idSeguindo = $profile AND idSeguidor = $idSession"); 
+            }
+        }
     }
+} 
 ?>

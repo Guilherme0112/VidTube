@@ -4,12 +4,20 @@
     if(!isset($_GET['id'])){
         header('Location: ../index.php');
     } else {
+        //data of profile
         $id = $_GET['id'];
         $sql = mysqli_query($conexao, "SELECT * FROM usuarios WHERE id = $id");
         $infoUser = $sql->fetch_assoc();
         $nameUser = $infoUser['nome'];
         $photoProfileUser = $infoUser['photoProfile'];
     }
+    if(isset($_SESSION['email'])){
+        $emailSession = $_SESSION['email'];
+        $sql3 = mysqli_query($conexao, "SELECT * FROM usuarios WHERE email = '$emailSession'");
+        $resp3 = $sql3->fetch_assoc();
+        $idSession = $resp3['id'];
+    }
+    // follow the page
     $sql = mysqli_query($conexao, "SELECT * FROM seguir WHERE idSeguindo = $id");
     $resp = $sql->fetch_assoc();
     $seguidores = mysqli_num_rows($sql);
@@ -92,7 +100,20 @@
                     <p>Seguindo <?php echo $seguindo ?? 0 ?></p>
                 </div>
                 <div>
-                    <input type='submit' class="btn-follow" id='follow' value='Seguir'>
+                    <?php
+                    if(isset($_SESSION['email'])){
+                        if($id == $idSession){
+                            header('Location: profile.php');
+                        }else{
+                            $condition = mysqli_query($conexao, "SELECT * FROM seguir WHERE idSeguindo = $id AND idSeguidor = $idSession");
+                            if(mysqli_num_rows($condition) < 1){
+                                echo "<input type='submit' class='btn-follow' id='follow' value='Seguir'>";
+                            } else {
+                                echo "<input type='submit' class='btn-follow' id='unfollow' value='Deixar de Seguir'>";
+                            }
+                        }
+                    } 
+                        ?>
                 </div>
             </div>
         </div>
@@ -118,25 +139,27 @@
         document.querySelector('.icon').addEventListener('click', function() {
             document.querySelector('.menu').classList.toggle('show-menu');
         });
-        $(document).ready(function(){
-            $('#follow').click(function(){
-                const profile = "<?php echo $id ?>";
+        $(function() {
+            $('.btn-follow').click(function(e) {
+                var profile = "<?php echo $id ?>"
                 $.ajax({
                     url: '../routes/follow.php',
-                    method: 'POST',
+                    type: 'POST',
                     data: {follow: profile},
                     success: function(e){
-                        console.log('Sucesso: ' + profile)
+                        console.log('Sucesso: ' + e)
+                        if ($('.btn-follow').val() === 'Seguir'){
+                            $('.btn-follow').val("Deixar de Seguir")
+                        } else{
+                            $('.btn-follow').val("Seguir")
+                        }
                     },
                     error: function(e){
-                        console.log('Error: ' + profile)
+                        console.log('Error: ' + e)
                     }
-                })
+                });
             });
-        })
-    </script>
-    <script>
-
+        });
     </script>
 </body>
 </html>

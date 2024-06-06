@@ -1,9 +1,14 @@
 <?php
-session_start();
+    session_start();
     if(!isset($_GET['id']) || !isset($_SESSION['email'])){
         header('Location: ../index.php');
     }
     include_once('../database/conexao.php');
+    $emailSession = $_SESSION['email'];
+    $sqlSession = mysqli_query($conexao, "SELECT * FROM usuarios WHERE email = '$emailSession'");
+    $respSession = $sqlSession->fetch_assoc();
+    $idSession = $respSession['id'];
+    //info video
     $idVideo = $_GET['id'];
     $sql = mysqli_query($conexao, "SELECT * FROM videos WHERE idVideo = $idVideo");
     $resp = $sql->fetch_assoc();
@@ -11,7 +16,22 @@ session_start();
     $video = $resp['video'];
     $thumb = $resp['thumb'];
     if(isset($_POST['submit'])){
-
+        if(isset($_POST['title'])){
+            $changeTitle = $_POST['title'];
+            if(strlen($changeTitle) > 2){
+                $changeSQL = mysqli_query($conexao, "UPDATE videos SET title = '$changeTitle' WHERE idVideo = $idVideo");
+            }  
+        }
+        if(!empty($_FILES['thumbChange']['name'])){
+            $nameThumb = $_FILES['thumbChange']['name'];
+            $routeThumb = "database/Arquivos/$idSession/$nameThumb";
+            move_uploaded_file($_FILES['thumbChange']['tmp_name'], "../$routeThumb");
+            $update = mysqli_query($conexao, "UPDATE videos SET thumb = '$routeThumb' WHERE idVideo = $idVideo");
+            if($update){
+                unlink("../$thumb");    
+            }
+        }
+        header("Location: profile.php");
     }
     if(isset($_POST['delete'])){
         if(file_exists($video)){
@@ -24,7 +44,7 @@ session_start();
     }
 ?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -71,19 +91,40 @@ session_start();
         </div>
     </header>
 <body>
-    <form action="<?php $_SERVER['PHP_SELF'] ?>" method="post">
+    <form action="<?php $_SERVER['PHP_SELF'] ?>" method="post" enctype="multipart/form-data" onsubmit="return vali()">
         <label for="title">Título do Vídeo</label>
         <input type="text" name="title" id="title" value='<?php echo $title ?>'>
-        <label for="thumb">Capa do Vídeo</label>
-        <input type="file" name="thumb" id="thumb">
-        <img src="" alt="" id='img-preview'>
-        <button name='submit'>Confirmar Alteraçoes</button>
-        <button name='delete'>Apagar Vídeo</button>
+        <p class='msg-error'></p>
+        <label for="thumb" class='thumb'>Clique para mudar a thumb</label>
+        <input type="file" name="thumbChange" id="thumb" accept="image/*">
+        <img id='img-preview'>
+        <button name='submit' class="submit">Confirmar Alteraçoes</button>
+        <button name='delete' onclick="return delet()">Apagar Vídeo</button>
     </form>
     <script>
          document.querySelector('.icon').addEventListener('click', function() {
             document.querySelector('.menu').classList.toggle('show-menu');
         });
+        function delet(){
+           
+            if(confirm("Você realmente deseja apagar este vídeo?")){
+                return true;
+            } else{
+                return false;
+            }
+        }
+        function vali(){
+            var title = document.querySelector('#title');
+            if(title.value.length < 3){
+                document.getElementById('title').style.outline = "2px solid red";
+                document.querySelector('.msg-error').innerHTML = 'O título precisa ter pelo menos 3 caracteres';
+                return false;
+            } else {
+                document.getElementById('title').style.outline = "none";
+                return true;
+            }
+        }
+        //img preview
         const fileInput = document.getElementById('thumb');
         const imagePreview = document.getElementById('img-preview');
 
@@ -106,6 +147,58 @@ session_start();
             display: flex;
             justify-content: center;
             align-items: center;
+        }
+        button{
+
+            width: 150px;
+            height: 40px;
+            color: white;
+            background-color: rgba(255, 0, 0, 0.8);
+            border-radius: 10px;
+            cursor: pointer;
+            transition: .3s;
+            margin: 10px;
+        }
+        button:hover{
+            background-color: rgba(255, 0, 0, 0.5);
+        }
+        .submit{
+
+            background-color: rgb(37, 37, 190);
+            transition: .3s;
+        }
+        .submit:hover{
+            background-color: rgba(37, 37, 190, 0.7);
+        }   
+        img{
+            width: 300px;
+            height: 170px;
+            border-radius: 10px;
+            background-color: #1b1b1b;
+        }
+        input[type='file']{
+            display: none;
+        }
+        
+        .thumb{
+            display: flex;
+            place-items: center;
+            justify-content: center;
+            width: 300px;
+            height: 40px;
+            cursor: pointer;
+            border-radius: 10px;
+            background-color: #1b1b1b;
+        }
+        .thumb:hover{
+
+            outline: 2px solid #3b3b3b;
+        }
+        .msg-error{
+            width: 100%;
+            text-align: center;
+            font-size: 11px;
+            color: red;
         }
     </style>
 </body>
