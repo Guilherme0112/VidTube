@@ -18,9 +18,9 @@
 
         $sql = mysqli_query($conexao, "SELECT *  FROM usuarios WHERE email = '$email';");
         $result = $sql->fetch_assoc();
-        $emailBC = $result['email'];
+        $emailBC = $result['email'] ?? '';
 
-        if (strlen($name) > 3 && strlen($phone) == 15 && $senha == $rsenha){
+        if (strlen($name) > 3 && strlen($phone) == 15 && $senha == $rsenha && strlen($senha) >= 5 && strlen($rsenha) >= 4){
             if(mysqli_num_rows($sql) > 0){
                 
             } else {
