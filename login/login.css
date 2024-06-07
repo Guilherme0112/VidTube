@@ -16,27 +16,31 @@ main{
 }
 form{
 
-    display: grid;
-    justify-content: end;
+    display: flex;
+    justify-content: center;
     align-items: center;
     flex-wrap: wrap;
-    width: 600px;
-    height: 300px;
+    width: 400px;
+    height: 400px;
     box-shadow: 0px 0px 10px black;
     border-radius: 10px;
-    padding: 30px;
+    padding: 50px 30px;
+    background-color: #1b1b1b;
 }
 label{
 
     color: white;
-    margin-bottom: -20px
+    margin-left: 20px;
+    width: 100%;
 }
 input{
 
-    width: 230px;
-    height: 30px;
-    border-radius: 10px;
+    width: 90%;
+    height: 40px;
+    border-radius: 5px;
     padding: 10px;
+    background-color: #0b0b0b;
+    color: white;
 }
 input[type='submit']{
 

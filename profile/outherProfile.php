@@ -127,6 +127,9 @@
                 $title = $i['title'];
                 $thumb = $i['thumb'];
                 $likes = $i['likes'];
+
+                $sql2 = mysqli_query($conexao, "SELECT * FROM likes WHERE videoLike = $idVideo");
+                $likes = mysqli_num_rows($sql2);
                 echo "<a href='../page-video/video.php?id=$idVideo' class='size-box-video' title='$title'>
                         <img class='box-video' src='../$thumb'></img>
                         <h3 class='video-title font-nigth'>$title</h3>

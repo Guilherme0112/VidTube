@@ -31,10 +31,6 @@
                         <i class="fa-solid fa-house icon-menu"></i>
                         Início
                     </a>
-                    <a href="../lives/lives.php">
-                        <i class="fa-solid fa-tower-broadcast icon-menu"></i>
-                        Lives
-                    </a>
                     <a href="#">
                         <i class="fa-solid fa-fire icon-menu"></i>
                         Em Alta
@@ -57,6 +53,7 @@
             <input type="email" name="email" class="email placeholder-center" value='' placeholder="Digite seu e-mail">
             <label for="senha">Senha:</label>
             <input type="password" name="senha" class="senha placeholder-center" value='' placeholder="Digite sua senha">
+            <a href="" class="font-nigth effect-text-line">Esqueci minha senha</a>
             <input type="submit" name='submit' value="Entrar">
         </form>
     </main>

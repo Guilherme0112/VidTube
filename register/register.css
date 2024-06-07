@@ -39,6 +39,9 @@ label{
 }
 #form_1{
 
+    display: flex;
+    justify-content: center;
+    align-items: center;
     width: 40%;
     height: 100%;
     padding: 20px;
@@ -106,4 +109,45 @@ input[type='password']{
     padding-left: 50px;
     width: 100%;
     height: 10px;
+}
+
+@media (max-width: 800px){
+
+
+    form{
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        height: 100vh;
+    }
+    #form_1, img{
+
+        width: 0;
+        opacity: 0;
+        pointer-events: none;
+    }
+    #form_2{
+        width: 90%;
+        height: 100%;
+        padding: 100px 150px;
+    }
+    input{
+
+        width: 80%;
+    }
+    input[type='tel']{
+
+        width: 40%;
+    }
+    input[type='password']{
+
+        margin-left: 40px;
+        width: 35%;
+    }
+    label{
+
+        margin-left: 40px;
+    }
 }

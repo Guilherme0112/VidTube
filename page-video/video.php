@@ -1,33 +1,36 @@
 <?php
-    include_once('../database/conexao.php');
-    session_start();
-    // data user session
-    if (isset($_SESSION['email'])) {
-        $emailSession = $_SESSION['email'];
-        $sqlSession = mysqli_query($conexao, "SELECT * FROM usuarios WHERE email = '$emailSession'");
-        $respSession = $sqlSession->fetch_assoc();
-        $nameSession = $respSession['nome'] ?? '';
-        $photoProfileSession = $respSession['photoProfile'] ?? '';
-        $idSession = $respSession['id'] ?? '';
-    }
-    // video verification
-    if (isset($_GET['id'])) {
-        $idVideo = $_GET['id'];
-    } else{
-        header('Location: video.php');
-    }
-    // data video
-    $sql = mysqli_query($conexao, "SELECT * FROM videos WHERE idVideo = $idVideo");
-    $resp = $sql->fetch_assoc();
-    $video = $resp['video'] ?? '';
-    $title = $resp['title'] ?? '';
-    $idUserVideo = $resp['userVideo'];
-    // data user create video  
-    $sql2 = mysqli_query($conexao, "SELECT * FROM usuarios WHERE id = $idUserVideo");
-    $resp2 = $sql2->fetch_assoc();
-    $name = $resp2['nome'] ?? '';
-    $idUser = $resp2['id'] ?? '';
-    $userPhoto = $resp2['photoProfile'] ?? '';
+include_once('../database/conexao.php');
+session_start();
+// data user session
+if (isset($_SESSION['email'])) {
+    $emailSession = $_SESSION['email'];
+    $sqlSession = mysqli_query($conexao, "SELECT * FROM usuarios WHERE email = '$emailSession'");
+    $respSession = $sqlSession->fetch_assoc();
+    $nameSession = $respSession['nome'] ?? '';
+    $photoProfileSession = $respSession['photoProfile'] ?? '';
+    $idSession = $respSession['id'] ?? '';
+}
+// video verification
+if (isset($_GET['id'])) {
+    $idVideo = $_GET['id'];
+} else {
+    header('Location: video.php');
+}
+// data video
+$sql = mysqli_query($conexao, "SELECT * FROM videos WHERE idVideo = $idVideo");
+$resp = $sql->fetch_assoc();
+$video = $resp['video'] ?? '';
+$title = $resp['title'] ?? '';
+$idUserVideo = $resp['userVideo'];
+// data user create video  
+$sql2 = mysqli_query($conexao, "SELECT * FROM usuarios WHERE id = $idUserVideo");
+$resp2 = $sql2->fetch_assoc();
+$name = $resp2['nome'] ?? '';
+$idUser = $resp2['id'] ?? '';
+$userPhoto = $resp2['photoProfile'] ?? '';
+//Amount likes of video
+$sql4 = mysqli_query($conexao, "SELECT * FROM likes WHERE videoLike = $idVideo");
+$amountLikes = mysqli_num_rows($sql4);
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -109,27 +112,34 @@
             <img src="<?php echo $userPhoto ?>" alt="">
             <a href="../profile/outherProfile.php?id=<?php echo $idUser; ?>" class="font-nigth"><?php echo $name ?></a>
             <?php
-                if(isset($_SESSION['email'])){
-                    if($idSession != $idUser){
-                        $condition = mysqli_query($conexao, "SELECT * FROM seguir WHERE idSeguindo = $idUser AND idSeguidor = $idSession");
-                        if(mysqli_num_rows($condition) < 1){
-                            echo "<input type='button' class='btn' value='Seguir'>";
-                        }
-                        else {
-                            echo "<input type='button' class='btn' value='Deixar de Seguir'>";
-                        }
+            if (isset($_SESSION['email'])) {
+                if ($idSession != $idUser) {
+                    $condition = mysqli_query($conexao, "SELECT * FROM seguir WHERE idSeguindo = $idUser AND idSeguidor = $idSession");
+                    if (mysqli_num_rows($condition) < 1) {
+                        echo "<input type='button' class='btn' value='Seguir'>";
                     } else {
-                        echo "<a href='../profile/profile.php'>
+                        echo "<input type='button' class='btn' value='Deixar de Seguir'>";
+                    }
+                } else {
+                    echo "<a href='../profile/profile.php'>
                                 <button class='btn'>Ver meu Perfil</button>
                             </a>";
-                    }
                 }
+            }
 
             ?>
-            
-            <i class="fa-regular fa-thumbs-up icon-interaction font-nigth" title="Like"></i>
-            <i class="fa-regular fa-thumbs-down icon-interaction font-nigth" title="Deslike"></i>
-            <i class="fa-solid fa-share icon-interaction font-nigth" title='Compartilhar'></i>
+            <?php
+            if (isset($_SESSION['email'])) {
+                $condition = mysqli_query($conexao, "SELECT * FROM likes WHERE videoLike = $idVideo AND userLike = $idSession");
+                if (mysqli_num_rows($condition) == 0) {
+                    echo "<i class='fa-regular fa-heart icon-interaction font-nigth' id='like' title='Like' value='true'></i><span class='amountLikes'>$amountLikes</span>";
+                } else {
+                    echo "<i class='fa-solid fa-heart icon-interaction font-nigth' id='like' title='Like' value='false'></i><span class='amountLikes'>$amountLikes</span>";
+                }
+            }
+
+            ?>
+
         </div>
         <section class="comments">
             <?php
@@ -156,16 +166,18 @@
                         $.ajax({
                             url: '../routes/comments.php',
                             type: 'POST',
-                            data: {comment: comentario, 
-                                    idVideo: idVideo},
-                            success: function(e){
+                            data: {
+                                comment: comentario,
+                                idVideo: idVideo
+                            },
+                            success: function(e) {
                                 console.log('Sucesso: ' + e)
                             },
-                            error: function(e){
+                            error: function(e) {
                                 console.log('Error: ' + e)
                             }
-                        }).done(function(e) {               
-                            $('.comments').children().eq(1).after("<div class='box-comments'><img src='"+ photoComment +"' alt=''><a href='../profile/outherProfile.php?id="+ userId +"' class='nameComment text-line-effect'>"+ nameComment +"</a><span style='width: 100%;'</span><p class='comment'>" + comentario +"</p></div>");
+                        }).done(function(e) {
+                            $('.comments').children().eq(1).after("<div class='box-comments'><img src='" + photoComment + "' alt=''><a href='../profile/outherProfile.php?id=" + userId + "' class='nameComment text-line-effect'>" + nameComment + "</a><span style='width: 100%;'</span><p class='comment'>" + comentario + "</p></div>");
                             $('input').val('');
                         });
                     });
@@ -173,24 +185,42 @@
                 $(function() {
                     $('.btn').click(function(e) {
                         var profile = "<?php echo $idUser ?>"
-                    $.ajax({
-                        url: '../routes/follow.php',
-                        type: 'POST',
-                        data: {follow: profile},
-                        success: function(e){
-                            console.log('Sucesso: ' + e)
-                            if ($('.btn').val() === 'Seguir'){
-                                $('.btn').val("Deixar de Seguir")
-                            } else{
-                                $('.btn').val("Seguir")
+                        $.ajax({
+                            url: '../routes/follow.php',
+                            type: 'POST',
+                            data: {
+                                follow: profile
+                            },
+                            success: function(e) {
+                                console.log('Sucesso: ' + e)
+                                if ($('.btn').val() === 'Seguir') {
+                                    $('.btn').val("Deixar de Seguir")
+                                } else {
+                                    $('.btn').val("Seguir")
+                                }
+                            },
+                            error: function(e) {
+                                console.log('Error: ' + e)
                             }
-                        },
-                        error: function(e){
-                            console.log('Error: ' + e)
-                        }
+                        });
                     });
                 });
-            });
+                $(function() {
+                    $('#like').click(function(e) {
+                        $.ajax({
+                            url: '../routes/likes.php',
+                            type: 'POST',
+                            data: {
+                                like: idVideo
+                            },
+                            success: function(e) {
+                                document.getElementById("like").classList.toggle("fa-regular");
+                                document.getElementById("like").classList.toggle("fa-solid");
+
+                            }
+                        })
+                    })
+                })
             </script>
             <?php
             // comments

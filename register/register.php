@@ -1,4 +1,10 @@
 <?php
+    //if the user is online, do not login
+    session_start();
+    if(isset($_SESSION['email'])){
+
+        header('Location: ../index.php');
+    }
     $name = '';
     $email = '';
     $phone = '';
@@ -18,23 +24,17 @@
             if(mysqli_num_rows($sql) > 0){
                 
             } else {
-                $cursor = mysqli_query($conexao, "INSERT INTO usuarios (nome, email, senha, phone) VALUES ('$name', '$email', '$senha', '$phone')");
+                $cursor = mysqli_query($conexao, "INSERT INTO usuarios VALUES (default, '$name', '$email', '$senha', '$phone', default)");
+                $sql = mysqli_query($conexao, "SELECT id FROM usuarios WHERE email = '$email';");
+                $result = $sql->fetch_assoc();
                 $idBC = $result['id'];
                 //criar uma pasta para uploads assim que o perfil é criado
                 $dir = '../database/Arquivos/' . $idBC . '/';
                 mkdir($dir, 0777, true);
                 header('Location: ../login/login.php');
             }
-
         }    
     };
-    //if the user is online, do not login
-    session_start();
-    if(isset($_SESSION['email'])){
-
-        header('Location: ../index.php');
-    }
-
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -59,10 +59,6 @@
                         <i class="fa-solid fa-house icon-menu"></i>
                         Início
                     </a>
-                    <a href="../lives/lives.php">
-                        <i class="fa-solid fa-tower-broadcast icon-menu"></i>
-                        Lives
-                    </a>
                     <a href="#">
                         <i class="fa-solid fa-fire icon-menu"></i>
                         Em Alta
@@ -82,6 +78,7 @@
     <main>
         <form id='form' action="<?= $_SERVER['PHP_SELF'] ?>" method="post" onsubmit='return validateForm()'>
             <div id="form_1">
+                <img src="../styles/icons/icon-ligth.png" width="200px" alt="">
             </div>
             <div id="form_2">
                 <label for="name">Nome:</label>

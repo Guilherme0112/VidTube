@@ -84,15 +84,21 @@ img{
 }
 .icon-interaction{
 
+    background-color: transparent;
     font-size: 25px;
     cursor: pointer;
     margin: auto 10px;
-
+    color: rgba(255, 255, 255, 0.6);
+    transition: .3s;
 }
 .icon-interaction:hover{
 
-    transition: .3s;
     transform: scale(1.1);
+    color: white;
+}
+.amountLikes{
+    color: white;
+    font-size: 12px;
 }
 /* Comments */
 .comments{
@@ -166,7 +172,7 @@ img{
         margin-left: 0;
     }
     .box-title, .box-interaction{
-        justify-content: center;
+
         margin: 10px 0;
         width: 90%;
     }

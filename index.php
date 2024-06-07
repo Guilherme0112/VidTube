@@ -71,8 +71,9 @@
                 $id = $result['idVideo'];
                 $video = $result['video']; //pega o valor que está na coluna video no na banco.
                 $title = $result['title']; //pega o valor que está na coluna title.
-                $likes = $result['likes']; // pega o valor que está na colina likes.
                 $thumb = $result['thumb']; //pega a rota da thumb no MySQL
+                $sql = mysqli_query($conexao, "SELECT * FROM likes WHERE videoLike = $id");
+                $likes = mysqli_num_rows($sql);
             
                 echo "<a href='page-video/video.php?id=$id' class='size-box-video' title='$title'>
                         <img class='box-video' src='$thumb'></img>
