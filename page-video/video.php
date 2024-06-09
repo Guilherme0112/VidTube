@@ -114,7 +114,7 @@
             </div>
         </div>
         <script>
-            var array =   JSON.parse('<?php echo $infoJSON ?>');
+            var array = JSON.parse('<?php echo $infoJSON ?>');
         </script>
     </header>
     <body>
@@ -156,11 +156,9 @@
                 if (isset($_SESSION['email'])) {
                     $condition = mysqli_query($conexao, "SELECT * FROM likes WHERE videoLike = $idVideo AND userLike = $idSession");
                     if (mysqli_num_rows($condition) == 0) {
-                        echo "<i class='fa-regular fa-heart icon-interaction font-nigth' id='like' title='Like' value='true'></i>
-                            <span class='amountLikes'>$amountLikes</span>";
+                        echo "<i class='fa-regular fa-heart icon-interaction font-nigth' id='like' title='Like' value='true'></i>";
                     } else {
-                        echo "<i class='fa-solid fa-heart icon-interaction font-nigth' id='like' title='Like' value='false'></i>
-                            <span class='amountLikes'>$amountLikes</span>";
+                        echo "<i class='fa-solid fa-heart icon-interaction font-nigth' id='like' title='Like' value='false'></i>";
                     }
                 }
             ?>
@@ -195,12 +193,14 @@
                         <div class='box-comments'>
                             <img src='$photoComment' alt=''>
                             <a href='../profile/outherProfile.php?id=$idComment' class='nameComment text-line-effect'>$userComment</a>
-                            <span style='width: 100%;'</span>
+                            <span style='width: 100%;'></span>
                             <p class='comment'>$comment</p>
                         </div>
                         ";
                 }
             ?>
+
         </section>
+        
     </body>
 </html>

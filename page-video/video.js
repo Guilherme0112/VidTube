@@ -25,8 +25,8 @@ $(function () {
             error: function (e) {
                 console.log('Error: ' + e)
             }
-        }).done(function (e) {
-            $('.comments').children().eq(1).after("<div class='box-comments'><img src='" + array.photoComment + "' alt=''><a href='../profile/outherProfile.php?id=" + array.userId + "' class='nameComment text-line-effect'>" + array.nameComment + "</a><span style='width: 100%;'</span><p class='comment'>" + comentario + "</p></div>");
+        }).done(function () {
+            $('.comments').children().eq(0).after("<div class='box-comments'><img src='" + array.photoComment + "' alt=''><a href='../profile/outherProfile.php?id=" + array.userId + "' class='nameComment text-line-effect'>" + array.nameComment + "</a><span style='width: 100%;'></span><p class='comment'>" + comentario + "</p></div>");
             $('input').val('');
         });
     });
