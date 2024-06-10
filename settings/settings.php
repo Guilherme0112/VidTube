@@ -13,6 +13,19 @@
         $id = $resultMySQL['id'];
         $name = $resultMySQL['nome'];
     };
+
+    //update name
+
+    if(isset($_POST['updateName']) && isset($_POST['name'])){
+        $changeName = $_POST['name'];
+        if(strlen($changeName) > 2){
+            $sql = mysqli_query($conexao, "UPDATE usuarios SET nome = '$changeName' WHERE id = $id");
+            header('Location: ../profile/profile.php');
+        }
+    }
+
+    //delete user
+
     if(isset($_POST['deleteUser'])){
 
         $cursor = mysqli_query($conexao, "DELETE FROM usuarios WHERE email = '$email';");
@@ -78,7 +91,7 @@
         </div>
     </header>
     <!-- Menu left -->
-    <section class="box-options" style="margin-top: 100px;">
+    <section class="box-options">
         <?php 
             if(isset($_SESSION['email']) && isset($_SESSION['senha'])){
 
@@ -99,6 +112,9 @@
                         <span class='font-nigth'>$id</span>
                         <label for='name' class='font-nigth'>Nome do usuário:</label>
                         <input type='text' name='name' class='input' value='$name' placeholder='$name'>
+                        <p class='msg-error'></p>
+                        <span style='width: 100%;'></span>
+                        <input type='submit' value='Mudar nome' name='updateName' class='changeName'>
                         <label for='email' class='font-nigth'>Email:</label>
                         <input type='email' name='email' class='input' value='$email' id='email' desabled>
                         <span style='width: 100%;'></span>
@@ -112,35 +128,6 @@
                     </form>";
             };
         ?>
-        
-        
     </main>
-    <script>
-        document.querySelector('.icon').addEventListener('click', function () {
-            document.querySelector('.menu').classList.toggle('show-menu');
-        });
-        const email = document.getElementById('email').disabled = true;
-        document.getElementsByName('deleteUser')[0].addEventListener('click', function(evento){
-            const confirmation = confirm('Você realmente deseja excluir a conta?');
-            if(!confirmation){
-                evento.preventDefault();
-            }
-        });
-        function photo(){
-            location.href = 'PassAndPhoto/photo.php';
-        }
-        function phone(){
-            location.href = 'nameAndPhone/phone.php';
-        };
-        function restorePass(){
-            location.href = 'PassAndPhoto/restorePass.php';
-        };
-            document.querySelector('.tel').addEventListener('input', function(e){
-                let tel = e.target.value.replace(/\D/g, '');
-                tel = tel.replace(/^(\d{2})(\d)/g, '($1) $2');
-                tel = tel.replace(/(\d)(\d{4})$/, '$1-$2');
-                e.target.value = tel;
-        });
-    </script>
 </body>
 </html>

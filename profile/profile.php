@@ -1,9 +1,7 @@
 <?php
     include_once('../database/conexao.php');
     session_start();
-    if ((!isset($_SESSION['email']) == true) and (!isset($_SESSION['senha']) == true)) {
-        unset($_SESSION['email']);
-        unset($_SESSION['senha']);
+    if (!isset($_SESSION['email'])){
         header('Location: ../login/login.php');
     }
     // info user 

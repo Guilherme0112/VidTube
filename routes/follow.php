@@ -1,5 +1,5 @@
 <?php
-    //header('Location: ../index.php');
+    header('Location: ../index.php');
     include_once('../database/conexao.php');
     session_start();
     if(isset($_SESSION['email'])){

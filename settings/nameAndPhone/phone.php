@@ -29,8 +29,7 @@ session_start();
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../../styles/model-of-page.css">
-    <link rel="stylesheet" href="styleNamePhone.css">
-    <link rel="stylesheet" href="../restorePass/restorePass.css">
+    <link rel="stylesheet" href="../PassAndPhoto/restorePass.css">
     <link rel="stylesheet" href="../../fontawesome-free-6.5.1-web/css/all.min.css">
     <link rel="shortcut icon" href="../../styles/icons/icon-ligth.png" type="image/x-icon">
     <title><?php echo $name; ?></title>
@@ -58,11 +57,13 @@ session_start();
 <body>
     <form action="<?php $_SERVER['PHP_SELF'] ?>" method="post">
         <label for="phone">Digite seu novo número de telefone</label>
-        <input type="tel" name="phone" class='tel' placeholder="(00) 00000-0000">
+        <input type="tel" name="phone" placeholder="(00) 00000-0000">
         <label for="pass">Digite sua senha</label>
         <input type="password" name="pass" placeholder="Digite sua senha">
         <input type="submit" name='submit' value="Mudar telefone">
     </form>
+
+
     <script>
         document.querySelector('.icon').addEventListener('click', function () {
             document.querySelector('.menu').classList.toggle('show-menu');

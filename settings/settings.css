@@ -1,3 +1,4 @@
+@import url('../styles/colors.css');
 body{
     display: flex;
     justify-content: start;
@@ -5,11 +6,13 @@ body{
 }
 .box-options{    
 
-    position: fixed;
+    position: absolute;
+    top: 0;
+    padding-top: 50px;
     width: 250px;
     height: 100vh;
-    background-color: #1b1b1b;
-    box-shadow: 0px 0px 10px black;
+    background-color: var(--color-background-ligth);
+    box-shadow: 0px 3px 3px black;
 }
 .box-options a{
 
@@ -19,7 +22,7 @@ body{
 }
 .box-options a:hover{
 
-    background-color: #2b2b2b;
+    background-color: var(--color-box-ligth);
     transition: .3s;
 }
 .main-box{
@@ -53,8 +56,10 @@ input[type='text'], input[type='email']{
     height: 40px;
     border-radius: 10px;
     padding-left: 5px;
+    background-color: var(--color-box-ligth);
+    color: var(--color-font-ligth);
 }
-input[type='button']{
+input[type='button'], .changeName{
     width: 300px;
     height: 40px;
     border-radius: 10px;
@@ -63,10 +68,20 @@ input[type='button']{
     color: white;
     cursor: pointer;
 }
-input[type='button']:hover{
+input[type='button']:hover, .changeName:hover{
 
     transition: .3s;
     background-color: #1b1b1b;
+}
+#email{
+    background-color: #3b3b3b;
+    color: #1b1b1b;
+}
+.msg-error{
+    width: 100%;
+    font-size: 12px;
+    color: red;
+    text-align: center;
 }
 /* input replace photo of user */
 input[type='file']{
@@ -130,10 +145,23 @@ input[type='file']{
 
         font-size: 12px;
     }
+    input[type='button'], input[type='text'], input[type='submit'], input[type='email']{
+        width: 80%;
+    }
     .yourProfile{
 
         width: 100%;
         padding-left: 120px;
         padding-top: 20px;
     }
+}
+@media (max-width: 400px){
+    .box-options{
+        width: 80px;
+        font-size: 10px;
+    }
+    .box-options a{
+        font-size: 9px;
+    }
+
 }

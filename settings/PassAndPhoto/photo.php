@@ -58,6 +58,7 @@
         <input type="submit" name='submit' value="Mudar foto de Perfil">
     </form>
     <style>
+        @import url('../../styles/colors.css');
         body{
             display: flex;
             justify-content: center;
@@ -67,23 +68,23 @@
 
             width: 500px;
             height: 500px;
-            background-color: #2b2b2b;
             border-radius: 10px;
             display: flex;
             justify-content: center;
             align-items: center;
             flex-wrap: wrap;
+            box-shadow: 0px 0px 5px black;
         }
         input[type='file']{
             display: none;
         }
         label{
-            background-color: #1b1b1b;
+            background-color: var(--color-box-ligth);
             width: 90%;
             height: 40%;
             border-radius: 10px;
             cursor: pointer;
-            color: white;
+            color: var(--color-font-ligth);
             display: grid;
             place-items: center;
         }
@@ -109,8 +110,8 @@
             object-fit: cover;
             object-position: center;
             border-radius: 50%;
-            background-color: #1b1b1b;
-            outline: 2px solid white;
+            background-color: var(--color-box-ligth);
+            outline: 2px solid var(--color-font-ligth);
             margin: 10px;
         }
     </style>

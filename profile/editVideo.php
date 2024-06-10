@@ -67,10 +67,6 @@
                         <i class="fa-solid fa-house icon-menu"></i>
                         Início
                     </a>
-                    <a href="../lives/lives.php">
-                        <i class="fa-solid fa-tower-broadcast icon-menu"></i>
-                        Lives
-                    </a>
                     <a href="#">
                         <i class="fa-solid fa-fire icon-menu"></i>
                         Em Alta
@@ -143,10 +139,25 @@
 });
     </script>
     <style>
+        @import url('../styles/colors.css');
         body{
             display: flex;
             justify-content: center;
             align-items: center;
+        }
+        header{
+            background-color: transparent !important;
+        }
+        form{
+            box-shadow: 0px 0px 10px black;
+        }
+        #title{
+            background-color: var(--color-box-ligth);
+            color: var(--color-font-ligth);
+        }
+        #title:hover, #title:focus{
+            outline: 1px solid white;
+            box-shadow: 0px 0px 3px white;
         }
         button{
 
@@ -174,7 +185,7 @@
             width: 300px;
             height: 170px;
             border-radius: 10px;
-            background-color: #1b1b1b;
+            background-color: var();
         }
         input[type='file']{
             display: none;
@@ -188,7 +199,7 @@
             height: 40px;
             cursor: pointer;
             border-radius: 10px;
-            background-color: #1b1b1b;
+            background-color: var(--color-box-ligth);
         }
         .thumb:hover{
 
@@ -199,6 +210,26 @@
             text-align: center;
             font-size: 11px;
             color: red;
+        }
+        @media (max-width: 768px){
+            form{
+                width: 100%;
+                height: 100%;
+                text-align: center;
+                box-shadow: none;
+            }
+            button{
+
+                width: 90%;
+                margin: 0;
+            }
+            .thumb{
+                width: 70%;
+            }
+            #title{
+
+                width: 70%;
+            }
         }
     </style>
 </body>

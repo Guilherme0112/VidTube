@@ -3,31 +3,12 @@
     session_start();
 
     // video verification
-
     if (isset($_GET['id'])) {
         $idVideo = $_GET['id'];
-    } else {
-        header('Location: video.php');
-    }
-
-    // data user session
-
-    if (isset($_SESSION['email'])) {
-        $emailSession = $_SESSION['email'];
-        $sqlSession = mysqli_query($conexao, "SELECT * FROM usuarios WHERE email = '$emailSession'");
-        $respSession = $sqlSession->fetch_assoc();
-        $nameSession = $respSession['nome'] ?? '';
-        $photoProfileSession = $respSession['photoProfile'] ?? '';
-        $idSession = $respSession['id'] ?? '';
-
-        $info = array(
-            'nameComment' => $nameSession,
-            'photoComment' => $photoProfileSession,
-            'userId' => $idSession,
-            'idVideo' => $idVideo
-        );
-        $infoJSON = json_encode($info);
-
+        $sql = mysqli_query($conexao, "SELECT * FROM videos WHERE idVideo = $idVideo");
+        if(mysqli_num_rows($sql) == 0){
+            header('Location: ../index.php');
+        }
     }
 
     // data video
@@ -51,6 +32,26 @@
     $amount = mysqli_query($conexao, "SELECT * FROM likes WHERE videoLike = $idVideo");
     $amountLikes = mysqli_num_rows($amount);
 
+    // data user session
+
+    if (isset($_SESSION['email'])) {
+        $emailSession = $_SESSION['email'];
+        $sqlSession = mysqli_query($conexao, "SELECT * FROM usuarios WHERE email = '$emailSession'");
+        $respSession = $sqlSession->fetch_assoc();
+        $nameSession = $respSession['nome'] ?? '';
+        $photoProfileSession = $respSession['photoProfile'] ?? '';
+        $idSession = $respSession['id'] ?? '';
+
+        $info = array(
+            'nameComment' => $nameSession,
+            'photoComment' => $photoProfileSession,
+            'userId' => $idSession,
+            'createVideoId' => $idUser,
+            'idVideo' => $idVideo
+        );
+        $infoJSON = json_encode($info);
+
+    }
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -70,8 +71,6 @@
 <body>
     <header>
         <div class="header-one">
-            <input type="search" name="search" id="search" placeholder="O que você está pensando?" class="placeholder-center">
-            <i class="fa-solid fa-magnifying-glass"></i>
         </div>
         <div class="header-two">
             <i class="fas fa-bars icon"></i>
@@ -130,7 +129,7 @@
 
         <div class="box-interaction">
             <img src="<?php echo $userPhoto ?>" alt="">
-            <a href="../profile/outherProfile.php?id=<?php echo $idUser; ?>" class="font-nigth">
+            <a href="../profile/outherProfile.php?id=<?php echo $idUser; ?>" class="font-nigth" title='<?php echo $name; ?>'>
                 <?php echo $name ?>
             </a>
             <?php
@@ -156,9 +155,9 @@
                 if (isset($_SESSION['email'])) {
                     $condition = mysqli_query($conexao, "SELECT * FROM likes WHERE videoLike = $idVideo AND userLike = $idSession");
                     if (mysqli_num_rows($condition) == 0) {
-                        echo "<i class='fa-regular fa-heart icon-interaction font-nigth' id='like' title='Like' value='true'></i>";
+                        echo "<i class='fa-regular fa-heart icon-interaction' id='like' title='Like' value='true'></i>";
                     } else {
-                        echo "<i class='fa-solid fa-heart icon-interaction font-nigth' id='like' title='Like' value='false'></i>";
+                        echo "<i class='fa-solid fa-heart icon-interaction' id='like' title='Like' value='false'></i>";
                     }
                 }
             ?>
@@ -172,7 +171,7 @@
                     echo "
                         <form action='video.php' method='POST' class='box-comments'>
                             <img src='$photoProfileSession' alt=''>
-                            <a href='../profile/profile.php' class='nameComment'>$nameSession</a>
+                            <a href='../profile/profile.php' class='nameComment' title='$nameSession'>$nameSession</a>
                             <input type='text' class='inputComment' placeholder='Diga a sua opinião'>
                             <button name='submitComment' class='submitComment'>Postar</button>
                         </form>
@@ -183,16 +182,18 @@
 
                 // comments
 
-                $sql3 = mysqli_query($conexao, "SELECT u.id, u.nome, u.photoProfile, c.comentario, c.idVideoComment FROM comentarios c JOIN usuarios u ON c.idUserComment = u.id WHERE idVideoComment = $idVideo;");
+                $sql3 = mysqli_query($conexao, "SELECT u.id, u.nome, u.photoProfile, c.comentario, c.idVideoComment, date_format(c.timeComment, '%d/%m/%Y') FROM comentarios c JOIN usuarios u ON c.idUserComment = u.id WHERE idVideoComment = $idVideo;");
                 while ($i = $sql3->fetch_assoc()) {
                     $idComment = $i['id'];
                     $photoComment = $i['photoProfile'];
                     $userComment = $i['nome'];
                     $comment = $i['comentario'];
+                    $timeComment = $i["date_format(c.timeComment, '%d/%m/%Y')"];
                     echo "
                         <div class='box-comments'>
                             <img src='$photoComment' alt=''>
-                            <a href='../profile/outherProfile.php?id=$idComment' class='nameComment text-line-effect'>$userComment</a>
+                            <a href='../profile/outherProfile.php?id=$idComment' class='nameComment text-line-effect' title='$userComment'>$userComment</a>
+                            <p class='timeComment'>$timeComment</p>
                             <span style='width: 100%;'></span>
                             <p class='comment'>$comment</p>
                         </div>

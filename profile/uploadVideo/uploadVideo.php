@@ -70,17 +70,25 @@ if (isset($_POST['submit']) && isset($_FILES['video']['name']) && isset($_FILES[
             </div>
         </div>
     </header>
-    <form action="<?php $_SERVER['PHP_SELF'] ?>" method="post" enctype="multipart/form-data">
-        <input type="text" name="title" id="title" placeholder="Título do Vídeo">
+    <form action="<?php $_SERVER['PHP_SELF'] ?>" method="post" enctype="multipart/form-data" onsubmit="return verification()">
+        <input type="text" name="title" id="title" placeholder="Título do Vídeo" min='3' required>
         <p id="msg-error"></p>
-        <label for="video" id='videoLabel'>Fazer upload de vídeo</label>
-        <input type="file" name="video" id='video' accept="video/*">
-        <progress id='progress' value="0" max='100'></progress>
-        <img id='img-preview'>
-        <label for="thumb" id='thumbLabel'>Capa do Vídeo</label>
-        <input type="file" name="thumb" id="thumb" accept="image/*">
         <span style='width: 100%;'></span>
-        <input type="submit" name='submit' value="Postar Vídeo">
+        <img id='img-preview'>
+        <span style="width: 100%;"></span>
+        <div class="div-config">
+            <div class="div-form">
+                <label for="video" id='videoLabel' class='labelClick'>Fazer upload de vídeo</label>
+                <input type="file" name="video" id='video' accept="video/*" required>
+                <progress id='progress' value="0" max='100'></progress>
+            </div>
+            <div class="div-form">
+                <label for="thumb" id='thumbLabel' class='labelClick' style="margin-bottom: 30px;">Capa do Vídeo</label>
+                <input type="file" name="thumb" id="thumb" accept="image/*" required>
+            </div>
+        </div>
+        <span style='width: 100%;'></span>
+        <input type="submit" name='submit' value="Postar Vídeo" onclick="verification()">
     </form>
 </body>
 </html>

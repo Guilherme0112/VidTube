@@ -33,7 +33,7 @@
     <link rel="stylesheet" href="restorePass.css">
     <link rel="stylesheet" href="../../styles/model-of-page.css">
     <link rel="stylesheet" href="../../fontawesome-free-6.5.1-web/css/all.min.css">
-    <link rel="shortcut icon" href="../../styles/icon.png" type="image/x-icon">
+    <link rel="shortcut icon" href="../../styles/icons/icon-ligth.png" type="image/x-icon">
     <title>Restaurar sua senha</title>
 </head>
 <header>

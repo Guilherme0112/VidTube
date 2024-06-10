@@ -35,8 +35,8 @@ $(function () {
 //settings follow
 
 $(function () {
-    $('.btn').click(function (e) {
-        var profile = array.userId
+    $('.btn').click(function () {
+        var profile = array.createVideoId
         $.ajax({
             url: '../routes/follow.php',
             type: 'POST',
