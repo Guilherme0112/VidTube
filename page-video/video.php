@@ -50,7 +50,6 @@
             'idVideo' => $idVideo
         );
         $infoJSON = json_encode($info);
-
     }
 ?>
 <!DOCTYPE html>
@@ -182,26 +181,52 @@
 
                 // comments
 
-                $sql3 = mysqli_query($conexao, "SELECT u.id, u.nome, u.photoProfile, c.comentario, c.idVideoComment, date_format(c.timeComment, '%d/%m/%Y') FROM comentarios c JOIN usuarios u ON c.idUserComment = u.id WHERE idVideoComment = $idVideo;");
+                $sql3 = mysqli_query($conexao, "SELECT u.id, u.nome, u.photoProfile, c.comentario, c.idComment, c.idVideoComment, date_format(c.timeComment, '%d/%m/%Y') FROM comentarios c JOIN usuarios u ON c.idUserComment = u.id WHERE idVideoComment = $idVideo;");
                 while ($i = $sql3->fetch_assoc()) {
-                    $idComment = $i['id'];
+
+                    $idUserComment = $i['id'];
                     $photoComment = $i['photoProfile'];
                     $userComment = $i['nome'];
                     $comment = $i['comentario'];
                     $timeComment = $i["date_format(c.timeComment, '%d/%m/%Y')"];
-                    echo "
-                        <div class='box-comments'>
-                            <img src='$photoComment' alt=''>
-                            <a href='../profile/outherProfile.php?id=$idComment' class='nameComment text-line-effect' title='$userComment'>$userComment</a>
-                            <p class='timeComment'>$timeComment</p>
-                            <span style='width: 100%;'></span>
-                            <p class='comment'>$comment</p>
-                        </div>
-                        ";
+                    $idComment = $i['idComment'];
+                    if(isset($_SESSION['email'])){
+                        if($idUserComment == $idSession){
+                            echo "<div class='box-comments'>
+                                    <input type='text' class='none' value='$idComment'>
+                                    <img src='$photoComment' alt=''>
+                                    <a href='../profile/outherProfile.php?id=$idUserComment' class='nameComment text-line-effect' title='$userComment'>$userComment</a>
+                                    <p class='timeComment'>$timeComment</p>
+                                    <i class='fa-solid fa-trash icon-comment' id='deleteComment'></i>
+                                    <span style='width: 100%;'></span>
+                                    <p class='comment'>$comment</p>
+                                </div>";
+                        } else {
+                            echo "
+                                <div class='box-comments'>
+                                    <input type='none' class='none' value='$idComment'>
+                                    <img src='$photoComment' alt=''>
+                                    <a href='../profile/outherProfile.php?id=$idUserComment' class='nameComment text-line-effect' title='$userComment'>$userComment</a>
+                                    <p class='timeComment'>$timeComment</p>
+                                    <span style='width: 100%;'></span>
+                                    <p class='comment'>$comment</p>
+                                </div>
+                                ";
+                        }
+                    } else {
+                        echo "
+                                <div class='box-comments'>
+                                    <input type='none' class='none' value='$idComment'>
+                                    <img src='$photoComment' alt=''>
+                                    <a href='../profile/outherProfile.php?id=$idUserComment' class='nameComment text-line-effect' title='$userComment'>$userComment</a>
+                                    <p class='timeComment'>$timeComment</p>
+                                    <span style='width: 100%;'></span>
+                                    <p class='comment'>$comment</p>
+                                </div>";
+                    }
                 }
             ?>
 
         </section>
-        
     </body>
 </html>

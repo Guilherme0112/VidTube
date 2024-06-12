@@ -91,9 +91,9 @@
                 <input type="tel" name="phone" class="input-space placeholder-center tel" placeholder="(00) 0000-0000" value='<?php print"$phone";?>'  required>
                 <p class='msg-error' id='phoneError'></p>
                 <label for="senha">Senha:</label>
-                <label for="rsenha" style="margin-left: 25px;">Repita a Senha:</label>
                 <input type="password" name="senha" class="input-space placeholder-center pass" placeholder='Digite sua senha' required>
-                <input type="password" name="rsenha" class="input-space placeholder-center rpass" placeholder='Repita sua senha' style='margin-left: -10px;' required>
+                <label for="rsenha" style="margin-left: 40px;">Repita a Senha:</label>
+                <input type="password" name="rsenha" class="input-space placeholder-center rpass" placeholder='Repita sua senha' required>
                 <p class="msg-error" id='passError'></p>
                 <input type="submit" value="Registrar" name="enviar" id='submit' title="Registrar conta">
             </div>

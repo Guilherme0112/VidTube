@@ -11,7 +11,7 @@ body{
     justify-content: start;
     align-items: center;
     width: 760px;
-    height: 430px;
+    aspect-ratio: 16/9;
     margin-top: 60px;
     border-radius: 10px;
     margin-left: 30px;
@@ -107,6 +107,7 @@ img{
     margin-left: 30px;
     margin-top: 50px;
     padding: 5px 5px 10px 0;
+    border-radius: 10px;
    
 }
 .box-comments{
@@ -130,9 +131,24 @@ img{
 
     text-decoration: underline;
 }
+.icon-comment{
+
+    margin-left: 20px;
+    font-size: 17px;
+    color: rgb(223, 21, 21);
+    cursor: pointer;
+    transition: .3s;
+}
+.icon-comment:hover{
+
+    transform: scale(1.08);
+}
 .timeComment{
     font-size: 12px;
     opacity: 0.7;
+}
+.none{
+    display: none;
 }
 .comment{
 
@@ -177,17 +193,23 @@ img{
     .box-title, .box-interaction{
 
         margin: 10px 0;
-        width: 90%;
+        width: 95%;
     }
     .comments{
         width: 100%;
         margin: 0;
         display: flex;
         justify-content: center;
+        outline: none;
     }
     .box-comments{
 
-        width: 90%;
+        width: 95%;
         margin: 10px 0;
+    }
+}
+@media (max-width: 500px){
+    .box-title, .box-interaction{
+        margin-bottom: -20px;
     }
 }
