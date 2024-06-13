@@ -4,6 +4,10 @@ body{
     justify-content: start;
     flex-wrap: wrap;
 }
+header{
+
+    background-color: var(--color-background-ligth) !important;
+}
 /* box play video */
 .box-picture{
 

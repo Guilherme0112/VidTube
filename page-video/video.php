@@ -70,6 +70,9 @@
 <body>
     <header>
         <div class="header-one">
+            <a href="../index.php">
+                <img src="../styles/icons/icon.png" class="img-logo">
+            </a>
         </div>
         <div class="header-two">
             <i class="fas fa-bars icon"></i>
@@ -119,7 +122,7 @@
     
         <!-- box video -->
 
-        <video src="<?php echo $video ?>" controls class="box-picture" type='video/mp4'></video> 
+        <video src="<?php echo $video ?>" controls autoplay class="box-picture" type='video/mp4'></video> 
         <div class='box-title'>
             <h1 class='title font-nigth'><?php echo $title ?></h1>
         </div>
@@ -171,7 +174,7 @@
                         <form action='video.php' method='POST' class='box-comments'>
                             <img src='$photoProfileSession' alt=''>
                             <a href='../profile/profile.php' class='nameComment' title='$nameSession'>$nameSession</a>
-                            <input type='text' class='inputComment' placeholder='Diga a sua opinião'>
+                            <input type='text' class='inputComment' placeholder='Diga a sua opinião' oninput='comment()'>
                             <button name='submitComment' class='submitComment'>Postar</button>
                         </form>
                         ";

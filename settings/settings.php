@@ -62,13 +62,14 @@
                     <a href="#">
                         <i class="fa-solid fa-fire icon-menu"></i>
                         Em Alta</a>
-                    <a href="settings.php" class="">
-                        <i class="fa-solid fa-gear icon-menu"></i>
-                        Configurações
-                    </a>
                     <?php 
                         if(isset($_SESSION['email']) && isset($_SESSION['senha'])){
-                            echo "<a href='../profile/profile.php'>
+                            echo "
+                                <a href='../profile/uploadVideo/uploadVideo.php'>
+                                    <i class='fa-solid fa-upload icon-menu'></i>
+                                    Enviar Vídeo
+                                </a>
+                                <a href='../profile/profile.php'>
                                     <i class='fa-solid fa-user icon-menu'></i>
                                     Seu Perfil
                                 </a>
@@ -95,13 +96,12 @@
         <?php 
             if(isset($_SESSION['email']) && isset($_SESSION['senha'])){
 
-                echo "<a href='' class='font-nigth'>Seu perfil</a>
-                    <a href='' class='font-nigth'>Configurações de privacidade</a>";
+                echo "<a href='' class='font-nigth'>Seu perfil</a>";
+            } else {
+                echo "<a href='../login/login.php' class='font-nigth'>Fazer Login</a>
+                <a href='../register/register.php' class='font-nigth'>Criar Conta</a>";
             }
         ?>
-        <a href="" class="font-nigth">Idioma</a>
-        <a href="" class="font-nigth">Tema</a>
-        <a href="" class="font-nigth">Notificações</a>
     </section>
     <main class="main-box">
         <?php 

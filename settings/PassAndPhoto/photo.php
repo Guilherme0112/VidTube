@@ -114,6 +114,11 @@
             outline: 2px solid var(--color-font-ligth);
             margin: 10px;
         }
+        @media (max-width: 768px){
+            form{
+                box-shadow: none;
+            }
+        }
     </style>
     <script>
         document.querySelector('.icon').addEventListener('click', function(){

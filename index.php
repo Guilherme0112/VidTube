@@ -41,7 +41,12 @@
                     <?php 
                         session_start();
                         if(isset($_SESSION['email']) && isset($_SESSION['senha'])){
-                            echo "<a href='profile/profile.php'>
+                            echo "
+                                <a href='profile/uploadVideo/uploadVideo.php'>
+                                    <i class='fa-solid fa-upload icon-menu'></i>
+                                    Enviar Vídeo
+                                </a>
+                                <a href='profile/profile.php'>
                                     <i class='fa-solid fa-user icon-menu'></i>
                                     Seu Perfil
                                 </a>

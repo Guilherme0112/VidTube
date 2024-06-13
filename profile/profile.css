@@ -126,7 +126,7 @@ input[type='submit']{
     justify-content: start;
     align-items: center;
     width: 340px;
-    height: 235px;
+    height: 245px;
     margin: 20px;
     background-color: var(--color-box-ligth);
     border-radius: 10px;
@@ -184,5 +184,11 @@ input[type='submit']{
     }
     .box-follow p{
         font-size: 12px;
+    }
+}
+@media (max-width: 576px){
+    .box-config{
+        width: 390px;
+        height: 285px;
     }
 }
