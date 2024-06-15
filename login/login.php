@@ -14,8 +14,9 @@
     <link rel="stylesheet" href="login.css">
     <link rel="stylesheet" href="../styles/model-of-page.css">
     <link rel="stylesheet" href="../fontawesome-free-6.5.1-web/css/all.min.css">
-    <script defer src="login.js"></script>
+    <script src="login.js"></script>
     <link rel="shortcut icon" href="../styles/icons/icon-ligth.png" type="image/x-icon">
+    <script src="../styles/jquery-3.7.1.js"></script>
     <title>Login</title>
 </head>
 <body>
@@ -39,6 +40,10 @@
                         <i class="fa-solid fa-gear icon-menu"></i>
                         Configurações
                     </a>
+                    <a href="../comunidade/comunidade.php" class="">
+                        <i class="fa-solid fa-inbox icon-menu"></i>
+                        Comunidade
+                    </a>
                     <a href="../register/register.php">
                         <i class="fa-solid fa-user icon-menu"></i>
                         Criar Conta
@@ -54,9 +59,8 @@
             <label for="senha">Senha:</label>
             <input type="password" name="senha" class="senha placeholder-center" value='' placeholder="Digite sua senha">
             <a href="" class="font-nigth effect-text-line">Esqueci minha senha</a>
-            <input type="submit" name='submit' value="Entrar">
+            <input type="submit" name='submit' id='submit' value="Entrar">
         </form>
     </main>
-    
 </body>
 </html>

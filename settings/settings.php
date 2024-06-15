@@ -61,7 +61,12 @@
                     </a>
                     <a href="#">
                         <i class="fa-solid fa-fire icon-menu"></i>
-                        Em Alta</a>
+                        Em Alta
+                    </a>
+                    <a href="../comunidade/comunidade.php" class="">
+                        <i class="fa-solid fa-inbox icon-menu"></i>
+                        Comunidade
+                    </a>
                     <?php 
                         if(isset($_SESSION['email']) && isset($_SESSION['senha'])){
                             echo "

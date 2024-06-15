@@ -86,6 +86,10 @@
                         <i class="fa-solid fa-fire icon-menu"></i>
                         Em Alta
                     </a>
+                     <a href="../comunidade/comunidade.php" class="">
+                        <i class="fa-solid fa-inbox icon-menu"></i>
+                        Comunidade
+                    </a>
                     <a href="../settings/settings.php" class="">
                         <i class="fa-solid fa-gear icon-menu"></i>
                         Configurações
@@ -114,9 +118,15 @@
                 </div>
             </div>
         </div>
-        <script>
-            var array = JSON.parse('<?php echo $infoJSON ?>');
-        </script>
+            <?php
+                if(isset($_SESSION['email'])){
+                    echo "
+                        <script>
+                            var array = JSON.parse('$infoJSON');
+                        </script>
+                        ";
+                    }
+            ?>
     </header>
     <body>
     
@@ -174,7 +184,7 @@
                         <form action='video.php' method='POST' class='box-comments'>
                             <img src='$photoProfileSession' alt=''>
                             <a href='../profile/profile.php' class='nameComment' title='$nameSession'>$nameSession</a>
-                            <input type='text' class='inputComment' placeholder='Diga a sua opinião' oninput='comment()'>
+                            <input type='text' class='inputComment' placeholder='Diga a sua opinião'>
                             <button name='submitComment' class='submitComment'>Postar</button>
                         </form>
                         ";

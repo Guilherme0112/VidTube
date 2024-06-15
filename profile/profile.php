@@ -55,6 +55,10 @@
                         <i class="fa-solid fa-gear icon-menu"></i>
                         Configurações
                     </a>
+                    <a href="../comunidade/comunidade.php" class="">
+                        <i class="fa-solid fa-inbox icon-menu"></i>
+                        Comunidade
+                    </a>
                     <a href="uploadVideo/uploadVideo.php">
                         <i class='fa-solid fa-upload icon-menu'></i>
                         Enviar Vídeo

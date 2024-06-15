@@ -67,6 +67,10 @@
                         <i class="fa-solid fa-gear icon-menu"></i>
                         Configurações
                     </a>
+                    <a href="../comunidade/comunidade.php" class="">
+                        <i class="fa-solid fa-inbox icon-menu"></i>
+                        Comunidade
+                    </a>
                     <a href="../login/login.php">
                         <i class="fa-solid fa-user icon-menu"></i>
                         Fazer Login

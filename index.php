@@ -34,6 +34,10 @@
                         <i class="fa-solid fa-fire icon-menu"></i>
                         Em Alta
                     </a>
+                    <a href="comunidade/comunidade.php" class="">
+                        <i class="fa-solid fa-inbox icon-menu"></i>
+                        Comunidade
+                    </a>
                     <a href="settings/settings.php" class="">
                         <i class="fa-solid fa-gear icon-menu"></i>
                         Configurações
@@ -72,11 +76,11 @@
     
     <main id="primary-page-video">
         <?php
-            while($result = $cursor->fetch_assoc()){ //pega uma linha do mysql, quando o loop voltar ele pega a proxima linha e substitui.
+            while($result = $cursor->fetch_assoc()){
                 $id = $result['idVideo'];
-                $video = $result['video']; //pega o valor que está na coluna video no na banco.
-                $title = $result['title']; //pega o valor que está na coluna title.
-                $thumb = $result['thumb']; //pega a rota da thumb no MySQL
+                $video = $result['video']; 
+                $title = $result['title']; 
+                $thumb = $result['thumb'];
                 $sql = mysqli_query($conexao, "SELECT * FROM likes WHERE videoLike = $id");
                 $likes = mysqli_num_rows($sql);
             
@@ -86,13 +90,8 @@
                         <p class='views-video font-nigth'> $likes pessoas curtiram</p>
                     </a>";
             }
-        //Se houver 10 linhas de dados, ele volta pega a array e guarda em $result, os índices sao mostrados por causa do echo e fica nesse loop até nao ter mais dados.
+       
         ?>
     </main>
 </body>
-<script>
-    document.querySelector('.icon').addEventListener('click', function () {
-    document.querySelector('.menu').classList.toggle('show-menu');
-});
-</script>
 </html>

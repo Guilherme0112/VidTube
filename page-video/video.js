@@ -20,8 +20,6 @@ $(function () {
         },
         success: function (response) {
           if (response.success) {
-
-            $('input').val('');
           } else {
             console.error('Server error:', response.error);
           }
@@ -31,7 +29,7 @@ $(function () {
         }
       }).done(function () {
         $('.comments').children().eq(0).after("<div class='box-comments'><img src='" + array.photoComment + "' alt=''><a href='../profile/outherProfile.php?id=" + array.userId + "' class='nameComment text-line-effect'>" + array.nameComment + "</a><p class='timeComment'>Preview do comentário</p><span style='width: 100%;'></span><p class='comment'>" + comentario + "</p></div>");
-        $('.submitComment').val('');
+        $('.inputComment').val('');
       });
     }
   });
