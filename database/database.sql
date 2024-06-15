@@ -1,5 +1,3 @@
-CREATE DATABASE  IF NOT EXISTS `vidtube` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci */;
-USE `vidtube`;
 -- MySQL dump 10.13  Distrib 5.7.17, for Win64 (x86_64)
 --
 -- Host: 127.0.0.1    Database: vidtube
@@ -33,7 +31,7 @@ CREATE TABLE `comentarios` (
   PRIMARY KEY (`idComment`),
   KEY `idUserComment` (`idUserComment`),
   CONSTRAINT `comentarios_ibfk_1` FOREIGN KEY (`idUserComment`) REFERENCES `usuarios` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=119 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=180 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -42,8 +40,34 @@ CREATE TABLE `comentarios` (
 
 LOCK TABLES `comentarios` WRITE;
 /*!40000 ALTER TABLE `comentarios` DISABLE KEYS */;
-INSERT INTO `comentarios` VALUES (117,56,37,'Teste','2024-06-10 20:40:31'),(118,55,37,'Teste','2024-06-10 20:40:31');
 /*!40000 ALTER TABLE `comentarios` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `comunidade`
+--
+
+DROP TABLE IF EXISTS `comunidade`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `comunidade` (
+  `idPost` int(11) NOT NULL AUTO_INCREMENT,
+  `idPostUser` int(11) DEFAULT NULL,
+  `post` varchar(50) DEFAULT NULL,
+  `descPost` text DEFAULT NULL,
+  `timePost` timestamp NOT NULL DEFAULT current_timestamp(),
+  PRIMARY KEY (`idPost`)
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `comunidade`
+--
+
+LOCK TABLES `comunidade` WRITE;
+/*!40000 ALTER TABLE `comunidade` DISABLE KEYS */;
+INSERT INTO `comunidade` VALUES (6,56,'../database/Arquivos/56/Desert.jpg','Mano, eu tava vendo esses últimos jogos do Brasil, e tá uma bosta KKKKKKKKKKK to coringando aqui','2024-06-14 23:04:29');
+/*!40000 ALTER TABLE `comunidade` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -58,7 +82,7 @@ CREATE TABLE `likes` (
   `videoLike` int(11) DEFAULT NULL,
   `userLike` int(11) DEFAULT NULL,
   PRIMARY KEY (`idLike`)
-) ENGINE=InnoDB AUTO_INCREMENT=81 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=88 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -67,7 +91,7 @@ CREATE TABLE `likes` (
 
 LOCK TABLES `likes` WRITE;
 /*!40000 ALTER TABLE `likes` DISABLE KEYS */;
-INSERT INTO `likes` VALUES (44,33,55),(74,34,55),(75,32,55),(76,32,56),(77,35,55),(78,36,55),(79,37,56),(80,37,55);
+INSERT INTO `likes` VALUES (44,33,55),(74,34,55),(75,32,55),(76,32,56),(77,35,55),(78,36,55),(79,37,56),(80,37,55),(81,39,55),(82,40,56),(84,43,56),(86,43,55),(87,44,55);
 /*!40000 ALTER TABLE `likes` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -87,7 +111,7 @@ CREATE TABLE `seguir` (
   KEY `idSeguidor` (`idSeguidor`),
   CONSTRAINT `seguir_ibfk_1` FOREIGN KEY (`idSeguindo`) REFERENCES `usuarios` (`id`),
   CONSTRAINT `seguir_ibfk_2` FOREIGN KEY (`idSeguidor`) REFERENCES `usuarios` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=41 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=43 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -96,6 +120,7 @@ CREATE TABLE `seguir` (
 
 LOCK TABLES `seguir` WRITE;
 /*!40000 ALTER TABLE `seguir` DISABLE KEYS */;
+INSERT INTO `seguir` VALUES (42,55,56);
 /*!40000 ALTER TABLE `seguir` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -123,7 +148,7 @@ CREATE TABLE `usuarios` (
 
 LOCK TABLES `usuarios` WRITE;
 /*!40000 ALTER TABLE `usuarios` DISABLE KEYS */;
-INSERT INTO `usuarios` VALUES (55,'Guilherme','guimendesmen124@gmail.com','123','(63) 99132-4404','../database/Arquivos/55/Penguins.jpg'),(56,'Matheus','matheus@gmail.com','123','(00) 00000-0000','../database/Arquivos/56/Koala.jpg');
+INSERT INTO `usuarios` VALUES (55,'Guilherme','guimendesmen124@gmail.com','123','(63) 99132-4404','../database/Arquivos/55/20220717_202858.jpg'),(56,'Matheus','matheus@gmail.com','123','(00) 00000-0000','../database/Arquivos/56/Koala.jpg');
 /*!40000 ALTER TABLE `usuarios` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -144,7 +169,7 @@ CREATE TABLE `videos` (
   PRIMARY KEY (`idVideo`),
   KEY `userVideo` (`userVideo`),
   CONSTRAINT `videos_ibfk_1` FOREIGN KEY (`userVideo`) REFERENCES `usuarios` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=38 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=45 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -153,7 +178,7 @@ CREATE TABLE `videos` (
 
 LOCK TABLES `videos` WRITE;
 /*!40000 ALTER TABLE `videos` DISABLE KEYS */;
-INSERT INTO `videos` VALUES (37,'../database/Arquivos/56/Teste.mp4',0,'database/Arquivos/56/IMG-20220716-WA0035.jpg',56,'Teste');
+INSERT INTO `videos` VALUES (40,'../database/Arquivos/56/teste 2.mp4',0,'database/Arquivos/56/Lighthouse.jpg',56,'teste 2'),(43,'../database/Arquivos/55/Roberto Carlos.mp4',0,'database/Arquivos/55/20220603_204339.jpg',55,'Roberto Carlos'),(44,'../database/Arquivos/55/Oxe mainha.mp4',0,'database/Arquivos/55/20240320_145815.jpg',55,'Futebol');
 /*!40000 ALTER TABLE `videos` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -166,4 +191,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-06-10 18:24:04
+-- Dump completed on 2024-06-15 14:34:25
