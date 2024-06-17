@@ -1,3 +1,5 @@
+CREATE DATABASE  IF NOT EXISTS `vidtube` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci */;
+USE `vidtube`;
 -- MySQL dump 10.13  Distrib 5.7.17, for Win64 (x86_64)
 --
 -- Host: 127.0.0.1    Database: vidtube
@@ -14,6 +16,34 @@
 /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+
+--
+-- Table structure for table `ajuda`
+--
+
+DROP TABLE IF EXISTS `ajuda`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `ajuda` (
+  `idAjuda` int(11) NOT NULL AUTO_INCREMENT,
+  `idUser` int(11) NOT NULL,
+  `title` varchar(30) DEFAULT NULL,
+  `textAjuda` text DEFAULT NULL,
+  `timeAjuda` timestamp NOT NULL DEFAULT current_timestamp(),
+  PRIMARY KEY (`idAjuda`),
+  KEY `idUser` (`idUser`),
+  CONSTRAINT `ajuda_ibfk_1` FOREIGN KEY (`idUser`) REFERENCES `usuarios` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `ajuda`
+--
+
+LOCK TABLES `ajuda` WRITE;
+/*!40000 ALTER TABLE `ajuda` DISABLE KEYS */;
+/*!40000 ALTER TABLE `ajuda` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
 -- Table structure for table `comentarios`
@@ -93,6 +123,36 @@ LOCK TABLES `likes` WRITE;
 /*!40000 ALTER TABLE `likes` DISABLE KEYS */;
 INSERT INTO `likes` VALUES (44,33,55),(74,34,55),(75,32,55),(76,32,56),(77,35,55),(78,36,55),(79,37,56),(80,37,55),(81,39,55),(82,40,56),(84,43,56),(86,43,55),(87,44,55);
 /*!40000 ALTER TABLE `likes` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `respajuda`
+--
+
+DROP TABLE IF EXISTS `respajuda`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `respajuda` (
+  `idRespAjuda` int(11) NOT NULL AUTO_INCREMENT,
+  `idPostResp` int(11) NOT NULL,
+  `idUserResp` int(11) NOT NULL,
+  `respAjuda` text DEFAULT NULL,
+  `timeRespAjuda` timestamp NOT NULL DEFAULT current_timestamp(),
+  PRIMARY KEY (`idRespAjuda`),
+  KEY `idPostResp` (`idPostResp`),
+  KEY `idUserResp` (`idUserResp`),
+  CONSTRAINT `respajuda_ibfk_1` FOREIGN KEY (`idPostResp`) REFERENCES `ajuda` (`idAjuda`),
+  CONSTRAINT `respajuda_ibfk_2` FOREIGN KEY (`idUserResp`) REFERENCES `usuarios` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `respajuda`
+--
+
+LOCK TABLES `respajuda` WRITE;
+/*!40000 ALTER TABLE `respajuda` DISABLE KEYS */;
+/*!40000 ALTER TABLE `respajuda` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -191,4 +251,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-06-15 14:34:25
+-- Dump completed on 2024-06-16 22:38:58
