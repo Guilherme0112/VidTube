@@ -26,4 +26,11 @@
         }
     }
     
+    // delete ajuda
+
+    if(isset($_POST['remove'])){
+        $idAjuda = $_POST['remove'];
+        $sqlRemove = mysqli_query($conexao, "DELETE FROM ajuda WHERE idAjuda = $idAjuda");
+    }
+
 ?>

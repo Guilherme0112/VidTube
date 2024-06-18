@@ -13,8 +13,10 @@ if (isset($_POST['submit'])) {
     if (isset($_POST['title']) && isset($_POST['text'])) {
         $title = $_POST['title'];
         $text = $_POST['text'];
-        if (strlen($title) != 0 && strlen($text) >= 5) {
-            $sql = mysqli_query($conexao, "INSERT INTO ajuda VALUES (default, $idSession, '$title', '$text', default)");
+        if (strlen($title) != 0 && strlen($title) <= 30 && strlen($text) >= 5 && strlen($text) <= 500) {
+            $textTratado = mysqli_real_escape_string($conexao, $text);
+            $titleTratado = mysqli_real_escape_string($conexao, $title);
+            $sql = mysqli_query($conexao, "INSERT INTO ajuda VALUES (default, $idSession, '$titleTratado', '$textTratado', default, default)");
             if ($sql) {
                 header('Location: suasAjudas.php');
             }
@@ -71,9 +73,11 @@ if (isset($_POST['submit'])) {
         <section>
             <form action="<?php $_SERVER['PHP_SELF'] ?>" method="post" onsubmit="return vali()">
                 <label for="title">Título do problema</label>
-                <input type="text" class="title" name="title" placeholder="Título do Problema">
+                <input type="text" class="title" name="title" placeholder="Título do Problema" oninput="refreshTxt()">
+                <p class="msg-error" id="title">0/30</p>
                 <label for="text">Descreva o problema</label>
-                <textarea name="text" placeholder="Descreva seu problema"></textarea>
+                <textarea name="text" placeholder="Descreva seu problema" oninput="refreshTxt()"></textarea>
+                <p class="msg-error" id="text">0/500</p>
                 <input type="submit" value="Enviar" name="submit" onclick="vali()">
             </form>
         </section>
@@ -86,20 +90,45 @@ if (isset($_POST['submit'])) {
         function vali() {
             var title = document.getElementsByName('title')[0];
             var text = document.getElementsByName('text')[0];
-            if (title.value.length === 0) {
+            var msgError = document.getElementById('title');
+            if (title.value.length === 0 || title.value.length > 30) {
                 title.style.outline = "2px solid red";
                 return false
             } else {
                 title.style.outline = "none";
-                return true;
             }
-            if (text.value.length < 5) {
+            if (text.value.length < 5 || text.value.length > 500) {
                 text.style.outline = "2px solid red";
-                return false
+                return false;
             } else {
                 text.style.outline = "none";
-                return true;
             }
+
+        }
+        function refreshTxt(){
+
+            //textarea
+
+            var amount = document.getElementById('title');
+            var text1 = document.getElementsByName('title')[0].value.length; 
+            amount.innerHTML = text1 + '/30';
+            if(text1 < 1 || text1 > 30){
+                amount.style.color = 'red';
+            } else {
+                amount.style.color = 'gray';
+            }
+
+            //title
+
+            var amount2 = document.getElementById('text');
+            var text2 = document.getElementsByName('text')[0].value.length; 
+            amount2.innerHTML = text2 + '/500';
+            if(text2 < 5 || text2 > 500){
+                amount2.style.color = 'red';
+            } else {
+                amount2.style.color = 'gray';
+            }
+
         }
     </script>
 </body>
