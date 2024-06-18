@@ -18,6 +18,31 @@ USE `vidtube`;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
+-- Table structure for table `admin`
+--
+
+DROP TABLE IF EXISTS `admin`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `admin` (
+  `idAdmin` int(11) NOT NULL AUTO_INCREMENT,
+  `emailAdmin` varchar(50) NOT NULL,
+  `timeAdmin` timestamp NOT NULL DEFAULT current_timestamp(),
+  PRIMARY KEY (`idAdmin`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `admin`
+--
+
+LOCK TABLES `admin` WRITE;
+/*!40000 ALTER TABLE `admin` DISABLE KEYS */;
+INSERT INTO `admin` VALUES (1,'guimendesmen124@gmail.com','2024-06-18 02:14:44');
+/*!40000 ALTER TABLE `admin` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `ajuda`
 --
 
@@ -30,10 +55,11 @@ CREATE TABLE `ajuda` (
   `title` varchar(30) DEFAULT NULL,
   `textAjuda` text DEFAULT NULL,
   `timeAjuda` timestamp NOT NULL DEFAULT current_timestamp(),
+  `situacao` varchar(20) DEFAULT 'Não Respondido',
   PRIMARY KEY (`idAjuda`),
   KEY `idUser` (`idUser`),
   CONSTRAINT `ajuda_ibfk_1` FOREIGN KEY (`idUser`) REFERENCES `usuarios` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=30 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -42,6 +68,7 @@ CREATE TABLE `ajuda` (
 
 LOCK TABLES `ajuda` WRITE;
 /*!40000 ALTER TABLE `ajuda` DISABLE KEYS */;
+INSERT INTO `ajuda` VALUES (29,56,'fsdfsdfsdfs','fsdfasdfasdfsdfsdfwefw','2024-06-18 02:35:45','Não Respondido');
 /*!40000 ALTER TABLE `ajuda` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -134,15 +161,10 @@ DROP TABLE IF EXISTS `respajuda`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `respajuda` (
   `idRespAjuda` int(11) NOT NULL AUTO_INCREMENT,
-  `idPostResp` int(11) NOT NULL,
-  `idUserResp` int(11) NOT NULL,
+  `idPostAjuda` int(11) DEFAULT NULL,
   `respAjuda` text DEFAULT NULL,
-  `timeRespAjuda` timestamp NOT NULL DEFAULT current_timestamp(),
-  PRIMARY KEY (`idRespAjuda`),
-  KEY `idPostResp` (`idPostResp`),
-  KEY `idUserResp` (`idUserResp`),
-  CONSTRAINT `respajuda_ibfk_1` FOREIGN KEY (`idPostResp`) REFERENCES `ajuda` (`idAjuda`),
-  CONSTRAINT `respajuda_ibfk_2` FOREIGN KEY (`idUserResp`) REFERENCES `usuarios` (`id`)
+  `timePostAjuda` timestamp NOT NULL DEFAULT current_timestamp(),
+  PRIMARY KEY (`idRespAjuda`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -171,7 +193,7 @@ CREATE TABLE `seguir` (
   KEY `idSeguidor` (`idSeguidor`),
   CONSTRAINT `seguir_ibfk_1` FOREIGN KEY (`idSeguindo`) REFERENCES `usuarios` (`id`),
   CONSTRAINT `seguir_ibfk_2` FOREIGN KEY (`idSeguidor`) REFERENCES `usuarios` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=43 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=44 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -251,4 +273,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-06-16 22:38:58
+-- Dump completed on 2024-06-18  0:24:43
