@@ -62,6 +62,14 @@
                         <i class="fa-solid fa-gear icon-menu"></i>
                         Configurações
                     </a>
+                    <a href='../ajuda.php'>
+                        <i class='fa-solid fa-upload icon-menu'></i>
+                        Criar Ajuda
+                    </a>
+                    <a href='../suasAjudas.php'>
+                        <i class='fa-solid fa-upload icon-menu'></i>
+                        Suas Ajudas
+                    </a>
                     <a href='../../profile/profile.php'>
                         <i class='fa-solid fa-user icon-menu'></i>
                         Seu Perfil
@@ -76,18 +84,54 @@
             <p class='name'><?php echo $title ?></p>
             <p class='time'><?php echo $time ?></p>
             <p class='text'><?php echo $text ?></p>
-            <button class=' fa-solid fa-trash btn-remove'></button>
+            <button class=' fa-solid fa-trash btn-remove1'></button>
         </div>
-        <form action='<?php $_SERVER['PHP_SELF'] ?>' method="post" class="box-response">
-            <textarea name="response" placeholder='Responda o usuario'></textarea>
-            <input type="submit" name='submit' value="Reponder">
-        </form>
+        <span>
+            <?php
+                $sql3 = mysqli_query($conexao, "SELECT *, date_format(timePostAjuda, '%d/%m/%Y') FROM respajuda WHERE idPostAjuda = $idAjuda");
+                while ($i = $sql3->fetch_assoc()){
+                    $idRespAjuda = $i['idRespAjuda'];
+                    $respAjuda = $i['respAjuda'];
+                    $timeAjuda = $i["date_format(timePostAjuda, '%d/%m/%Y')"];
+                    echo "<div class='box-ajuda'>
+                            <input type='text' class='idAjuda' value='$idRespAjuda' style='display: none;'>
+                            <p class='name'></p>
+                            <p class='time'>$timeAjuda</p>
+                            <p class='text'>$respAjuda</p>
+                            <button class=' fa-solid fa-trash btn-remove'></button>
+                        </div>";
+                }
+            ?>
+        </span>
+        <span>
+            <form action='<?php $_SERVER['PHP_SELF'] ?>' method="post" class="box-response">
+                <textarea name="response" placeholder='Responda o usuario'></textarea>
+                <input type="submit" class='submit' name='submit' value="Reponder">
+            </form>
+        </span>
     </main>
     <script>
         document.querySelector('.icon').addEventListener('click', function () {
             document.querySelector('.menu').classList.toggle('show-menu');
         });
         $('.btn-remove').click(function(){
+            var resp = confirm('Você deseja realmente apagar esta mensagem?');
+            if(resp){
+                var idAjuda = $('.idAjuda').val()
+                $.ajax({
+                    url: '../../routes/comments.php',
+                    method: 'POST',
+                    data: {removeResp: idAjuda},
+                    success: function(e){
+                        console.log('Success:' + e)
+                        location.href = 'admin.php';
+                    }, error: function(e){
+                        console.log('Error: ' + e)
+                    }
+                });
+            } 
+        });
+        $('.btn-remove1').click(function(){
             var resp = confirm('Você deseja realmente apagar esta solicitaçao?');
             if(resp){
                 var idAjuda = $('.idAjuda').val()
@@ -116,6 +160,13 @@
             align-items: center;
             flex-wrap: wrap;
         }
+        span{
+
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
         .box-ajuda{
             width: 500px;
             height: auto;
@@ -128,7 +179,7 @@
             border-radius: 10px;
             margin: 20px 0;
         }
-        .btn-remove{
+        .btn-remove, .btn-remove1{
             width: 40px;
             height: 40px;
             color: white;

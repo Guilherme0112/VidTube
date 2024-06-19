@@ -32,5 +32,9 @@
         $idAjuda = $_POST['remove'];
         $sqlRemove = mysqli_query($conexao, "DELETE FROM ajuda WHERE idAjuda = $idAjuda");
     }
+    if(isset($_POST['removeResp'])){
+        $idAjuda = $_POST['removeResp'];
+        $sqlRemove = mysqli_query($conexao, "DELETE FROM respajuda WHERE idPostAjuda = $idAjuda");
+    }
 
 ?>

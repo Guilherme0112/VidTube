@@ -36,11 +36,19 @@
                         <i class="fa-solid fa-gear icon-menu"></i>
                         Configurações
                     </a>
+                    <a href='../suasAjudas.php'>
+                        <i class='fa-solid fa-upload icon-menu'></i>
+                        Suas Ajudas
+                    </a>
+                    <a href='../ajuda.php'>
+                        <i class='fa-solid fa-upload icon-menu'></i>
+                        Criar Ajuda
+                    </a>
                     <a href='../../profile/profile.php'>
                         <i class='fa-solid fa-user icon-menu'></i>
                         Seu Perfil
                     </a>
-                    <a href='../../profile/goOut.php' class='close-btn font-nigth' title='Sair do Perfil'>
+                    <a href='../../profile/goOut.php' class='close-btn font-nigth'>
                         Sair
                     </a>
                 </div>

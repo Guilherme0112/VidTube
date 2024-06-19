@@ -53,6 +53,7 @@
     <link rel="stylesheet" href="../styles/model-of-page.css">
     <link rel="shortcut icon" href="../styles/icons/icon-ligth.png" type="image/x-icon">
     <link rel="stylesheet" href="../fontawesome-free-6.5.1-web/css/all.min.css">
+    <script defer src="editVideo.js"></script>
     <title><?php echo $title ?></title>
 </head>
     <header>
@@ -89,55 +90,14 @@
 <body>
     <form action="<?php $_SERVER['PHP_SELF'] ?>" method="post" enctype="multipart/form-data" onsubmit="return vali()">
         <label for="title">Título do Vídeo</label>
-        <input type="text" name="title" id="title" value='<?php echo $title ?>'>
-        <p class='msg-error'></p>
+        <input type="text" name="title" id="title" value='<?php echo $title ?>' oninput="txt()">
+        <p class='msg-error'>/50</p>
         <label for="thumb" class='thumb'>Clique para mudar a thumb</label>
         <input type="file" name="thumbChange" id="thumb" accept="image/*">
         <img id='img-preview'>
         <button name='submit' class="submit">Confirmar Alteraçoes</button>
         <button name='delete' onclick="return delet()">Apagar Vídeo</button>
     </form>
-    <script>
-         document.querySelector('.icon').addEventListener('click', function() {
-            document.querySelector('.menu').classList.toggle('show-menu');
-        });
-        function delet(){
-           
-            if(confirm("Você realmente deseja apagar este vídeo?")){
-                return true;
-            } else{
-                return false;
-            }
-        }
-        function vali(){
-            var title = document.querySelector('#title');
-            if(title.value.length < 3){
-                document.getElementById('title').style.outline = "2px solid red";
-                document.querySelector('.msg-error').innerHTML = 'O título precisa ter pelo menos 3 caracteres';
-                return false;
-            } else {
-                document.getElementById('title').style.outline = "none";
-                return true;
-            }
-        }
-        //img preview
-        const fileInput = document.getElementById('thumb');
-        const imagePreview = document.getElementById('img-preview');
-
-        fileInput.addEventListener('change', function() {
-            const file = this.files[0];
-
-        if (file) {
-            const reader = new FileReader();
-
-            reader.onload = function(event) {
-                imagePreview.src = event.target.result;
-                };
-
-        reader.readAsDataURL(file);
-    }
-});
-    </script>
     <style>
         @import url('../styles/colors.css');
         body{
@@ -209,7 +169,7 @@
             width: 100%;
             text-align: center;
             font-size: 11px;
-            color: red;
+            color: gray;
         }
         @media (max-width: 768px){
             form{

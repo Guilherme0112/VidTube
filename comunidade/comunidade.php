@@ -96,9 +96,7 @@
     </header>
     <main>
         <?php
-        $sql = mysqli_query($conexao, "SELECT c.idPost, c.idPostUser, c.post, c.descPost, date_format(c.timePost, '%d/%m/%Y'), u.photoProfile, u.nome FROM comunidade c JOIN usuarios u WHERE c.idPostUser = u.id;
-            ;
-            ");
+        $sql = mysqli_query($conexao, "SELECT c.idPost, c.idPostUser, c.post, c.descPost, date_format(c.timePost, '%d/%m/%Y'), u.photoProfile, u.nome FROM comunidade c JOIN usuarios u WHERE c.idPostUser = u.id;");
         while ($i = $sql->fetch_assoc()) {
             $idPost = $i['idPost'];
             $idPostUser = $i['idPostUser'];
@@ -108,31 +106,60 @@
             $descPost = $i['descPost'];
             $timePost = $i["date_format(c.timePost, '%d/%m/%Y')"];
             if($idPostUser == $idSession){
-                echo "
-                        <div class='boxPost' title='$descPost'>
-                            <input style='display: none;' id='idPost' value='$idPost'>
-                            <div class='boxPost1'>
-                                <img src='$photoProfilePostUser' class='photoUserPost'>
-                                <a href='../profile/outherProfile.php?id=$idPostUser' class='nameUserPost'>$namePostUser</a>
-                                <span class='timePost'>$timePost</span>
-                                <button class='fa-solid fa-trash delete'>
-                            </div>
-                            <p class='textPost'>$descPost</p>
-                            <img src='$post' class='photoPost'>
-                        </div>
-                    ";
-                } else { 
+                if(!file_exists($post)){
                     echo "
                             <div class='boxPost' title='$descPost'>
+                                <input style='display: none;' id='idPost' value='$idPost'>
                                 <div class='boxPost1'>
                                     <img src='$photoProfilePostUser' class='photoUserPost'>
                                     <a href='../profile/outherProfile.php?id=$idPostUser' class='nameUserPost'>$namePostUser</a>
                                     <span class='timePost'>$timePost</span>
+                                    <button class='fa-solid fa-trash delete'>
+                                </div>
+                                <p class='textPost'>$descPost</p>
+                            </div>
+                        ";  
+                } else {
+                    echo "
+                            <div class='boxPost' title='$descPost'>
+                                <input style='display: none;' id='idPost' value='$idPost'>
+                                <div class='boxPost1'>
+                                    <img src='$photoProfilePostUser' class='photoUserPost'>
+                                    <a href='../profile/outherProfile.php?id=$idPostUser' class='nameUserPost'>$namePostUser</a>
+                                    <span class='timePost'>$timePost</span>
+                                    <button class='fa-solid fa-trash delete'>
                                 </div>
                                 <p class='textPost'>$descPost</p>
                                 <img src='$post' class='photoPost'>
                             </div>
-                        ";
+                        ";  
+                    }   
+                } else { 
+                    if(!file_exists($post)){
+                        echo "
+                                <div class='boxPost' title='$descPost'>
+                                    <div class='boxPost1'>
+                                        <img src='$photoProfilePostUser' class='photoUserPost'>
+                                        <a href='../profile/outherProfile.php?id=$idPostUser' class='nameUserPost'>$namePostUser</a>
+                                        <span class='timePost'>$timePost</span>
+                                    </div>
+                                    <p class='textPost'>$descPost</p>
+                                </div>
+                            ";
+                    } else {
+
+                        echo "
+                                <div class='boxPost' title='$descPost'>
+                                    <div class='boxPost1'>
+                                        <img src='$photoProfilePostUser' class='photoUserPost'>
+                                        <a href='../profile/outherProfile.php?id=$idPostUser' class='nameUserPost'>$namePostUser</a>
+                                        <span class='timePost'>$timePost</span>
+                                    </div>
+                                    <p class='textPost'>$descPost</p>
+                                    <img src='$post' class='photoPost'>
+                                </div>
+                            ";
+                    }
                 }
         }
         ?>

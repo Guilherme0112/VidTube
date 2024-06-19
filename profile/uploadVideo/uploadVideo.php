@@ -71,8 +71,8 @@ if (isset($_POST['submit']) && isset($_FILES['video']['name']) && isset($_FILES[
         </div>
     </header>
     <form action="<?php $_SERVER['PHP_SELF'] ?>" method="post" enctype="multipart/form-data" onsubmit="return verification()">
-        <input type="text" name="title" id="title" placeholder="Título do Vídeo" min='3' required>
-        <p id="msg-error"></p>
+        <input type="text" name="title" id="title" placeholder="Título do Vídeo" min='3' oninput="text()" required>
+        <p id="msg-error">0/50</p>
         <span style='width: 100%;'></span>
         <img id='img-preview'>
         <span style="width: 100%;"></span>

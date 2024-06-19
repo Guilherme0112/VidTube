@@ -9,10 +9,9 @@ function validateForm(){
     var pass = document.getElementsByName('senha')[0];
     var rpass = document.getElementsByName('rsenha')[0];
     
-    if(name.value.length < 3 || phone.value.length != 15 || pass.value != rpass.value || pass.value.length < 5 && rpass.value.length < 5){
+    if(name.value.length < 3 || name.value.length > 20 || phone.value.length != 15 || pass.value != rpass.value || pass.value.length < 5 && rpass.value.length < 5){
         if(name.value.length < 3){
             console.log('O nome precisa ter pelo menos 3 caracteres');
-            nameError.innerText = 'O nome precisa ter pelo menos 3 caracteres.';
             name.style.outline = '2px solid red';
         }else{
             name.style.outline = 'none';
@@ -30,7 +29,7 @@ function validateForm(){
             console.log('As senhas não coencidem ou estao vazias');
             pass.style.outline = '2px solid red';
             rpass.style.outline = '2px solid red';
-            document.getElementById('passError').innerHTML = 'As senhas não coencidem ou tem menos de 5 caracteres';
+            document.getElementById('passError').innerHTML = 'As senhas não coencidem ou tem menos de 5 caracteres ou mais de 30';
         }else{
             pass.style.outline = 'none';
             rpass.style.outline = 'none';
@@ -51,4 +50,17 @@ document.querySelector('.tel').addEventListener('input', function (e) {
     tel = tel.replace(/(\d)(\d{4})$/, '$1-$2'); //coloca o hífen depois de 5 números
     e.target.value = tel;
   });
+  //
+function nameMsg(){
+    var textName = document.getElementsByName('name')[0].value.length;
+    var msgName = document.getElementById('nameError');
+    msgName.innerHTML = textName + '/20';
+    if(textName < 3 || textName > 20){
+        msgName.style.color = 'red';
+    } else {
+        msgName.style.color = 'gray';
+    }
+
+}
+
   

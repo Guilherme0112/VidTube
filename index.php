@@ -1,6 +1,12 @@
 <?php
     include_once('database/conexao.php');
-    $cursor = mysqli_query($conexao, "SELECT * FROM videos");
+    session_start();
+    if(isset($_GET['search'])){
+        $search = $_GET['search'];
+        $cursor = mysqli_query($conexao, "SELECT * FROM videos WHERE title LIKE '$search%'");
+    } else {
+        $cursor = mysqli_query($conexao, "SELECT * FROM videos");
+    }
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -12,16 +18,17 @@
     <link rel="stylesheet" href="styles/model-of-page.css">
     <link rel="stylesheet" href="fontawesome-free-6.5.1-web/css/all.min.css">
     <script src="scripts.js" defer></script>
+    <script src="styles/jquery-3.7.1.js"></script>
     <link rel="shortcut icon" href="styles/icons/icon-ligth.png" type="image/x-icon">
     <title>Início</title>
 </head>
 
 <body>
     <header>
-        <div class="header-one">
+        <form class="header-one" action="<?php $_SERVER['PHP_SELF'] ?>" method="GET">
             <input type="search" name="search" id="search" placeholder="O que você está pensando?" class="placeholder-center">
-            <i class="fa-solid fa-magnifying-glass"></i>
-        </div>
+            <button class="fa-solid fa-magnifying-glass search"></button>
+        </form>
         <div class="header-two">
             <i class="fas fa-bars icon"></i>
             <div class="menu">
@@ -43,7 +50,6 @@
                         Configurações
                     </a>
                     <?php 
-                        session_start();
                         if(isset($_SESSION['email']) && isset($_SESSION['senha'])){
                             echo "
                                 <a href='profile/uploadVideo/uploadVideo.php'>
@@ -80,19 +86,25 @@
     
     <main id="primary-page-video">
         <?php
-            while($result = $cursor->fetch_assoc()){
-                $id = $result['idVideo'];
-                $video = $result['video']; 
-                $title = $result['title']; 
-                $thumb = $result['thumb'];
-                $sql = mysqli_query($conexao, "SELECT * FROM likes WHERE videoLike = $id");
-                $likes = mysqli_num_rows($sql);
-            
-                echo "<a href='page-video/video.php?id=$id' class='size-box-video' title='$title'>
-                        <img class='box-video' src='$thumb'></img>
-                        <h3 class='video-title font-nigth'>$title</h3>
-                        <p class='views-video font-nigth'> $likes pessoas curtiram</p>
-                    </a>";
+            if(mysqli_num_rows($cursor) == 0){
+                echo "<p class='msgDados'>Não há dados de pesquisa
+                        <a href='index.php'>Voltar ao Início</a>
+                    </p>";
+            } else {
+                while($result = $cursor->fetch_assoc()){
+                    $id = $result['idVideo'];
+                    $video = $result['video']; 
+                    $title = $result['title']; 
+                    $thumb = $result['thumb'];
+                    $sql = mysqli_query($conexao, "SELECT * FROM likes WHERE videoLike = $id");
+                    $likes = mysqli_num_rows($sql);
+                
+                    echo "<a href='page-video/video.php?id=$id' class='size-box-video' title='$title'>
+                            <img class='box-video' src='$thumb'></img>
+                            <h3 class='video-title font-nigth'>$title</h3>
+                            <p class='views-video font-nigth'> $likes pessoas curtiram</p>
+                        </a>";
+                }
             }
        
         ?>

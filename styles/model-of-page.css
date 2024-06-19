@@ -40,21 +40,6 @@ header{
     background-color: transparent;
     border-radius: 0;
 }
-.header-one i{
-
-    display: block;
-    padding: 10px;
-    border-radius: 50%;
-    background-color: var(--color-box-ligth);
-    margin-left: -40px;
-    color: var(--color-font-dark);
-    cursor: pointer;
-}
-.header-one i:hover{
-
-    background-color: rgba(71, 71, 71, 0.9);
-    transition: .3s;
-}
 .header-two{
 
     width: 10%;

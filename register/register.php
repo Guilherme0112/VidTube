@@ -45,7 +45,7 @@
     <link rel="stylesheet" href="register.css">
     <link rel="stylesheet" href="../styles/model-of-page.css">
     <link rel="stylesheet" href="../fontawesome-free-6.5.1-web/css/all.min.css">
-    <link rel="shortcut icon" href="../styles/icon.png" type="image/x-icon">
+    <link rel="shortcut icon" href="../styles/icons/icon-ligth.png" type="image/x-icon">
     <script defer src="register.js"></script>
     <title>Registrar</title>
 </head>
@@ -86,8 +86,8 @@
             </div>
             <div id="form_2">
                 <label for="name">Nome:</label>
-                <input type="text" name="name" class="input-space placeholder-center" min='3' placeholder='Digite seu nome' value='<?php print"$name";?>' required>
-                <p class='msg-error' id='nameError'></p>
+                <input type="text" name="name" class="input-space placeholder-center" min='3' placeholder='Digite seu nome' value='<?php print"$name";?>' oninput="nameMsg()" required>
+                <p class='msg-error' id='nameError'>0/20</p>
                 <label for="email">Email:</label>
                 <input type="email" name="email" class="input-space placeholder-center" placeholder='Digite seu e-mail' value='<?php print"$email";?>' required>
                 <p class="msg-error" id='emailError'></p>
@@ -101,7 +101,6 @@
                 <p class="msg-error" id='passError'></p>
                 <input type="submit" value="Registrar" name="enviar" id='submit' title="Registrar conta">
             </div>
-            
         </form>
     </main>
 </body>

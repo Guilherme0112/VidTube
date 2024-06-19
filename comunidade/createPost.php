@@ -1,31 +1,29 @@
 <?php
-session_start();
-include_once('../database/conexao.php');
-if (!isset($_SESSION['email'])) {
-    header('Location: ../login/login.php');
-} else {
-    $emailSession = $_SESSION['email'];
-    $sessionSQL = mysqli_query($conexao, "SELECT * FROM usuarios  WHERE email = '$emailSession'");
-    $respSession = $sessionSQL->fetch_assoc();
-    $idSession = $respSession['id'];
-}
-if (isset($_POST['submit'])) {
-    if (isset($_POST['txt'])) {
-        $desc = $_POST['txt'];
-        if (strlen($desc) > 0) {
-            if (isset($_FILES['img']['name'])) {
-                $imgName = $_FILES['img']['name'];
-                $routePost = "../database/Arquivos/$idSession/$imgName";
-                move_uploaded_file($_FILES['img']['tmp_name'], "$routePost");
-                $insertPost = mysqli_query($conexao, "INSERT INTO comunidade VALUES (default, $idSession, '$routePost', '$desc', default)");
-            } else {
-                $add = mysqli_query($conexao, "INSERT INTO comunidade VALUES (default, $idSession, '', '$desc', default)");
-        } 
+    session_start();
+    include_once('../database/conexao.php');
+    if (!isset($_SESSION['email'])) {
+        header('Location: ../login/login.php');
+    } else {
+        $emailSession = $_SESSION['email'];
+        $sessionSQL = mysqli_query($conexao, "SELECT * FROM usuarios  WHERE email = '$emailSession'");
+        $respSession = $sessionSQL->fetch_assoc();
+        $idSession = $respSession['id'];
     }
-}
-
-    header('Location: comunidade.php');
-}
+    if (isset($_POST['submit'])) {
+        if (isset($_POST['txt1'])) {
+            $desc = $_POST['txt1'];
+            $desc = mysqli_real_escape_string($conexao, $desc);
+            if (strlen($desc) > 0 || strlen($desc) < 201) {
+                if (isset($_FILES['img']['name'])) {
+                    $imgName = $_FILES['img']['name'];
+                    $routePost = "../database/Arquivos/$idSession/$imgName";
+                    move_uploaded_file($_FILES['img']['tmp_name'], "$routePost");
+                    $add = mysqli_query($conexao, "INSERT INTO comunidade VALUES (default, $idSession, '$routePost', '$desc', default)");
+                    header('Location: comunidade.php');
+                }
+            }
+        }    
+    }
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -38,6 +36,7 @@ if (isset($_POST['submit'])) {
     <link rel="stylesheet" href="comunidade.css">
     <link rel="stylesheet" href="../fontawesome-free-6.5.1-web/css/all.min.css">
     <script src="../styles/jquery-3.7.1.js"></script>
+    <script src="comunidade.js"></script>
     <link rel="shortcut icon" href="../styles/icons/icon-ligth.png" type="image/x-icon">
     <title>Criar Postagem</title>
 </head>
@@ -93,13 +92,13 @@ if (isset($_POST['submit'])) {
         </div>
     </header>
     <main>
-        <form action="<?php $_SERVER['PHP_SELF'] ?>" method="post" class='createPost' enctype="multipart/form-data">
-            <p></p>
-            <textarea name='txt' placeholder="Faça uma postagem"></textarea>
+        <form action="<?php $_SERVER['PHP_SELF'] ?>" method="post" class='createPost' enctype="multipart/form-data" onsubmit="return vali()">
+            <textarea name='txt1' id='txt1' placeholder="Faça uma postagem" oninput="amountTxt()"></textarea>
+            <p class="msg-error" id="msg">0/200</p>
             <label for="post-img" class="label-img">Poste uma imagem</label>
             <input type="file" name='img' id="post-img" accept="image/*">
             <img class="img">
-            <input type="submit" name='submit' class='btn-post' style='width: 200px;' value="Postar">
+            <input type="submit" name='submit' class='btn-post' style='width: 200px;' value="Postar" onclick="vali()">
         </form>
     </main>
 </body>

@@ -1,4 +1,18 @@
+@import url('styles/colors.css');
+form button{
+    display: block;
+    padding: 10px;
+    border-radius: 50%;
+    background-color: var(--color-box-ligth);
+    margin-left: -40px;
+    color: var(--color-font-dark);
+    cursor: pointer;
+}
+form button:hover{
 
+    background-color: rgba(71, 71, 71, 0.9);
+    transition: .3s;
+}
 body{
     height: 100vh;
 }
@@ -13,7 +27,32 @@ main{
     justify-content: center;
     align-items: center;
     flex-wrap: wrap;
-}       
+} 
+.msgDados{
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    width: 400px;
+    height: 200px;
+    border-radius: 10px;
+    margin-top: 60px;
+    padding-top: 30px;
+    background-color: var(--color-box-ligth);
+    font-size: 20px;
+}     
+.msgDados a{
+
+    width: 100%;
+    font-size: 16px;
+    color: black;
+    text-decoration: none;
+    text-align: center;
+} 
+.msgDados a:hover{
+    text-decoration: underline;
+}
 @media (max-width: 768px) {
     #search{
 

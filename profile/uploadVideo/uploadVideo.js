@@ -6,15 +6,29 @@ document.querySelector('.icon').addEventListener('click', function() {
 
 function verification(){
     var title = document.getElementById("title").value;
-    if(title.length <= 2){
+    if(title.length <= 2 || title.length > 50){
         document.getElementById("title").style.outline = "2px solid red";
-        document.getElementById("msg-error").innerHTML = "O título precisa ter pelo menos 3 caracteres";
         return false;
     } else {
         document.getElementById("title").style.outline = "none";
-        document.getElementById("msg-error").innerHTML = "";
-        return true;
     }
+    const videoLabel = document.querySelector('#videoLabel');
+    const video = document.querySelector('#video');
+    if(video.files.length === 0){
+        videoLabel.style.outline = "2px solid red";
+        return false;
+    } else {
+        videoLabel.style.outline = 'none';
+    }
+    //
+    const thumbLabel = document.querySelector('#thumbLabel');
+    const thumb = document.querySelector('#thumb');
+    if(thumb.files.length === 0){
+        thumbLabel.style.outline = "2px solid red";
+        return false;
+    } else {
+        thumbLabel.style.outline = 'none';
+    }   
 }
 
 // Video loading 
@@ -39,7 +53,6 @@ videoInput.addEventListener('change', function() {
     xhr.upload.onload = function() {
         document.getElementById("videoLabel").innerHTML = 'Vídeo carregado com sucesso!'
     };
-
     xhr.open('POST', 'uploadVideo.php', true);
     xhr.send(formData);
 });
@@ -62,3 +75,17 @@ fileInput.addEventListener('change', function() {
         reader.readAsDataURL(file);
     }
 });
+
+//
+
+function text(){
+    var msg = document.getElementById('msg-error');
+    var title = document.getElementById('title').value.length;
+    msg.innerHTML = title + '/50';
+    if(title < 2 || title > 50){
+        msg.style.color = 'red';
+    } else {
+        msg.style.color = 'gray';
+    }
+
+}
