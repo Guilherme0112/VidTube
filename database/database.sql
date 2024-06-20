@@ -59,7 +59,7 @@ CREATE TABLE `ajuda` (
   PRIMARY KEY (`idAjuda`),
   KEY `idUser` (`idUser`),
   CONSTRAINT `ajuda_ibfk_1` FOREIGN KEY (`idUser`) REFERENCES `usuarios` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=30 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -68,7 +68,6 @@ CREATE TABLE `ajuda` (
 
 LOCK TABLES `ajuda` WRITE;
 /*!40000 ALTER TABLE `ajuda` DISABLE KEYS */;
-INSERT INTO `ajuda` VALUES (29,56,'fsdfsdfsdfs','fsdfasdfasdfsdfsdfwefw','2024-06-18 02:35:45','Não Respondido');
 /*!40000 ALTER TABLE `ajuda` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -114,7 +113,7 @@ CREATE TABLE `comunidade` (
   `descPost` text DEFAULT NULL,
   `timePost` timestamp NOT NULL DEFAULT current_timestamp(),
   PRIMARY KEY (`idPost`)
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -123,7 +122,6 @@ CREATE TABLE `comunidade` (
 
 LOCK TABLES `comunidade` WRITE;
 /*!40000 ALTER TABLE `comunidade` DISABLE KEYS */;
-INSERT INTO `comunidade` VALUES (6,56,'../database/Arquivos/56/Desert.jpg','Mano, eu tava vendo esses últimos jogos do Brasil, e tá uma bosta KKKKKKKKKKK to coringando aqui','2024-06-14 23:04:29');
 /*!40000 ALTER TABLE `comunidade` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -165,7 +163,7 @@ CREATE TABLE `respajuda` (
   `respAjuda` text DEFAULT NULL,
   `timePostAjuda` timestamp NOT NULL DEFAULT current_timestamp(),
   PRIMARY KEY (`idRespAjuda`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -174,6 +172,7 @@ CREATE TABLE `respajuda` (
 
 LOCK TABLES `respajuda` WRITE;
 /*!40000 ALTER TABLE `respajuda` DISABLE KEYS */;
+INSERT INTO `respajuda` VALUES (1,29,'poifas fij dsf sdf','2024-06-18 14:34:34');
 /*!40000 ALTER TABLE `respajuda` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -215,7 +214,7 @@ DROP TABLE IF EXISTS `usuarios`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `usuarios` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `nome` varchar(50) NOT NULL,
+  `nome` varchar(20) DEFAULT NULL,
   `email` varchar(60) NOT NULL,
   `senha` varchar(30) NOT NULL,
   `phone` varchar(15) DEFAULT NULL,
@@ -251,7 +250,7 @@ CREATE TABLE `videos` (
   PRIMARY KEY (`idVideo`),
   KEY `userVideo` (`userVideo`),
   CONSTRAINT `videos_ibfk_1` FOREIGN KEY (`userVideo`) REFERENCES `usuarios` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=45 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=46 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -273,4 +272,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-06-18  0:24:43
+-- Dump completed on 2024-06-19 21:47:40
