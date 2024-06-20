@@ -25,6 +25,9 @@
 
 <body>
     <header>
+        <a href="index.php">
+            <img src="styles/icons/icon.png" class="img-logo">
+        </a>
         <form class="header-one" action="<?php $_SERVER['PHP_SELF'] ?>" method="GET">
             <input type="search" name="search" id="search" placeholder="O que você está pensando?" class="placeholder-center">
             <button class="fa-solid fa-magnifying-glass search"></button>

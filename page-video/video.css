@@ -8,6 +8,17 @@ header{
 
     background-color: var(--color-background-ligth) !important;
 }
+.img-logo{
+
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+    background-color: gray;
+    object-fit: cover;
+    object-position: center;
+    margin-left: -30px;
+    margin-top: 3px;
+}
 /* box play video */
 .box-picture{
 
@@ -214,6 +225,11 @@ img{
 }
 @media (max-width: 500px){
     .box-title, .box-interaction{
-        margin-bottom: -20px;
+        margin-bottom: -60px;
+    }
+}
+@media (max-width: 345px){
+    .img-logo{
+        margin-left: 0;
     }
 }

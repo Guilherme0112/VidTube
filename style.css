@@ -16,6 +16,17 @@ form button:hover{
 body{
     height: 100vh;
 }
+.img-logo{
+
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+    background-color: gray;
+    object-fit: cover;
+    object-position: center;
+    margin-left: 7px;
+    margin-top: 3px;
+}
 #primary-page-video{
 
     margin-top: 50px;
