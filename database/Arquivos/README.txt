@@ -1,0 +1,1 @@
+Este é o lugar onde os vídeos, fotos de perfis, fotos da comunidade, ficarao guardados
