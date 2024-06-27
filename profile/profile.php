@@ -47,10 +47,6 @@
                         <i class="fa-solid fa-house icon-menu"></i>
                         Início
                     </a>
-                    <a href="#">
-                        <i class="fa-solid fa-fire icon-menu"></i>
-                        Em Alta
-                    </a>
                     <a href="../settings/settings.php" class="">
                         <i class="fa-solid fa-gear icon-menu"></i>
                         Configurações
@@ -62,6 +58,10 @@
                     <a href="uploadVideo/uploadVideo.php">
                         <i class='fa-solid fa-upload icon-menu'></i>
                         Enviar Vídeo
+                    </a>
+                    <a href='../ajuda/suasAjudas.php'>
+                        <i class='fa-regular fa-question icon-menu'></i>
+                        Ajuda
                     </a>
                     <a href="goOut.php" class="close-btn font-nigth" title="Sair do Perfil">
                         Sair

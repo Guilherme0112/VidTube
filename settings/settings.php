@@ -18,9 +18,11 @@
 
     if(isset($_POST['updateName']) && isset($_POST['name'])){
         $changeName = $_POST['name'];
-        if(strlen($changeName) > 2){
-            $sql = mysqli_query($conexao, "UPDATE usuarios SET nome = '$changeName' WHERE id = $id");
-            header('Location: ../profile/profile.php');
+        if($name != $changeName){
+            if(strlen($changeName) > 2){
+                $sql = mysqli_query($conexao, "UPDATE usuarios SET nome = '$changeName' WHERE id = $id");
+                header('Location: ../profile/profile.php');
+            }
         }
     }
 
@@ -59,10 +61,6 @@
                         <i class="fa-solid fa-house icon-menu"></i>
                         Início
                     </a>
-                    <a href="#">
-                        <i class="fa-solid fa-fire icon-menu"></i>
-                        Em Alta
-                    </a>
                     <a href="../comunidade/comunidade.php" class="">
                         <i class="fa-solid fa-inbox icon-menu"></i>
                         Comunidade
@@ -77,6 +75,10 @@
                                 <a href='../profile/profile.php'>
                                     <i class='fa-solid fa-user icon-menu'></i>
                                     Seu Perfil
+                                </a>
+                                <a href='../ajuda/suasAjudas.php'>
+                                    <i class='fa-regular fa-question icon-menu'></i>
+                                    Ajuda
                                 </a>
                                 <a href='../profile/goOut.php' class='close-btn font-nigth' title='Sair do Perfil'>
                                     Sair

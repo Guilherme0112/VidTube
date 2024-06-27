@@ -47,6 +47,10 @@ session_start();
                     <i class='fa-solid fa-user icon-menu'></i>
                     Seu Perfil
                 </a>
+                <a href='../../ajuda/suasAjudas.php'>
+                    <i class='fa-regular fa-question icon-menu'></i>
+                    Ajuda
+                </a>
                 <a href='../../profile/goOut.php' class='close-btn font-nigth' title='Sair do Perfil'>
                     Sair
                 </a>

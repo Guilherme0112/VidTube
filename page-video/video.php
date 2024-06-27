@@ -3,12 +3,16 @@
     session_start();
 
     // video verification
-    if (isset($_GET['id'])) {
-        $idVideo = $_GET['id'];
-        $sql = mysqli_query($conexao, "SELECT * FROM videos WHERE idVideo = $idVideo");
-        if(mysqli_num_rows($sql) == 0){
-            header('Location: ../index.php');
+    if(!empty($_GET['id'])){
+        if (isset($_GET['id'])) {
+            $idVideo = $_GET['id'];
+            $sql = mysqli_query($conexao, "SELECT * FROM videos WHERE idVideo = $idVideo");
+            if(mysqli_num_rows($sql) == 0){
+                header('Location: ../index.php');
+            }
         }
+    } else {
+        header('location: ../index.php');
     }
 
     // data video
@@ -82,10 +86,6 @@
                         <i class="fa-solid fa-house icon-menu"></i>
                         Início
                     </a>
-                    <a href="#">
-                        <i class="fa-solid fa-fire icon-menu"></i>
-                        Em Alta
-                    </a>
                      <a href="../comunidade/comunidade.php" class="">
                         <i class="fa-solid fa-inbox icon-menu"></i>
                         Comunidade
@@ -99,6 +99,14 @@
                         echo "<a href='../profile/profile.php'>
                                     <i class='fa-solid fa-user icon-menu'></i>
                                     Seu Perfil
+                                </a>
+                                <a href='../profile/uploadVideo/uploadVideo.php'>
+                                    <i class='fa-solid fa-upload icon-menu'></i>
+                                    Enviar Vídeo
+                                </a>
+                                <a href='../ajuda/suasAjudas.php'>
+                                    <i class='fa-regular fa-question icon-menu'></i>
+                                    Ajuda
                                 </a>
                                 <a href='../profile/goOut.php' class='close-btn font-nigth' title='Sair do Perfil'>
                                     Sair

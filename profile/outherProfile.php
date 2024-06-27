@@ -1,12 +1,15 @@
 <?php
     session_start();
     include_once('../database/conexao.php');
-    if (!isset($_GET['id'])) {
+    if (empty($_GET['id'])) {
         header('Location: ../index.php');
     } else {
         //data of profile
         $id = $_GET['id'];
         $sql = mysqli_query($conexao, "SELECT * FROM usuarios WHERE id = $id");
+        if(mysqli_num_rows($sql) == 0) {
+            header('location: ../index.php');
+        }
         $infoUser = $sql->fetch_assoc();
         $nameUser = $infoUser['nome'];
         $photoProfileUser = $infoUser['photoProfile'];
@@ -53,10 +56,6 @@
                         <i class="fa-solid fa-house icon-menu"></i>
                         Início
                     </a>
-                    <a href="#">
-                        <i class="fa-solid fa-fire icon-menu"></i>
-                        Em Alta
-                    </a>
                     <a href="../settings/settings.php" class="">
                         <i class="fa-solid fa-gear icon-menu"></i>
                         Configurações
@@ -66,6 +65,10 @@
                         echo "<a href='../profile/profile.php'>
                                     <i class='fa-solid fa-user icon-menu'></i>
                                     Seu Perfil
+                                </a>
+                                <a href='../sajuda/suasAjudas.php'>
+                                    <i class='fa-regular fa-question icon-menu'></i>
+                                    Ajuda
                                 </a>
                                 <a href='../profile/goOut.php' class='close-btn font-nigth' title='Sair do Perfil'>
                                     Sair

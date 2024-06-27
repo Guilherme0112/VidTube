@@ -56,10 +56,6 @@
                         <i class="fa-solid fa-house icon-menu"></i>
                         Início
                     </a>
-                    <a href="#">
-                        <i class="fa-solid fa-fire icon-menu"></i>
-                        Em Alta
-                    </a>
                     <a href="../settings/settings.php" class="">
                         <i class="fa-solid fa-gear icon-menu"></i>
                         Configurações

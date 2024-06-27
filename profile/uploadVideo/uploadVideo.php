@@ -63,6 +63,10 @@ if (isset($_POST['submit']) && isset($_FILES['video']['name']) && isset($_FILES[
                         <i class="fa-solid fa-user icon-menu"></i>
                         Seu Perfil
                     </a>
+                    <a href='../../ajuda/suasAjudas.php'>
+                        <i class='fa-regular fa-question icon-menu'></i>
+                        Ajuda
+                    </a>
                     <a href="../goOut.php" class="close-btn font-nigth" title="Sair do Perfil">
                         Sair
                     </a>

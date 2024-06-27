@@ -3,6 +3,9 @@
     if(!isset($_GET['id']) || !isset($_SESSION['email'])){
         header('Location: ../index.php');
     }
+    if(empty($_GET['id'])){
+        header('Location: ../index.php');
+    }
     include_once('../database/conexao.php');
     $emailSession = $_SESSION['email'];
     $sqlSession = mysqli_query($conexao, "SELECT * FROM usuarios WHERE email = '$emailSession'");
@@ -15,6 +18,10 @@
     $title = $resp['title'];
     $video = $resp['video'];
     $thumb = $resp['thumb'];
+    $idUserVideo = $resp['userVideo'];
+    if($idUserVideo != $idSession){
+        header('location: ../index.php');
+    }
     if(isset($_POST['submit'])){
         if(isset($_POST['title'])){
             $changeTitle = $_POST['title'];
@@ -79,6 +86,10 @@
                     <a href="uploadVideo/uploadVideo.php">
                         <i class='fa-solid fa-upload icon-menu'></i>
                         Enviar Vídeo
+                    </a>
+                    <a href='ajuda/suasAjudas.php'>
+                        <i class='fa-regular fa-question icon-menu'></i>
+                        Ajuda
                     </a>
                     <a href="goOut.php" class="close-btn font-nigth" title="Sair do Perfil">
                         Sair
