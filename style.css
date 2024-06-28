@@ -1,80 +1,77 @@
-﻿html, body{
-
-    width: 100%;
-    height: 100vh;
-    background-color: rgb(156, 0, 104);
+@import url('styles/colors.css');
+form button{
+    display: block;
+    padding: 10px;
+    border-radius: 50%;
+    background-color: var(--color-box-ligth);
+    margin-left: -40px;
+    color: var(--color-font-dark);
+    cursor: pointer;
 }
+form button:hover{
 
-/* Main page */
+    background-color: rgba(71, 71, 71, 0.9);
+    transition: .3s;
+}
+body{
+    height: 100vh;
+}
+.img-logo{
 
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+    background-color: gray;
+    object-fit: cover;
+    object-position: center;
+    margin-left: 7px;
+    margin-top: 3px;
+}
+#primary-page-video{
+
+    margin-top: 50px;
+}
 main{
 
     width: 100%;
-}
-#background_1{
-
-    width: 100%;
-    height: 500px;
-    background: url(photos/main-page/photo-1-main-page.png);
-    background-size: cover;
-    background-position: center ;
-}
-#help-in-search{ /* part center of page */
-
-    width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
     flex-wrap: wrap;
-}
+} 
+.msgDados{
 
-/* best stores */
-
-.best-stores{
-
-    width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
     flex-wrap: wrap;
-}
-
-/* novidades */
-
-.novidades{
-
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-wrap: wrap;
-}
-/* info of page */
-
-.info{
+    width: 400px;
+    height: 200px;
+    border-radius: 10px;
+    margin-top: 60px;
+    padding-top: 30px;
+    background-color: var(--color-box-ligth);
+    font-size: 20px;
+}     
+.msgDados a{
 
     width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-wrap: wrap;
+    font-size: 16px;
+    color: black;
+    text-decoration: none;
+    text-align: center;
+} 
+.msgDados a:hover{
+    text-decoration: underline;
 }
+@media (max-width: 768px) {
+    #search{
 
-/* footer of page */
+        width: 100px;
+        height: 40px;      
+    }
+    .header-one{
 
-footer{
-
-    width: 100%;
-    height: 100px;
-    background-color: rgb(156, 0, 104);
-    box-shadow: 0px 0px 10px black;
-    display: flex;
-    align-items: center;
-    justify-content: end;
-}
-#opcoes{
-
-    display: grid;
-    width: 150px;
-    font-size: 13px;
+        margin: auto;
+    }
 }

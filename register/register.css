@@ -1,149 +1,144 @@
-@import url('https://fonts.googleapis.com/css2?family=Tilt+Neon&display=swap');
-*{
-    padding: 0;
-    margin: 0;
-    font-family: Tilt Neon;
-    box-sizing: border-box;
-    border: 0;
-    outline: 0;
-}
-main{
+@import url('../styles/colors.css');
+body{
 
     width: 100%;
     height: 100vh;
     display: flex;
-    justify-content: end;
-    
-}
-section{
-
-    height: 100%;
-    width: 40%;
-    background: linear-gradient(to bottom, rgb(93, 0, 62) 20%, rgb(156, 0, 104));
-    box-shadow: 0px 0px 10px black;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-wrap: wrap;
-}
-section div{
-
-    width: 100%;
-    height: 40px;
-    margin-left: 20px;
-}
-#back{
-
-    height: 40px;
-    width: 40px;
-    font-size: 40px;
-    padding: 0px 2px 3px 0px;
-    border-radius: 50%;
-    display: flex;
     justify-content: center;
     align-items: center;
 }
-#back:hover{
+.header-two{    
 
-    background-color: rgb(156, 0, 104);
+    position: absolute;
+    right: 0px;
+    top: 13px;
 }
 form{
 
-    height: 60%;
-    width: 90%;
-    padding: 0px 50px 0px 50px;
-    display: grid;
-    margin-bottom: 30%;
-   
+    width: 800px;
+    height: 550px;
+    margin-top: 50px;
+    box-shadow: 0px 0px 7px black;
+    background-color: transparent;
+    border-radius: 10px;
+    display: flex;
+    flex-wrap: wrap;
 }
 label{
 
-    color: white;
+    display: block;
+    color: var(--color-font-ligth);
+    width: 150px;
+    height: 20px;
+    margin-left: 40px;
+}
+#form_1{
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 40%;
+    height: 100%;
+    padding: 20px;
+    background-color: transparent;
+    border-radius: 10px;
+    box-shadow: 1px 0px 7px black;
+
+}
+#form_2{
+
+    width: 60%;
+    height: 100%;
+    flex-wrap: wrap;
+    display: flex;
+    padding: 20px 0;
+
+}
+form div a{
+
+    text-decoration: none;
+    width: 40%;
+    margin: 17px 20px;
 }
 input{
 
-    width: 100%;
+    display: block;
+    background-color: var(--color-box-ligth);
+    width: 400px;
     height: 40px;
     padding-left: 10px;
-    border-radius: 10px;
-    margin: 10px 0px 10px 0px;
+    border-radius: 5px;
+    color: var(--color-font-ligth);
+    margin: 10px auto 10px auto;
 }
-.error{
+input[type='tel']{
 
-    font-size: 12px;
-    color: red;
-    width: 100%;
-    text-align: center;
+    width: 400px;
 }
-a{
+input[type='password']{
 
-    color: white;
-    margin: 5px 0px 10px 0px;
-    text-decoration: none;
-    width: 150px;
+    width: 400px;
 }
-a:hover{
+#submit{
 
-    text-decoration: underline;
-}
-#no-cep{
-
-    margin: 10px 0;
-}
-button{
-
-    width: 100%;
-    height: 40px;
-    border-radius: 10px;
-    background-color: white;
-    color: rgb(93, 0, 62);
+    background-color: rgb(24, 182, 24);
     cursor: pointer;
-    font-size: 20px;
-}
-button:hover{
-
-    background-color: rgb(93, 0, 62);
     color: white;
-    transition: 0.3s;
-    border: 1px solid white;
 }
-#img{
+#submit:hover{
 
-    background: url('../photos/register/back-register.jpg');
-    background-size: cover;
-    background-position: center center;
-    width: 60%;
-    height: 100vh;
-
+    transition: .3s;
+    box-shadow: 0px 0px 7px rgb(9, 187, 9);
 }
-@media (max-width: 768px){
 
-    
-    main{
+/* Error mensage */
 
-        width: 100%;
-        height: 100vh;
-        background: url('../photos/register/back-register.jpg');
-        background-size: cover;
-        background-position: center center;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    
-    }
-    section{
+.msg-error{
 
-        height: 100vh;
-        width: 90%;
-    }
+    width: 100%;
+    height: 20px;
+    color: red;
+    font-size: 11px;
+    text-align: center;
+    margin-top: -10px;
+}
+
+@media (max-width: 800px){
+
+
     form{
 
+        display: flex;
+        justify-content: center;
+        align-items: center;
         width: 100%;
-        margin-bottom: 30%;
+        height: 100vh;
+        box-shadow: none;
     }
-    #img{
+    #form_1, img{
 
-        width: 0;
-        height: 0;
+        display: none;
+    }
+    #form_2{
+        width: 100%;
+        height: 100%;
+        padding: 0;
+        
+    }
+    input{
+
+        width: 80%;
+    }
+    input[type='tel']{
+
+        width: 80%;
+    }
+    input[type='password']{
+
+        width: 80%;
+    }
+    label{
+
+        margin-left: 60px;
     }
 }
