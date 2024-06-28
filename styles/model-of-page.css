@@ -1,0 +1,227 @@
+@import url('https://fonts.googleapis.com/css2?family=Archivo+Black&family=Kanit&family=Lilita+One&family=Rowdies:wght@300;400;700&family=Signika:wght@300..700&display=swap');
+@import url('colors.css');
+*{
+    font-family: Kanit;
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-size: 15px;
+    border: 0;
+    outline: none;
+}
+body, html{
+    
+    max-width: 1280px;
+    height: 100vh;
+    background-color: var(--color-background-ligth);
+}
+/* header of site */
+header{
+
+    position: fixed;
+    top: 0;
+    width: 100%;
+    height: 50px;
+    background-color: transparent;
+    display: flex;
+    z-index: 1;
+}
+.header-one{
+
+    width: 90%;
+    height: 100%;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    margin-left: 50px;
+   
+}
+.img-logo{
+    background-color: transparent;
+    border-radius: 0;
+}
+.header-two{
+
+    width: 10%;
+    display: flex;
+    justify-content: end;
+    align-items: center;
+}
+#search{
+
+    width: 500px;
+    height: 40px;
+    border-radius: 20px;
+    padding: 10px;
+}
+#search:hover, #search:focus{
+
+    box-shadow: 0px 0px 7px black;
+    transition: .5s;
+}
+.size-box-video{ /* size box default */
+
+    width: 240px;
+    height: 220px;
+    margin: 20px;
+    text-align: center;
+    border-radius: 10px;
+    cursor: pointer;
+    text-decoration: none;
+}
+.size-box-video:hover{
+
+    transition: .3s;
+    box-shadow: 0px 0px 7px black;
+}
+.box-video{ /* box video default */
+
+    background-color: rgb(71, 71, 71);
+    height: 150px;
+    width: 240px;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    cursor: pointer;
+}
+.box-video:hover{
+
+    transition: .7s;
+}
+.video-title{
+
+    font-size: 15px;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    overflow: hidden;
+    -webkit-box-orient: vertical;
+}
+.views-video{ /* settings font os views */
+
+    font-size: 12px;
+    opacity: 0.4;
+}   
+.effect-text-line{
+
+    text-decoration: none;
+}
+.effect-text-line:hover{ /* effect bottom of text */
+
+    text-decoration: underline;
+    cursor: pointer;
+}
+.placeholder-center::placeholder{ /* centralize placeholder */
+
+    text-align: center;
+}
+.font-nigth{ /* for theme nigth */
+
+    color: var(--color-font-ligth);
+}
+.font-ligth{ /* for theme ligth */
+
+    color: var(--color-font-dark);
+}
+/* Menu Hamburguer */
+.select{
+
+    color: rgb(31, 31, 31);
+}
+.icon{ /* settings icon */
+
+    margin-right: 10px;
+    z-index: 2;
+    cursor: pointer;
+    font-size: 24px;
+    color: var(--color-font-ligth);
+}
+.menu{ /* settings for menu side */
+    position: fixed;
+    top: 0;
+    right: -250px;
+    background: var(--color-background-ligth);
+    width: 250px;
+    height: 100vh;
+    transition: right 0.3s;
+    z-index: 1;
+    box-shadow: 0px 0px 10px black;
+}
+.menu a{ /* settings links of menu */
+
+    display: block;
+    width: 100%;
+    padding: 10px;
+    text-decoration: none;
+    color: var(--color-font-ligth);
+}
+.menu a:hover{
+
+    background-color: var(--color-box-ligth);
+}
+.icon-menu{ /* space icon menu */
+
+    margin-right: 10px;
+}
+.show-menu {
+    right: 0;
+}
+.close-btn{
+
+    background-color: rgb(155, 27, 27);
+    text-decoration: none;
+    cursor: pointer;
+    border-radius: 10px;
+    text-align: center;
+}
+.close-btn:hover{
+
+    background-color: rgba(155, 27, 27, 0.8) !important;
+    transition: .3s;
+}
+
+@media (max-width: 768px){
+    .video-title, .views-video{
+
+        transform: scale(0.8);
+    }
+    #search{
+        width: 400px;
+    }
+
+}
+@media (max-width: 576px){
+
+    #search{
+
+        width: 250px;
+    }
+    .size-box-video{
+        
+        width: 300px;
+        height: 280px;           
+        margin-top: 20px;
+    }
+    .box-video{
+        width: 300px;
+        height: 190px;
+    }
+    .video-title{
+
+        margin-top: 10px;
+    }
+}
+@media (max-width: 345px){
+    .size-box-video{
+        
+        width: 90%;
+        height: 250px;
+    }
+    #search{
+
+        width: 200px;
+    }
+    .header-one{
+
+        margin: auto 2px;
+        justify-content: start;
+    }
+}

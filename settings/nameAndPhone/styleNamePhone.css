@@ -1,0 +1,19 @@
+label{
+
+    color: white;
+}
+input[type='tel']{
+
+    width: 300px;
+    height: 40px;
+}
+input[type='password']{
+
+    width: 300px;
+    height: 40px;
+}
+input[type='submit']{
+
+    width: 300px;
+    height: 40px;
+}

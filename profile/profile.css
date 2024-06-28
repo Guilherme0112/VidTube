@@ -1,0 +1,194 @@
+@import url('../styles/colors.css');
+
+/* style of pages */
+
+body{
+
+    width: 100%;
+    margin-top: 50px;
+}
+header{
+
+    background-color: var(--color-box-ligth) !important;
+}
+.size-img-profile{
+
+    width: 100%;
+    height: 250px;
+    display: flex;
+    align-items: end;
+    padding: 25px 0px 25px 10px;
+    background-color: var(--color-box-ligth);
+
+}
+.img-profile{
+
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    object-fit: cover;
+    background-color: #1b1b1b;
+    outline: 1px solid var(--color-font-ligth);
+}
+.name-space{
+
+    width: 330px;
+    height: 40px;
+    margin-bottom: 50px;
+    display: flex;
+    
+}
+main{
+
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    flex-wrap: wrap;
+    padding: 10px;
+}
+/* editVideo.php */
+form{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    width: 500px;
+    height: 500px;
+    background-color: var(--color-background-ligth);
+    border-radius: 10px;
+    padding: 50px;
+}
+label{
+    width: 100%;
+    color: var(--color-font-ligth);
+}
+input[type='text']{
+
+    width: 300px;
+    height: 40px;
+    border-radius: 5px;
+    padding-left: 5px;
+}
+img{
+
+    width: 200px;
+    height: 100px;
+}
+
+/* profile.php and outherProfile.php */
+/* outherProfile.php */
+input[type='submit']{
+
+    width: 150px;
+    height: 40px;
+    border-radius: 10px;
+    color: black;
+}
+.box-follow{
+    color: var(--color-font-ligth);
+    display: grid;
+    margin-top: -10px;
+}
+.name{
+    margin-left: 20px;
+    font-size: 35px;
+    color: var(--color-font-ligth);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.box-follow p{
+    width: 150px;
+    height: 10px;
+    margin-bottom: 15px;
+    display: flex;
+    padding-left: 20px;
+}
+.btn-follow{
+
+    background-color: #0b0b0b;
+    color: white !important;
+    cursor: pointer;
+    border-radius: 10px;
+    transition: .3s;
+    margin-top: 10px;
+}
+.btn-follow:hover{
+
+    background-color: #2b2b2b;
+}
+
+/* profile.php */
+
+.box-config{
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    width: 340px;
+    height: 245px;
+    margin: 20px;
+    background-color: var(--color-box-ligth);
+    border-radius: 10px;
+    box-shadow: 0px 0px 5px black;
+}
+.edit{
+    width: 100px;
+    height: 90%;
+    display: flex;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    padding: 0;
+}
+.config{
+
+    display: block;
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    background-color: rgb(37, 37, 190);
+    color: white !important;
+    cursor: pointer;
+    transition: .3s;
+    margin-top: 45px;
+    text-decoration: none;
+    text-align: center;
+    padding-top: 13px;
+}
+.config:hover{
+
+    background-color: #1b1b1b;
+
+}  
+
+/* Settings for phone */
+
+@media (max-width: 768px){
+    main{
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .img-profile{
+        width: 200px;
+        height: 200px;
+    }
+    .name-space{
+        width: 200px;
+        flex-wrap: wrap;
+    }
+    .name{
+        font-size: 25px;
+        margin: -40px 20px 20px 20px;
+    }
+    .box-follow p{
+        font-size: 12px;
+    }
+}
+@media (max-width: 576px){
+    .box-config{
+        width: 390px;
+        height: 285px;
+    }
+}

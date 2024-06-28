@@ -1,0 +1,167 @@
+@import url('../styles/colors.css');
+body{
+    display: flex;
+    justify-content: start;
+    align-items: center;
+}
+.box-options{    
+
+    position: absolute;
+    top: 0;
+    padding-top: 50px;
+    width: 250px;
+    height: 100vh;
+    background-color: var(--color-background-ligth);
+    box-shadow: 0px 3px 3px black;
+}
+.box-options a{
+
+    padding: 12px;
+    text-decoration: none;
+    display: block;
+}
+.box-options a:hover{
+
+    background-color: var(--color-box-ligth);
+    transition: .3s;
+}
+.main-box{
+
+    width: 100%;
+    height: 100%;
+}
+.yourProfile{
+
+    width: 100%;
+    margin-top: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    text-align: center;
+    padding-left: 250px;
+    padding-top: 20px;
+}
+label{
+
+    width: 100%;
+}
+input{
+
+    margin: 10px auto;
+}
+input[type='text'], input[type='email']{
+
+    width: 300px;
+    height: 40px;
+    border-radius: 10px;
+    padding-left: 5px;
+    background-color: var(--color-box-ligth);
+    color: var(--color-font-ligth);
+}
+input[type='button'], .changeName{
+    width: 300px;
+    height: 40px;
+    border-radius: 10px;
+    padding-left: 10px;
+    background-color: rgb(37, 37, 190);
+    color: white;
+    cursor: pointer;
+}
+input[type='button']:hover, .changeName:hover{
+
+    transition: .3s;
+    background-color: #1b1b1b;
+}
+#email{
+    background-color: #3b3b3b;
+    color: #1b1b1b;
+}
+.msg-error{
+    width: 100%;
+    font-size: 12px;
+    color: red;
+    text-align: center;
+}
+/* input replace photo of user */
+input[type='file']{
+
+    display: none;
+}
+.photoProfile{
+
+    width: 300px;
+    height: 40px;
+    margin: 10px auto;
+    background-color: rgb(37, 37, 190);
+    color: white;
+    border-radius: 10px;
+    padding: 9px;
+    cursor: pointer;
+}
+.photoProfile:hover{
+
+    transition: .3s;
+    background-color: #1b1b1b;
+}
+.submit{
+
+    margin-top: 20px;
+    width: 300px;
+    height: 30px;
+    border-radius: 10px;
+    cursor: pointer;
+    background-color: rgb(37, 37, 190);
+    color: white;
+}
+.submit:hover{
+
+    transition: .3s;
+    background-color: #1b1b1b;
+
+}
+.deleteUser{
+
+    width: 300px;
+    height: 40px;
+    border-radius: 10px;
+    cursor: pointer;
+    background-color: rgb(203, 51, 42);
+    color: #0b0b0b;
+}
+.deleteUser:hover{
+
+    background-color: #1b1b1b;
+    color: rgb(203, 51, 42);
+    transition: .3s;
+}
+@media (max-width: 768px){
+
+    .box-options{
+
+        width: 120px;
+    }
+    .box-options a{
+
+        font-size: 12px;
+    }
+    input[type='button'], input[type='text'], input[type='submit'], input[type='email']{
+        width: 80%;
+    }
+    .yourProfile{
+
+        width: 100%;
+        padding-left: 120px;
+        padding-top: 20px;
+    }
+}
+@media (max-width: 400px){
+    .box-options{
+        width: 80px;
+        font-size: 10px;
+    }
+    .box-options a{
+        font-size: 9px;
+    }
+
+}
