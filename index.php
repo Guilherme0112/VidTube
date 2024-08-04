@@ -86,7 +86,7 @@
     <main id="primary-page-video">
         <?php
             if(mysqli_num_rows($cursor) == 0){
-                echo "<p class='msgDados'>Não há dados de pesquisa
+                echo "<p class='msgDados'>Sem dados
                         <a href='index.php'>Voltar ao Início</a>
                     </p>";
             } else {

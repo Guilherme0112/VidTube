@@ -1,10 +1,10 @@
 :root{
 
     --color-box-dark: #1b1b1b;
-    --color-background-dark: #0b0b0b;
+    --color-background-dark: #202020;
     --color-font-dark: white;
 
-    --color-background-ligth: rgb(174, 174, 174);
+    --color-background-ligth: rgb(233, 233, 233);
     --color-box-ligth: rgb(200, 200, 200);
     --color-font-ligth: black;
 }

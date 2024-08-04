@@ -68,6 +68,7 @@ header{
     border-radius: 10px;
     cursor: pointer;
     text-decoration: none;
+    outline: 2px solid rgb(171, 171, 171);
 }
 .size-box-video:hover{
 
@@ -94,6 +95,8 @@ header{
     -webkit-line-clamp: 1;
     overflow: hidden;
     -webkit-box-orient: vertical;
+
+    padding: 0 5px;
 }
 .views-video{ /* settings font os views */
 
