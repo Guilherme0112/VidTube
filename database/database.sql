@@ -1,269 +1,330 @@
-CREATE DATABASE  IF NOT EXISTS `vidtube` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci */;
-USE `vidtube`;
--- MySQL dump 10.13  Distrib 5.7.17, for Win64 (x86_64)
+-- phpMyAdmin SQL Dump
+-- version 5.2.1
+-- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1    Database: vidtube
--- ------------------------------------------------------
--- Server version	5.5.5-10.4.32-MariaDB
+-- Host: 127.0.0.1
+-- Tempo de geração: 04/08/2024 às 02:21
+-- Versão do servidor: 10.4.32-MariaDB
+-- Versão do PHP: 8.2.12
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+START TRANSACTION;
+SET time_zone = "+00:00";
+
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8 */;
-/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
-/*!40103 SET TIME_ZONE='+00:00' */;
-/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
-/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
-/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
-/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+/*!40101 SET NAMES utf8mb4 */;
 
 --
--- Table structure for table `admin`
+-- Banco de dados: `acai`
 --
 
-DROP TABLE IF EXISTS `admin`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+-- --------------------------------------------------------
+
+--
+-- Estrutura para tabela `admin`
+--
+
 CREATE TABLE `admin` (
-  `idAdmin` int(11) NOT NULL AUTO_INCREMENT,
-  `emailAdmin` varchar(50) NOT NULL,
-  `timeAdmin` timestamp NOT NULL DEFAULT current_timestamp(),
-  PRIMARY KEY (`idAdmin`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `admin`
---
-
-LOCK TABLES `admin` WRITE;
-/*!40000 ALTER TABLE `admin` DISABLE KEYS */;
-/*!40000 ALTER TABLE `admin` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `ajuda`
---
-
-DROP TABLE IF EXISTS `ajuda`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `ajuda` (
-  `idAjuda` int(11) NOT NULL AUTO_INCREMENT,
-  `idUser` int(11) NOT NULL,
-  `title` varchar(30) DEFAULT NULL,
-  `textAjuda` text DEFAULT NULL,
-  `timeAjuda` timestamp NOT NULL DEFAULT current_timestamp(),
-  `situacao` varchar(20) DEFAULT 'Não Respondido',
-  PRIMARY KEY (`idAjuda`),
-  KEY `idUser` (`idUser`),
-  CONSTRAINT `ajuda_ibfk_1` FOREIGN KEY (`idUser`) REFERENCES `usuarios` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `ajuda`
---
-
-LOCK TABLES `ajuda` WRITE;
-/*!40000 ALTER TABLE `ajuda` DISABLE KEYS */;
-/*!40000 ALTER TABLE `ajuda` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `comentarios`
---
-
-DROP TABLE IF EXISTS `comentarios`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `comentarios` (
-  `idComment` int(11) NOT NULL AUTO_INCREMENT,
-  `idUserComment` int(11) NOT NULL,
-  `idVideoComment` int(11) NOT NULL,
-  `comentario` text NOT NULL,
-  `timeComment` timestamp NOT NULL DEFAULT current_timestamp(),
-  PRIMARY KEY (`idComment`),
-  KEY `idUserComment` (`idUserComment`),
-  CONSTRAINT `comentarios_ibfk_1` FOREIGN KEY (`idUserComment`) REFERENCES `usuarios` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `comentarios`
---
-
-LOCK TABLES `comentarios` WRITE;
-/*!40000 ALTER TABLE `comentarios` DISABLE KEYS */;
-/*!40000 ALTER TABLE `comentarios` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `comunidade`
---
-
-DROP TABLE IF EXISTS `comunidade`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `comunidade` (
-  `idPost` int(11) NOT NULL AUTO_INCREMENT,
-  `idPostUser` int(11) DEFAULT NULL,
-  `post` varchar(50) DEFAULT NULL,
-  `descPost` text DEFAULT NULL,
-  `timePost` timestamp NOT NULL DEFAULT current_timestamp(),
-  PRIMARY KEY (`idPost`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `comunidade`
---
-
-LOCK TABLES `comunidade` WRITE;
-/*!40000 ALTER TABLE `comunidade` DISABLE KEYS */;
-/*!40000 ALTER TABLE `comunidade` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `likes`
---
-
-DROP TABLE IF EXISTS `likes`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `likes` (
-  `idLike` int(11) NOT NULL AUTO_INCREMENT,
-  `videoLike` int(11) DEFAULT NULL,
-  `userLike` int(11) DEFAULT NULL,
-  PRIMARY KEY (`idLike`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `likes`
---
-
-LOCK TABLES `likes` WRITE;
-/*!40000 ALTER TABLE `likes` DISABLE KEYS */;
-/*!40000 ALTER TABLE `likes` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `respajuda`
---
-
-DROP TABLE IF EXISTS `respajuda`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `respajuda` (
-  `idRespAjuda` int(11) NOT NULL AUTO_INCREMENT,
-  `idPostAjuda` int(11) DEFAULT NULL,
-  `respAjuda` text DEFAULT NULL,
-  `timePostAjuda` timestamp NOT NULL DEFAULT current_timestamp(),
-  PRIMARY KEY (`idRespAjuda`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `respajuda`
---
-
-LOCK TABLES `respajuda` WRITE;
-/*!40000 ALTER TABLE `respajuda` DISABLE KEYS */;
-/*!40000 ALTER TABLE `respajuda` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `seguir`
---
-
-DROP TABLE IF EXISTS `seguir`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `seguir` (
-  `idSeguir` int(11) NOT NULL AUTO_INCREMENT,
-  `idSeguindo` int(11) NOT NULL,
-  `idSeguidor` int(11) NOT NULL,
-  PRIMARY KEY (`idSeguir`),
-  KEY `idSeguindo` (`idSeguindo`),
-  KEY `idSeguidor` (`idSeguidor`),
-  CONSTRAINT `seguir_ibfk_1` FOREIGN KEY (`idSeguindo`) REFERENCES `usuarios` (`id`),
-  CONSTRAINT `seguir_ibfk_2` FOREIGN KEY (`idSeguidor`) REFERENCES `usuarios` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `seguir`
---
-
-LOCK TABLES `seguir` WRITE;
-/*!40000 ALTER TABLE `seguir` DISABLE KEYS */;
-/*!40000 ALTER TABLE `seguir` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `usuarios`
---
-
-DROP TABLE IF EXISTS `usuarios`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `usuarios` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `nome` varchar(20) DEFAULT NULL,
-  `email` varchar(60) NOT NULL,
-  `senha` varchar(30) NOT NULL,
-  `phone` varchar(15) DEFAULT NULL,
-  `photoProfile` varchar(60) DEFAULT '../styles/icons/user.jpg',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=60 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `usuarios`
---
-
-LOCK TABLES `usuarios` WRITE;
-/*!40000 ALTER TABLE `usuarios` DISABLE KEYS */;
-/*!40000 ALTER TABLE `usuarios` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `videos`
---
-
-DROP TABLE IF EXISTS `videos`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `videos` (
-  `idVideo` int(11) NOT NULL AUTO_INCREMENT,
-  `video` varchar(100) DEFAULT NULL,
-  `likes` int(11) DEFAULT NULL,
-  `thumb` varchar(60) DEFAULT NULL,
-  `userVideo` int(11) DEFAULT NULL,
-  `title` varchar(50) DEFAULT NULL,
-  PRIMARY KEY (`idVideo`),
-  KEY `userVideo` (`userVideo`),
-  CONSTRAINT `videos_ibfk_1` FOREIGN KEY (`userVideo`) REFERENCES `usuarios` (`id`)
+  `idAdmin` int(11) NOT NULL,
+  `admin` int(11) NOT NULL,
+  `inputAdmin` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
+
+-- --------------------------------------------------------
 
 --
--- Dumping data for table `videos`
+-- Estrutura para tabela `ajuda`
 --
 
-LOCK TABLES `videos` WRITE;
-/*!40000 ALTER TABLE `videos` DISABLE KEYS */;
-/*!40000 ALTER TABLE `videos` ENABLE KEYS */;
-UNLOCK TABLES;
-/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+CREATE TABLE `ajuda` (
+  `idAjuda` int(11) NOT NULL,
+  `idUserAjuda` int(11) NOT NULL,
+  `titleAjuda` varchar(50) NOT NULL,
+  `ajuda` text NOT NULL,
+  `timeAjuda` timestamp NOT NULL DEFAULT current_timestamp(),
+  `status` varchar(40) NOT NULL DEFAULT 'Não Respondido'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
-/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
-/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
-/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+-- --------------------------------------------------------
+
+--
+-- Estrutura para tabela `carrinho`
+--
+
+CREATE TABLE `carrinho` (
+  `idCarrinho` int(11) NOT NULL,
+  `idUser` int(11) NOT NULL,
+  `idProduto` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura para tabela `info`
+--
+
+CREATE TABLE `info` (
+  `idAddress` int(11) NOT NULL,
+  `idUser` int(11) NOT NULL,
+  `endereco` text NOT NULL,
+  `bairro` varchar(50) NOT NULL,
+  `numero` int(11) NOT NULL,
+  `rua` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura para tabela `pedidos`
+--
+
+CREATE TABLE `pedidos` (
+  `idPedido` int(11) NOT NULL,
+  `idProduto` int(11) NOT NULL,
+  `idUser` int(11) NOT NULL,
+  `timeProduto` timestamp NOT NULL DEFAULT current_timestamp(),
+  `status` varchar(20) DEFAULT 'Solicitado',
+  `ownerProduct` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura para tabela `products`
+--
+
+CREATE TABLE `products` (
+  `idProduct` int(11) NOT NULL,
+  `nomeProduct` varchar(50) NOT NULL,
+  `ownerProduct` int(11) NOT NULL,
+  `photoProduct` text DEFAULT NULL,
+  `descricao` text DEFAULT NULL,
+  `price` double(10,2) DEFAULT NULL,
+  `productcreate` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura para tabela `rajuda`
+--
+
+CREATE TABLE `rajuda` (
+  `idResp` int(11) NOT NULL,
+  `idStaff` int(11) NOT NULL,
+  `resposta` text NOT NULL,
+  `idPost` int(11) NOT NULL,
+  `time` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura para tabela `topicos`
+--
+
+CREATE TABLE `topicos` (
+  `idTopico` int(11) NOT NULL,
+  `userAdmin` int(11) NOT NULL,
+  `titleT` varchar(50) NOT NULL,
+  `topico` text NOT NULL,
+  `timeTopico` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura para tabela `users`
+--
+
+CREATE TABLE `users` (
+  `id` int(11) NOT NULL,
+  `nome` varchar(50) NOT NULL,
+  `tel` varchar(15) NOT NULL,
+  `cep` varchar(9) NOT NULL,
+  `email` varchar(55) NOT NULL,
+  `senha` varchar(16) NOT NULL,
+  `timecreate` timestamp NOT NULL DEFAULT current_timestamp(),
+  `photoProfile` text NOT NULL DEFAULT '../assets/user.jpg'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+--
+-- Despejando dados para a tabela `users`
+--
+
+INSERT INTO `users` (`id`, `nome`, `tel`, `cep`, `email`, `senha`, `timecreate`, `photoProfile`) VALUES
+(2, 'Guilherme', '(63) 99132-4404', '773-10000', 'guimendesmen124@gmail.com', '12345', '2024-08-03 23:28:09', '../assets/user.jpg');
+
+--
+-- Índices para tabelas despejadas
+--
+
+--
+-- Índices de tabela `admin`
+--
+ALTER TABLE `admin`
+  ADD PRIMARY KEY (`idAdmin`),
+  ADD KEY `admin` (`admin`);
+
+--
+-- Índices de tabela `ajuda`
+--
+ALTER TABLE `ajuda`
+  ADD PRIMARY KEY (`idAjuda`),
+  ADD KEY `idUserAjuda` (`idUserAjuda`);
+
+--
+-- Índices de tabela `carrinho`
+--
+ALTER TABLE `carrinho`
+  ADD PRIMARY KEY (`idCarrinho`),
+  ADD KEY `idProduto` (`idProduto`),
+  ADD KEY `idUser` (`idUser`);
+
+--
+-- Índices de tabela `info`
+--
+ALTER TABLE `info`
+  ADD PRIMARY KEY (`idAddress`),
+  ADD KEY `idUser` (`idUser`);
+
+--
+-- Índices de tabela `pedidos`
+--
+ALTER TABLE `pedidos`
+  ADD PRIMARY KEY (`idPedido`),
+  ADD KEY `idUser` (`idUser`),
+  ADD KEY `idProduto` (`idProduto`);
+
+--
+-- Índices de tabela `products`
+--
+ALTER TABLE `products`
+  ADD PRIMARY KEY (`idProduct`),
+  ADD KEY `ownerProduct` (`ownerProduct`);
+
+--
+-- Índices de tabela `rajuda`
+--
+ALTER TABLE `rajuda`
+  ADD PRIMARY KEY (`idResp`);
+
+--
+-- Índices de tabela `topicos`
+--
+ALTER TABLE `topicos`
+  ADD PRIMARY KEY (`idTopico`);
+
+--
+-- Índices de tabela `users`
+--
+ALTER TABLE `users`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- AUTO_INCREMENT para tabelas despejadas
+--
+
+--
+-- AUTO_INCREMENT de tabela `admin`
+--
+ALTER TABLE `admin`
+  MODIFY `idAdmin` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de tabela `ajuda`
+--
+ALTER TABLE `ajuda`
+  MODIFY `idAjuda` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de tabela `carrinho`
+--
+ALTER TABLE `carrinho`
+  MODIFY `idCarrinho` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de tabela `info`
+--
+ALTER TABLE `info`
+  MODIFY `idAddress` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de tabela `pedidos`
+--
+ALTER TABLE `pedidos`
+  MODIFY `idPedido` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de tabela `products`
+--
+ALTER TABLE `products`
+  MODIFY `idProduct` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de tabela `rajuda`
+--
+ALTER TABLE `rajuda`
+  MODIFY `idResp` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de tabela `topicos`
+--
+ALTER TABLE `topicos`
+  MODIFY `idTopico` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT de tabela `users`
+--
+ALTER TABLE `users`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- Restrições para tabelas despejadas
+--
+
+--
+-- Restrições para tabelas `admin`
+--
+ALTER TABLE `admin`
+  ADD CONSTRAINT `admin_ibfk_1` FOREIGN KEY (`admin`) REFERENCES `users` (`id`);
+
+--
+-- Restrições para tabelas `ajuda`
+--
+ALTER TABLE `ajuda`
+  ADD CONSTRAINT `ajuda_ibfk_1` FOREIGN KEY (`idUserAjuda`) REFERENCES `users` (`id`);
+
+--
+-- Restrições para tabelas `carrinho`
+--
+ALTER TABLE `carrinho`
+  ADD CONSTRAINT `carrinho_ibfk_1` FOREIGN KEY (`idProduto`) REFERENCES `products` (`idProduct`),
+  ADD CONSTRAINT `carrinho_ibfk_2` FOREIGN KEY (`idUser`) REFERENCES `users` (`id`);
+
+--
+-- Restrições para tabelas `info`
+--
+ALTER TABLE `info`
+  ADD CONSTRAINT `info_ibfk_1` FOREIGN KEY (`idUser`) REFERENCES `users` (`id`);
+
+--
+-- Restrições para tabelas `pedidos`
+--
+ALTER TABLE `pedidos`
+  ADD CONSTRAINT `pedidos_ibfk_1` FOREIGN KEY (`idUser`) REFERENCES `users` (`id`),
+  ADD CONSTRAINT `pedidos_ibfk_2` FOREIGN KEY (`idProduto`) REFERENCES `products` (`idProduct`);
+
+--
+-- Restrições para tabelas `products`
+--
+ALTER TABLE `products`
+  ADD CONSTRAINT `products_ibfk_1` FOREIGN KEY (`ownerProduct`) REFERENCES `users` (`id`);
+COMMIT;
+
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
-/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
-
--- Dump completed on 2024-06-26 21:12:52
