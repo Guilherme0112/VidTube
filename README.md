@@ -12,7 +12,7 @@ Uma rede social de vídeos onde os usuários podem compartilhar seus momentos, i
 * **Upload de vídeos:** Compartilhe seus vídeos favoritos com a comunidade.
 * **Perfil personalizado:** Crie um perfil único com foto, informações pessoais e feed de atividades.
 * **Interação social:** Dê like em vídeos, siga outros usuários e comente em posts.
-* **Crie posts:** Crie postagens com imagens ou apenas texto.
+* **Crie posts:** Crie postagens com imagens.
 
 **Tecnologias:**
 
